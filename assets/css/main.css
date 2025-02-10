@@ -1564,7 +1564,7 @@ section,
 
 .trainers .member .member-img {
   margin: 0 80px;
-  border-radius: 50%;
+  border-radius: 5%;
   overflow: hidden;
   position: relative;
 }
