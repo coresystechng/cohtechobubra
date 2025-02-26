@@ -28,7 +28,8 @@
     <div class="container">
       <h1 class="hide-on-med-and-down">Registration Form</h1>
       <h4 class="hide-on-large-only">Registration Form</h4>
-      <p class="flow-text grey-text text-darken-2">Complete the form below to begin the registration process. Applications are invited from suitably qualified candidates for admission into various programmes of the College which commences on Wednesday, 14th February, 2025.</p>
+      <p class="flow-text grey-text text-darken-2">Complete the form below to begin the registration process. Qualified candidates are invited to apply for admission into various programs at the College, starting Wednesday, February 14, 2025.</p>
+      <p class="flow-text grey-text text-darken-2"><strong>Deadline: Sunday, March 30, 2025 </strong></p>
     </div>
   </header>
   <main>
@@ -40,19 +41,19 @@
           <div class="section" id="personal_info">
             <div class="row">
               <div class="col s12 l4 input-field">
+                <input type="text" name="first_name" id="first_name" class="validate" required>
                 <label for="first_name">First Name</label>
-                <input type="text" name="first_name" id="first_name" required>
               </div>
               <div class="col s12 l3 input-field">
+                <input type="text" name="surname" id="surname" class="validate" required>
                 <label for="surname">Surname</label>
-                <input type="text" name="surname" id="surname" required>
               </div>
               <div class="col s12 l3 input-field">
+                <input type="text" name="other_names" id="other_names">
                 <label for="other_names">Other Names</label>
-                <input type="text" name="other_names" id="other_names" required>
               </div>
               <div class="col s12 l2 input-field">
-                <select name="gender" id="gender">
+                <select name="gender" id="gender" required>
                   <option value="">Gender</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
@@ -61,11 +62,11 @@
             </div>
             <div class="row">
               <div class="col s12 l2 input-field">
+                <input type="text" name="date_of_birth" id="date_of_birth" class="datepicker" required>
                 <label for="date_of_birth">Date of Birth</label>
-                <input type="text" name="date_of_birth" id="date_of_birth" class="datepicker">
               </div>
               <div class="col s12 l2 input-field">
-                <select name="marital_status" id="marital_status">
+                <select name="marital_status" id="marital_status" required>
                   <option value="">Marital Status</option>
                   <option value="single">Single</option>
                   <option value="Married">Married</option>
@@ -117,25 +118,25 @@
                 </select>
               </div>
               <div class="col s12 l3 input-field">
+                <input type="text" name="lga" id="lga" class="validate" required>
                 <label for="lga">LGA of Origin</label>
-                <input type="text" name="lga" id="lga" required>
               </div>
               <div class="col s12 l3 input-field">
+                <input type="text" name="nationality" id="nationality" class="validate" required>
                 <label for="nationality">Nationality</label>
-                <input type="text" name="nationality" id="nationality" required>
               </div>
             </div>
             <div class="row">
               <div class="col s12 l4 input-field">
+                <input type="tel" name="phone_no" id="phone_no" class="validate" required>
                 <label for="phone_no">Phone Number</label>
-                <input type="tel" name="phone_no" id="phone_no" required>
               </div>
               <div class="col s12 l5 input-field">
+                <input type="text" name="email" id="email" class="validate" required>
                 <label for="email">Email Address</label>
-                <input type="text" name="email" id="email" required>
               </div>
               <div class="col s12 l3 input-field">
-                <select name="religion" id="religion">
+                <select name="religion" id="religion" required>
                   <option value="">Religion</option>
                   <option value="christianity">Christianity</option>
                   <option value="islam">Islam</option>
@@ -145,7 +146,7 @@
             </div>
             <div class="row">
               <div class="col s12 input-field">
-                <textarea name="contact_address" id="contact_address" class="materialize-textarea"></textarea>
+                <textarea name="contact_address" id="contact_address" required class="materialize-textarea validate"></textarea>
                 <label for="contact_address">Contact Address</label>
               </div>
             </div>
@@ -155,26 +156,26 @@
           <div class="section" id="next_of_kin">
             <div class="row">
               <div class="col s12 l6 input-field">
+                <input type="text" name="nok_name" id="nok_name" class="validate" required>
                 <label for="nok__name">Full Name</label>
-                <input type="text" name="nok_name" id="nok_name" required>
               </div>
               <div class="col s12 l3 input-field">
+                <input type="text" name="nok_relationship" id="nok_relationship"placeholder="Father, Mother, Husband etc"  class="validate" required>
                 <label for="nok_relationship">Relationship</label>
-                <input type="text" name="nok_relationship" id="nok_relationship"placeholder="Father, Mother, Husband etc" required>
               </div>
               <div class="col s12 l3 input-field">
+                <input type="text" name="nok_phone_no" id="nok_phone_no" class="validate" required>
                 <label for="nok_phone_no">Phone Number</label>
-                <input type="text" name="nok_phone_no" id="nok_phone_no" required>
               </div>
             </div>
             <div class="row">
               <div class="col s12 l10 input-field">
-                <textarea name="nok_contact_address" id="nok_contact_address" class="materialize-textarea"></textarea>
+                <textarea name="nok_contact_address" id="nok_contact_address" class="materialize-textarea validate" required></textarea>
                 <label for="nok_contact_address">Address</label>
               </div>
               <div class="col s12 l2 input-field">
-                <input type="text" name="nok_occupation" id="nok_occupation">
-                <label for="nok)nok_occupation">Occupation</label>
+                <input type="text" name="nok_occupation" id="nok_occupation" class="validate" required>
+                <label for="nok_occupation">Occupation</label>
               </div>
             </div>
           </div>
@@ -185,13 +186,13 @@
               <div class="col s12 input-field">
                 <p>
                   <label>
-                    <input type="checkbox" name="attestation_1"/>
+                    <input type="checkbox" required class="validate" name="attestation_1"/>
                     <span>I hereby attest to the authenticity of the above information supplied above </span>
                   </label>
                 </p>
                 <p>
                   <label>
-                    <input type="checkbox" name="attestation_1"/>
+                    <input type="checkbox" required class="validate"  name="attestation_1"/>
                     <span>I agree to comply with the rules and regulations of the college if my registration application is approved. </span>
                   </label>
                 </p>
