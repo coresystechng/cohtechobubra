@@ -11,9 +11,35 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <style>
+    /* Parallax height */
     .parallax-container {
       height: 400px;
     }
+
+    /* label focus color */
+    .input-field input:focus + label, textarea:focus + label {
+      color: #702963 !important;
+    }
+
+    /* label underline focus color */
+    .input-field input:focus, textarea:focus {
+      border-bottom: 1px solid #702963 !important;
+      box-shadow: 0 1px 0 0 #702963 !important;
+    }
+
+    /* Dropdown text color */
+    .dropdown-content li>a,.dropdown-content li > span {
+      color: #702963 !important; 
+    }
+
+    .theme-color-txt {
+      color: #702963 !important;
+    }
+
+    .theme-color-bg {
+      background-color: #702963 !important;
+    }
+
   </style>
 </head>
 <body class="grey lighten-5">
@@ -21,15 +47,17 @@
   <header>
     <div class="parallax-container hide-on-med-and-down">
       <div class="parallax">
-        <img src="assets/img/17650.jpg" alt="Designed by Freepik" class="responsive-img">
+        <img src="./assets/img/17650.jpg" alt="Designed by Freepik" class="responsive-img">
       </div>
     </div>
-    <img src="assets/img/17650.jpg" alt="Designed by Freepik" class="responsive-img hide-on-large-only">
+    <img src="./assets/img/17650.jpg" alt="Designed by Freepik" class="responsive-img hide-on-large-only">
     <div class="container">
       <h1 class="hide-on-med-and-down">Registration Form</h1>
       <h4 class="hide-on-large-only">Registration Form</h4>
-      <p class="flow-text grey-text text-darken-2">Complete the form below to begin the registration process. Qualified candidates are invited to apply for admission into various programs at the College, starting Wednesday, February 14, 2025.</p>
-      <p class="flow-text grey-text text-darken-2"><strong>Deadline: Sunday, March 30, 2025 </strong></p>
+      <p class="flow-text grey-text text-darken-2">Qualified candidates are invited to apply for admission into various programs at the College, starting Wednesday, February 14, 2025.
+        Complete the form below to begin the registration process. 
+      </p>
+      <!-- <p class="flow-text grey-text text-darken-2"><strong>Deadline: Sunday, March 30, 2025. </strong></p> -->
     </div>
   </header>
   <main>
@@ -200,7 +228,7 @@
             </div>
           </div>
           <div class="center-align section">
-            <input type="submit" value="submit application" name="submit" class="btn btn-flat btn-large black white-text">
+            <input type="submit" value="submit application" name="submit" class="btn btn-flat btn-large theme-color-bg white-text">
             <br><br><br>
           </div>
         </form>
@@ -227,7 +255,9 @@
     $(document).ready(function(){
       $('.parallax').parallax();
       $('.datepicker').datepicker({yearRange: 50});
-      $('select').formSelect();
+      $('select').formSelect({
+        
+      });
     })
   </script>
   <script src="assets/js/lga.js"></script>
