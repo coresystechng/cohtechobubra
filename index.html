@@ -63,7 +63,7 @@
   <main>
     <section class="section">
       <div class="container">
-        <form action="">
+        <form action="save.php" method="post">
 
           <h5>Personal Info</h5>
           <div class="section" id="personal_info">
@@ -104,7 +104,7 @@
                 </select>
               </div>
               <div class="col s12 l2 input-field">
-                <select name="state" id="state" required>
+                <select name="state_of_origin" id="state_of_origin" required>
                   <option value="" selected="selected">State of Origin</option>
                   <option value="Abia">Abia</option>
                   <option value="Adamawa">Adamawa</option>
@@ -208,8 +208,8 @@
             </div>
           </div>
 
+          <h5>Attestation</h5>
           <div class="section">
-            <h5>Attestation</h5>
             <div class="row">
               <div class="col s12 input-field">
                 <p>
@@ -220,7 +220,7 @@
                 </p>
                 <p>
                   <label>
-                    <input type="checkbox" required class="validate"  name="attestation_1" value="yes"/>
+                    <input type="checkbox" required class="validate"  name="attestation_2" value="yes"/>
                     <span>I agree to comply with the rules and regulations of the college if my registration application is approved. </span>
                   </label>
                 </p>
