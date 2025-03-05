@@ -1884,6 +1884,15 @@ section,
 /*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/
-.starter-section {
-  /* Add your styles here */
+.register-btn {
+  /* width: 50px; */
+  background-color: #702963;
+  color: white;
+  text-align: center;
+  padding: 17px;
+  border-radius: 10px;
+}
+.register-btn:hover{
+  color: var(--contrast-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 15%);
 }
