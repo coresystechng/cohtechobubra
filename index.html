@@ -71,8 +71,13 @@
   <main>
     <section class="section">
       <div class="container">
-        <form action="check_email.php" method="post">
+        <form action="new_user.php" method="post">
           <div class="row">
+            <div class="col s12 l6 input-field">
+              <input type="text" name="email" id="email" required>
+              <label for="email">Email Address</label>
+              <span id="email-error" class="helper-text"></span>
+            </div>
             <div class="col s12 l3 input-field">
               <input type="text" name="first_name" id="first_name" required>
               <label for="first_name">First Name</label>
@@ -80,11 +85,6 @@
             <div class="col s12 l3 input-field">
               <input type="text" name="surname" id="surname" required>
               <label for="surname">Surname</label>
-            </div>
-            <div class="col s12 l6 input-field">
-              <input type="text" name="email" id="email" required>
-              <label for="email">Email Address</label>
-              <span id="email-error" class="helper-text"></span>
             </div>
           </div>
           <div class="row">
