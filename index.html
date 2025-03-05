@@ -71,7 +71,7 @@
   <main>
     <section class="section">
       <div class="container">
-        <form action="" method="post">
+        <form action="check_email.php" method="post">
           <div class="row">
             <div class="col s12 l3 input-field">
               <input type="text" name="first_name" id="first_name" required>
@@ -84,6 +84,7 @@
             <div class="col s12 l6 input-field">
               <input type="text" name="email" id="email" required>
               <label for="email">Email Address</label>
+              <span id="email-error" class="helper-text"></span>
             </div>
           </div>
           <div class="row">
@@ -111,16 +112,48 @@
   
   
   <!-- JQuery CDN -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-  crossorigin="anonymous"></script>
-  <!-- LGA.js  -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script>
     $(document).ready(function(){
       $('.parallax').parallax();
     })
+  </script>
+
+  <script>
+    $(document).ready(function(){
+    var emailValid = false;
+
+      $("#email").on("blur", function() {
+        var email = $(this).val().trim();
+
+        if(email !== "") {
+            $.ajax({
+                url: "check_email.php",
+                type: "POST",
+                data: { email: email },
+                dataType: "json",
+                success: function(response) {
+                    if (response.status === "error") {
+                        $("#email-error").text(response.message).css("color", "red");
+                        emailValid = false;
+                    } else {
+                        $("#email-error").text("Email is available").css("color", "green");
+                        emailValid = true;
+                    }
+                }
+            });
+          }
+      });
+
+      $("form").on("submit", function(event) {
+        if (!emailValid) {
+            event.preventDefault(); // Stop form submission if email is taken
+            alert("Please enter a valid and available email before proceeding.");
+        }
+      });
+    });
   </script>
 </body>
 </html>
