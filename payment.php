@@ -1,9 +1,15 @@
 <?php
+  //Fetch Payment Details
+
+  // Paysack API URL
   $url = "https://api.paystack.co/transaction/initialize";
 
+  // Payment Details
   $fields = [
-    'email' => "customer@email.com",
-    'amount' => "500000"
+    'email' => "collinsduzzy21@gmail.com",
+    'amount' => "100000",
+    'callback_url' => "https://localhost/cohtechobubra/success.php",
+    'metadata' => ["cancel_action" => "replace_with_redirect_url_when_user_cancels"]
   ];
 
   $fields_string = http_build_query($fields);
@@ -25,15 +31,8 @@
   
   //execute post
   $result = curl_exec($ch);
-  $result = json_decode($result, true);
-  // print_r($result);
-  // print_r($result['data']['access_code']);
-
-  if(isset($_POST['pay'])){
-    $transaction_id = $_POST['name'];
-    $url = "https://api.paystack.co/transaction/verify/$transaction_id";
-    header('Location: $url');
-  }
+  $decoded_response = json_decode($result, true);
+  $link= $decoded_response['data']['authorization_url'];
 ?>
 
 <!DOCTYPE html>
@@ -89,19 +88,15 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <h4>Payment Page</h4>
-    <form action="payment.php" method="POST">
-      <input type="text" name="name" required value="<?php echo $result['data']['access_code']; ?>">
-      <input type="submit" value="Pay Now" name="pay">
-    </form>
-  </div>
+  <script>
+      window.location.href = "<?php echo $link?>"
+  </script>
 
   <!-- Scripts -->
-  <script src="https://js.paystack.co/v2/inline.js"></script>
-  <script>
+  <!-- <script src="https://js.paystack.co/v2/inline.js"></script> -->
+  <!-- <script>
     const popup = new PaystackPop();
     popup.resumeTransaction(access_code)
-  </script>
+  </script> -->
 </body>
 </html>
