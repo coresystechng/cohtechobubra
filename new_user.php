@@ -1,4 +1,7 @@
 <?php 
+
+    include 'working_mail_send.php';
+
     $servername = "localhost";
     $username = "collins";
     $password = "1234";
@@ -29,16 +32,19 @@
         $_SESSION['verification_code'] = $verification_code;
         
         // Set expiration time (current time + 5 minutes)
-        $expires_at = date("Y-m-d H:i:s", strtotime("+5 minutes"));
+        // $expires_at = date("Y-m-d H:i:s", strtotime("+5 minutes"));
 
         // Insert or update the verification code in the database
-        $stmt = $conn->prepare("INSERT INTO email_verifications (email, verification_code, expires_at) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE verification_code=?, expires_at=?");
-        $stmt->bind_param("sssss", $email, $verification_code, $expires_at, $verification_code, $expires_at);
+        $stmt = $conn->prepare("UPDATE users_tb SET verification_code=? WHERE email=?");
+        $stmt->bind_param("ss", $verification_code, $email);
         $stmt->execute();
         $stmt->close();
 
         // Redirect to Code verification page
+        // $fullname = $first_name . " " . $surname;
+        // sendmail($fullname,$email,$verification_code);
         header("Location: verification.php?email=$email");
+
     }
 
     $conn->close();
