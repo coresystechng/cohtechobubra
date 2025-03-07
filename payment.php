@@ -7,9 +7,9 @@
   // Payment Details
   $fields = [
     'email' => "collinsduzzy21@gmail.com",
-    'amount' => "100000",
+    'amount' => "750000",
     'callback_url' => "https://localhost/cohtechobubra/success.php",
-    'metadata' => ["cancel_action" => "replace_with_redirect_url_when_user_cancels"]
+    // 'metadata' => ["cancel_action" => "replace_with_redirect_url_when_user_cancels"]
   ];
 
   $fields_string = http_build_query($fields);

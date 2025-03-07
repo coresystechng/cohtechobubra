@@ -132,7 +132,7 @@
         <div class="row">
           <input type="hidden" name="email" value="<?php echo $email; ?>">
           <div class="col s12 l4 push-l4 input-field">
-            <input type="text" id="verification_code" name="verification_code" required length="6">
+            <input type="text" id="verification_code" name="verification_code" required maxlength="6" pattern="\d{6}">
             <label for="verification_code">Enter Verification Code</label>
             <span id="verify-error" class="red-text"><?php echo $error; ?></span>
           </div>
