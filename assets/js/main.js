@@ -134,3 +134,12 @@
   window.addEventListener("load", initSwiper);
 
 })();
+
+// yearly update
+function yearlyUpdate() {
+  const currentYear = new Date().getFullYear();
+  // console.log(currentYear);
+  document.getElementById('copyright-update').textContent = currentYear;
+}
+
+yearlyUpdate();
