@@ -1,17 +1,8 @@
 <?php 
 
-    include 'working_mail_send.php';
+    include 'connect.php';
+    // include 'working_mail_send.php';
 
-    $servername = "localhost";
-    $username = "collins";
-    $password = "1234";
-    $database = "cohtechobubra_db";
-
-    $conn = new mysqli($servername, $username, $password, $database);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $first_name = trim($_POST['first_name']);
@@ -38,13 +29,14 @@
         $stmt = $conn->prepare("UPDATE users_tb SET verification_code=? WHERE email=?");
         $stmt->bind_param("ss", $verification_code, $email);
         $stmt->execute();
-        $stmt->close();
-
+        
         // Redirect to Code verification page
         // $fullname = $first_name . " " . $surname;
         // sendmail($fullname,$email,$verification_code);
         header("Location: verification.php?email=$email");
 
+        $stmt->close();
+        
     }
 
     $conn->close();

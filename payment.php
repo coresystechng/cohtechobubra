@@ -1,13 +1,16 @@
 <?php
   //Fetch Payment Details
+  session_start();
+  $email = $_SESSION['email'];
+  $amount = 750000;
 
   // Paysack API URL
   $url = "https://api.paystack.co/transaction/initialize";
 
   // Payment Details
   $fields = [
-    'email' => "collinsduzzy21@gmail.com",
-    'amount' => "750000",
+    'email' => $email,
+    'amount' => $amount,
     'callback_url' => "https://localhost/cohtechobubra/success.php",
     // 'metadata' => ["cancel_action" => "replace_with_redirect_url_when_user_cancels"]
   ];
@@ -40,7 +43,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Payment Test</title>
+  <link rel="shortcut icon" href="assets/img/cohtech-logo.png" type="image/x-icon">
+  <title>Payment Portal </title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -91,12 +95,5 @@
   <script>
       window.location.href = "<?php echo $link?>"
   </script>
-
-  <!-- Scripts -->
-  <!-- <script src="https://js.paystack.co/v2/inline.js"></script> -->
-  <!-- <script>
-    const popup = new PaystackPop();
-    popup.resumeTransaction(access_code)
-  </script> -->
 </body>
 </html>

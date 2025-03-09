@@ -1,6 +1,7 @@
 <?php
 
-$conn = mysqli_connect('localhost','collins','1234','cohtechobubra_db');
+require 'connect.php';
+
 
 $first_name=$surname=$other_names=$gender=$date_of_birth=$marital_status=$state_of_origin=$lga=$nationality=$phone_no=$email=$religion=$contact_address=$nok_name=$nok_relationship=$nok_phone_no=$nok_contact_address=$nok_occupation=$attestation_1=$attestation_2="";
 
@@ -35,3 +36,18 @@ if(isset($_POST['submit'])){
     };
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+</head>
+<body>
+    <br>
+    <button>
+        <a href="/index.html">Back to Home</a>
+    </button>
+</body>
+</html>

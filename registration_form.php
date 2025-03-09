@@ -1,3 +1,15 @@
+<?php 
+
+session_start();
+
+if(isset($_SESSION['trx_id'])){
+  $email = $_SESSION['email'];
+  $first_name = $_SESSION['surname'];
+  $surname = $_SESSION['surname'];
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,11 +86,11 @@
           <div class="section" id="personal_info">
             <div class="row">
               <div class="col s12 l4 input-field">
-                <input type="text" name="first_name" id="first_name" class="validate" required>
+                <input type="text" name="first_name" value="<?php echo $first_name; ?>" id="first_name" class="validate" required>
                 <label for="first_name">First Name</label>
               </div>
               <div class="col s12 l3 input-field">
-                <input type="text" name="surname" id="surname" class="validate" required>
+                <input type="text" name="surname" value="<?php echo $surname; ?>" id="surname" class="validate" required>
                 <label for="surname">Surname</label>
               </div>
               <div class="col s12 l3 input-field">
@@ -165,7 +177,7 @@
                 <label for="phone_no">Phone Number</label>
               </div>
               <div class="col s12 l5 input-field">
-                <input type="text" name="email" id="email" class="validate" required>
+                <input type="text" name="email" value="<?php echo $email; ?>" id="email" class="validate" required>
                 <label for="email">Email Address</label>
               </div>
               <div class="col s12 l3 input-field">

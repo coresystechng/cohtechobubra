@@ -1,8 +1,10 @@
 <?php 
-
+session_start();
+require 'connect.php';
 // Get the transaction reference from the URL
 if(isset($_GET['trxref'])){
   $trx_id = strtoupper($_GET['trxref']);
+  $_SESSION['trx_id'] = $trx_id;
 }
 
 ?>
@@ -62,7 +64,7 @@ if(isset($_GET['trxref'])){
     <div class="container">
     <p class="center-align">Click on the button below to continue your registration.</p>
     <div class="center-align">
-      <a href="./registration_form.html?reg_id=<?php echo $trx_id; ?>" class="btn btn-large btn-flat theme-color-bg white-text">CONTINUE REGISTRATION</a>
+      <a href="./registration_form.php?reg_id=<?php echo $trx_id; ?>" class="btn btn-large btn-flat theme-color-bg white-text">CONTINUE REGISTRATION</a>
     </div>
   </section>
 </body>

@@ -1,15 +1,6 @@
 <?php
-  session_start();
-  $servername = "localhost";
-  $username = "collins";
-  $password = "1234";
-  $database = "cohtechobubra_db";
-
-  $conn = new mysqli($servername, $username, $password, $database);
-  if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-  }
-
+  require 'connect.php';
+  
   if ($_SERVER["REQUEST_METHOD"] == "GET") {
       $email = trim($_GET['email']);
       $error = "";
@@ -22,13 +13,16 @@
     $error = "";
 
     // Get the verification code from the database
-    $sql = "SELECT * FROM email_verifications WHERE email = '$email' AND verification_code = '$verification_code'";
-    $send_query = mysqli_query($conn, $sql);
-    $result = mysqli_fetch_assoc($send_query);
-
+    $stmt = $conn->prepare("SELECT * FROM users_tb WHERE email = ? AND verification_code = ?");
+    $stmt->bind_param("ss", $email, $verification_code);
+    $stmt->execute();
+    $result = $stmt->get_result()->fetch_assoc();
+    
     // Check if the verification code is valid
     if($result['verification_code'] == $verification_code) {
       // Redirect to the payment page
+      session_start();
+      $_SESSION['email'] = $email;
       header("Location: payment.php");
     } else {
       // Redirect to the verification page with an error message
@@ -36,6 +30,7 @@
       // header("Location: verification.php?email=$email&error=Verification code is incorrect");
     }
     
+    $stmt->close();
 
 
   }
