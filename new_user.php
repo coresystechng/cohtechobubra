@@ -34,7 +34,7 @@
         $fullname = $first_name . " " . $surname;
         $_SESSION['fullname'] = $fullname;
 
-        include 'php_mailer.php';
+        include 'send_email_verify.php';
 
         $stmt->close();
     }

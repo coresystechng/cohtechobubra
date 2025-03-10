@@ -1,11 +1,31 @@
 <?php 
-session_start();
 require 'connect.php';
+
 // Get the transaction reference from the URL
 if(isset($_GET['trxref'])){
+  session_start();
+  $email = $_SESSION['email'];
+  $fullname = $_SESSION['fullname'];
   $trx_id = strtoupper($_GET['trxref']);
   $_SESSION['trx_id'] = $trx_id;
+
 }
+
+//Update Users Table with the transaction reference
+$stmt = $conn->prepare("UPDATE users_tb SET payment_ref=? WHERE email=?");
+$stmt->bind_param("ss", $trx_id, $email);
+$stmt->execute();
+$stmt->close();
+
+// After the continue button is clicked, the user will be redirected to the registration page
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+  include 'send_payment_success.php';
+  header('Location: registration_form.php');
+}
+
+
+
+$conn->close();
 
 ?>
 <!DOCTYPE html>
@@ -43,32 +63,80 @@ if(isset($_GET['trxref'])){
   </style>
 </head>
 <body>
-  <section class="section container">
-    <div class="container section">
-      <h1 class="center-align">Payment Completed</h1>
-      <div class="row section valign-wrapper">
-        <div class="col s6">
-          <h6 class="right-align">Your Transaction ID is: </h6>
-        </div>
-        <div class="col s2">
-          <input type="text" id="copyText" value="<?php echo $trx_id; ?>" readonly>
-        </div>
-        <div class="col s4">
-          <button class="btn btn-flat theme-color-bg white-text copy-btn" onclick="copyToClipboard()">Copy</button>
-        </div>
+<header>
+    <div class="parallax-container hide-on-med-and-down">
+      <div class="parallax">
+        <img src="./assets/img/payment-done.jpg" alt="Designed by Freepik" class="responsive-img">
       </div>
     </div>
+    <img src="./assets/img/payment-done.jpg" alt="Designed by Freepik" class="responsive-img hide-on-large-only">
+  </header>
+  <main>
+    <section class="section container">
+      <div class="container section">
+        <h1 class="center-align hide-on-med-and-down">Payment Completed</h1>
+        <h4 class="center-align hide-on-large-only">Payment Completed</h4>
+        <div class="row section">
+          <div class="col s12 l6">
+            <h6 class="right-align hide-on-med-and-down">Your Transaction ID is: </h6>
+            <h6 class="hide-on-large-only">Your Transaction ID is: </h6>
+          </div>
+          <div class="col s8 l2">
+            <input type="text" id="copyText" value="<?php echo $trx_id; ?>" readonly>
+          </div>
+          <div class="col s4 l4">
+            <button class="btn btn-flat theme-color-bg white-text copy-btn" onclick="copyToClipboard()">Copy</button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    <div class="container divider"></div>
+    <br>
+    <section class="center-align">
+      <div class="container">
+        <p class="center-align">Click on the button below to continue your registration.</p>
+        <br>
+        <form action="success.php" method="post">
+          <div class="center-align">
+            <input type="submit" value="Continue Registration" class="btn btn-large btn-flat theme-color-bg white-text">
+          </div>
+        </form>
+      </div>
+    </section>
+    <br><br>
+  </main>
+  <footer class="page-footer black center-align">
+    <div class="footer-copyright">
+      <div class="container">
+        <p class="center">
+          <span>&COPY; 2025 COHTECH Obubra.</span>
+          <a href="https://wwww.cohtechobubra.edu.ng" target="_blank" class="white-text underline-txt">
+            Back to Home
+            <i class="material-icons tiny white-text">call_made</i>
+          </a>
+        </p>
+      </div>
     </div>
-  </section>
-  <section class="center-align">
-    <div class="container">
-    <p class="center-align">Click on the button below to continue your registration.</p>
-    <div class="center-align">
-      <a href="./registration_form.php?reg_id=<?php echo $trx_id; ?>" class="btn btn-large btn-flat theme-color-bg white-text">CONTINUE REGISTRATION</a>
-    </div>
-  </section>
+  </footer>
 </body>
 
+  <!-- JQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+  crossorigin="anonymous"></script>
+  <!-- LGA.js  -->
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('.parallax').parallax();
+      $('.datepicker').datepicker({yearRange: 50});
+      $('select').formSelect({
+        
+      });
+    })
+  </script>
   <script>
       function copyToClipboard() {
           var copyText = document.getElementById("copyText");
