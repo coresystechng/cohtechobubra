@@ -31,12 +31,12 @@
         $stmt->execute();
         
         // Redirect to Code verification page
-        // $fullname = $first_name . " " . $surname;
-        // sendmail($fullname,$email,$verification_code);
-        header("Location: verification.php?email=$email");
+        $fullname = $first_name . " " . $surname;
+        $_SESSION['fullname'] = $fullname;
+
+        include 'php_mailer.php';
 
         $stmt->close();
-        
     }
 
     $conn->close();

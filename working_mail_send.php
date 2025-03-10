@@ -1,7 +1,8 @@
 <?php 
 //just include on new_user.php and then call the function sendmail() with the needed details
-function sendmail($fullname,$email,$code){
-     $subject = "E-mail Verification";
+include 'connect.php';
+function sendmail($fullname,$email,$verification_code){
+    $subject = "E-mail Verification";
         $htmlContent = "
         <!DOCTYPE html>
         <html lang='en'>
@@ -78,7 +79,7 @@ function sendmail($fullname,$email,$code){
                     <img src='link_to_logo' width='20%'/>
                     <p>Dear $fullname,</p>
                     <p>Thank you for registering. Please use the following verification code to confirm your email</p>
-                    <div class='code'>$code</div>
+                    <div class='code'>$verification_code</div>
                     <p>If you did not request this, please ignore this email.</p>
                 </div>
                 <div class='footer'>
@@ -93,15 +94,14 @@ function sendmail($fullname,$email,$code){
             $subject = "Your Verification Code";
             $headers = "MIME-Version: 1.0" . "\r\n";
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            $headers .= "From: replace_with_sender_email" . "\r\n"; 
+            $headers .= "From: noreply@cohtechobubra.edu.ng" . "\r\n"; 
 
             $mail = mail($to, $subject, $htmlContent, $headers);
             if($mail){
-                echo 1;
+                header("Location: verification.php?email=$email");
             }
         
     }
- 
 
-    mysqli_close($conn);
+    // mysqli_close($conn);
 ?>

@@ -4,8 +4,6 @@ session_start();
 
 if(isset($_SESSION['trx_id'])){
   $email = $_SESSION['email'];
-  $first_name = $_SESSION['surname'];
-  $surname = $_SESSION['surname'];
 }
 
 ?>
