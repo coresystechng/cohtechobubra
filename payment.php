@@ -2,6 +2,8 @@
   //Fetch Payment Details
   session_start();
   $email = $_SESSION['email'];
+  $fullname = $_SESSION['fullname'];
+  // Amount to be paid
   $amount = 750000;
 
   // Paysack API URL
@@ -11,7 +13,7 @@
   $fields = [
     'email' => $email,
     'amount' => $amount,
-    'callback_url' => "https://localhost/cohtechobubra/success.php",
+    'callback_url' => "http://localhost/cohtechobubra/success.php",
     // 'metadata' => ["cancel_action" => "replace_with_redirect_url_when_user_cancels"]
   ];
 

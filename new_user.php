@@ -31,12 +31,19 @@
         $stmt->execute();
         
         // Redirect to Code verification page
+<<<<<<< HEAD
         $fullname = $first_name . " " . $surname;
         $_SESSION['fullname'] = $fullname;
 
-        include 'php_mailer.php';
+        include 'send_email_verify.php';
+=======
+        // $fullname = $first_name . " " . $surname;
+        // sendmail($fullname,$email,$verification_code);
+        header("Location: verification.php?email=$email");
+>>>>>>> parent of e8afa4a (installed, tested & deployed php mailer plugin ✅)
 
         $stmt->close();
+        
     }
 
     $conn->close();

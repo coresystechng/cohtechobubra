@@ -1,5 +1,4 @@
 <?php
-include 'connect.php';
 
 session_start();
 $email = $_SESSION['email'];
@@ -36,7 +35,7 @@ try {
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = 'Email Verification';
-    $mail->Body    = "<p> Good day, $fullname.</p></br><p>Please use the verification code below to confirm your email:</p><h1><code>$verification_code<code></h1><p>If you did not make this request, kindly ignore this email.</p><br><br><p>&copy; 2025 COHTECH Obubra. All rights reserved.</p>";
+    $mail->Body    = "<p> Good day, $fullname.</p></br><p>Please use the verification code below to confirm your email:</p><h1><code>$verification_code<code></h1><p>If you did not make this request, kindly ignore this email.</p><br><hr><p>&copy; 2025 COHTECH Obubra. All rights reserved.</p>";
     $mail->AltBody = "Your verification code is $verification_code";
 
     $mail->send() ;

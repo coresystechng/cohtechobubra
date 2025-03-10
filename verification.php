@@ -23,6 +23,9 @@
       // Redirect to the payment page
       session_start();
       $_SESSION['email'] = $email;
+      $first_name = $result['first_name'];
+      $surname = $result['surname'];
+      $fullname = strtoupper($first_name) . " " . strtoupper($surname);
       header("Location: payment.php");
     } else {
       // Redirect to the verification page with an error message

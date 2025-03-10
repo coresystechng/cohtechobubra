@@ -4,6 +4,8 @@ session_start();
 
 if(isset($_SESSION['trx_id'])){
   $email = $_SESSION['email'];
+  $trx_id = $_SESSION['trx_id'];
+  $fullname = $_SESSION['fullname'];
 }
 
 ?>
@@ -71,8 +73,8 @@ if(isset($_SESSION['trx_id'])){
     <div class="container">
       <h1 class="hide-on-med-and-down">Registration Form</h1>
       <h4 class="hide-on-large-only">Registration Form</h4>
-      <p class="flow-text grey-text text-darken-2">Complete the form below to continue the registration process. All fields are required.</p>
-      <!-- <p class="flow-text grey-text text-darken-2"><strong>Deadline: Sunday, March 30, 2025. </strong></p> -->
+      <p class="flow-text grey-text text-darken-2">Hello <?php echo $fullname; ?> <code>(<?php echo $trx_id; ?>)</code>, <br> Complete the form below to continue the registration process. All fields are required.</p>
+      <p class="flow-text grey-text text-darken-2"><strong>Deadline: Sunday, March 30, 2025. </strong></p>
     </div>
   </header>
   <main>
@@ -84,11 +86,11 @@ if(isset($_SESSION['trx_id'])){
           <div class="section" id="personal_info">
             <div class="row">
               <div class="col s12 l4 input-field">
-                <input type="text" name="first_name" value="<?php echo $first_name; ?>" id="first_name" class="validate" required>
+                <input type="text" name="first_name" id="first_name" class="validate" required>
                 <label for="first_name">First Name</label>
               </div>
               <div class="col s12 l3 input-field">
-                <input type="text" name="surname" value="<?php echo $surname; ?>" id="surname" class="validate" required>
+                <input type="text" name="surname" id="surname" class="validate" required>
                 <label for="surname">Surname</label>
               </div>
               <div class="col s12 l3 input-field">
@@ -113,9 +115,7 @@ if(isset($_SESSION['trx_id'])){
                   <option value="">Marital Status</option>
                   <option value="single">Single</option>
                   <option value="Married">Married</option>
-                  <option value="divorced">Divorced</option>
-                  <option value="separated">Separated</option>
-                  <option value="widowed">Widowed</option>
+                  <option value="divorced">Other</option>
                 </select>
               </div>
               <div class="col s12 l2 input-field">
