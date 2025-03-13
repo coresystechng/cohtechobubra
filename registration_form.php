@@ -1,13 +1,14 @@
 <?php 
 
 session_start();
-
 if(isset($_SESSION['trx_id'])){
   $email = $_SESSION['email'];
   $trx_id = $_SESSION['trx_id'];
   $fullname = $_SESSION['fullname'];
+}else{
+  header('location:index.html');
+  session_destroy();
 }
-
 ?>
 
 <!DOCTYPE html>
