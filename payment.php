@@ -1,10 +1,15 @@
 <?php
-  //Fetch Payment Details
-  session_start();
-  $email = $_SESSION['email'];
-  $fullname = $_SESSION['fullname'];
-  // Amount to be paid
-  $amount = 750000;
+
+  if($_SESSION['verification_code'] !== "") {
+    //Fetch Payment Details
+    session_start();
+    $email = $_SESSION['email'];
+    $fullname = $_SESSION['fullname'];
+    // Amount to be paid
+    $amount = 750000;
+  } else {
+    header("Location: index.html");
+  }
 
   // Paysack API URL
   $url = "https://api.paystack.co/transaction/initialize";
@@ -13,7 +18,7 @@
   $fields = [
     'email' => $email,
     'amount' => $amount,
-    'callback_url' => "http://localhost/horizon/cohtechobubra/success.php",
+    'callback_url' => "http://localhost/cohtechobubra/success.php", //Redirect URL after payment
     // 'metadata' => ["cancel_action" => "replace_with_redirect_url_when_user_cancels"]
   ];
 
@@ -27,7 +32,7 @@
   curl_setopt($ch,CURLOPT_POST, true);
   curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
   curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    "Authorization: Bearer sk_test_a84285b4013faed1fddd57be4126c810a81876f3",
+    "Authorization: Bearer sk_test_75df5930311613f3dcdf19b24398b18148560ae7",
     "Cache-Control: no-cache",
   ));
   

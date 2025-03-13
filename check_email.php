@@ -14,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         echo json_encode(["status" => "error", "message" => "Email is already registered."]);
 
-       
     } else {
         $stmt= $conn->prepare("SELECT * FROM users_tb WHERE email = ?");
         $stmt->bind_param("s", $email);
@@ -34,7 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo json_encode(["status" => "pending", "email"=> $email ,"message" => "Email is already in use. Please use the button below to complete registration."]);
                 exit();
             }
-           
             exit();
         }else{
             echo json_encode(["status" => "success", "message" => "Email is available."]);

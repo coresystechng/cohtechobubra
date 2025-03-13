@@ -8,7 +8,8 @@ if(isset($_GET['trxref'])){
   $fullname = $_SESSION['fullname'];
   $trx_id = strtoupper($_GET['trxref']);
   $_SESSION['trx_id'] = $trx_id;
-
+} else {
+  header("Location: index.html");
 }
 
 //Update Users Table with the transaction reference
