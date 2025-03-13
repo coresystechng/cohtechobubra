@@ -2,10 +2,14 @@
   require 'connect.php';
   
   if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    if(isset($_GET['email'])){
       $email = trim($_GET['email']);
       $error = "";
       $verification_code = "";
+    } else {
+      header("Location: index.html");
     }
+  }
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
@@ -17,9 +21,14 @@
     $stmt->bind_param("ss", $email, $verification_code);
     $stmt->execute();
     $result = $stmt->get_result()->fetch_assoc();
-    
+    $stmt->close();
+
     // Check if the verification code is valid
     if($result['verification_code'] == $verification_code) {
+      $code = $result['verification_code'];
+      $sql = "UPDATE users_tb SET verified = 1 WHERE email = '$email' AND verification_code = '$code'";
+      $conn->query($sql);
+
       // Redirect to the payment page
       session_start();
       $_SESSION['email'] = $email;

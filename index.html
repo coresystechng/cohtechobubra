@@ -72,7 +72,7 @@
   <main>
     <section class="section">
       <div class="container">
-        <form action="new_user.php" method="post">
+        <form action="new_user.php" id="registration" method="post">
           <div class="row">
             <div class="col s12 l6 input-field">
               <input type="text" name="email" id="email" required>
@@ -90,7 +90,9 @@
           </div>
           <div class="row">
             <div class="col s12 input-field center-align">
-              <input type="submit" value="start application" class="btn btn-large btn-flat theme-color-bg white-text">
+              <div id="submit-area">
+              <input type="submit" value="start application" id="submit-button" class="btn btn-large btn-flat theme-color-bg white-text">
+            </div>
             </div>
           </div>
         </form>
@@ -111,7 +113,49 @@
       </div>
     </div>
   </footer>
-  
+   
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4>Continue Registration</h4>
+        <p>Please enter your payment reference to access the Registration Form</p>
+        <div class="input-field">
+          <form action="check_ref.php" method="POST">
+            <input type="email" name="email_ref"  id="ref-email" readonly required>
+          <input type="text" id="payment_ref" name="payment_ref" required>
+          <label for="payment_ref">Payment Reference</label>
+          <span id="payment-error" class="helper-text"></span>
+
+          <input type="submit" value="Continue Registration" class="btn btn-flat theme-color-bg white-text">
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+      </div>
+      </div>
+    </div>
+    
+    <!-- Modal Structure -->
+    <div id="modal2" class="modal">
+      <div class="modal-content">
+        <h4>Continue Registration</h4>
+        <p>Please confirm this is your email before proceeding</p>
+        <div class="input-field">
+          <form action="new_user.php" method="POST">
+            <input type="email" name="con_email"  id="con_email" readonly required>
+          <input type="hidden" id="continue" name="continue" required>
+          
+
+          <input type="submit" value="Continue Registration" class="btn btn-flat theme-color-bg white-text">
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+      </div>
+    </div>
+    </div>
   
   <!-- JQuery CDN -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -137,10 +181,18 @@
                 data: { email: email },
                 dataType: "json",
                 success: function(response) {
-                    if (response.status === "error") {
+                    if (response.status === "pending") {
                         $("#email-error").text(response.message).css("color", "red");
                         emailValid = false;
-                    } else {
+                        document.getElementById('submit-area').innerHTML = '<a class="btn btn-large btn-flat theme-color-bg white-text modal-trigger" href="#modal1">Continue Registration</a>';
+                        
+                        document.getElementById('ref-email').value= response.email;
+                    } else if(response.status === "pay_pending"){
+                      $("#email-error").text(response.message).css("color", "red");
+                      document.getElementById('submit-area').innerHTML = '<a class="btn btn-large btn-flat theme-color-bg white-text modal-trigger" href="#modal2">Continue Registration</a>';
+                      document.getElementById('con_email').value= response.email;
+                      emailValid = false;
+                    } else{
                         $("#email-error").text("Email is available").css("color", "green");
                         emailValid = true;
                     }
@@ -149,12 +201,17 @@
           }
       });
 
-      $("form").on("submit", function(event) {
+      $("#registration").on("submit", function(event) {
         if (!emailValid) {
             event.preventDefault(); // Stop form submission if email is taken
             alert("Invalid email. Please enter an available email before proceeding.");
         }
       });
+    });
+  </script>
+  <script>
+    $(document).ready(function(){
+      $('.modal').modal();
     });
   </script>
 </body>

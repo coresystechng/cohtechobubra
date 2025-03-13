@@ -13,7 +13,7 @@
   $fields = [
     'email' => $email,
     'amount' => $amount,
-    'callback_url' => "http://localhost/cohtechobubra/success.php",
+    'callback_url' => "http://localhost/horizon/cohtechobubra/success.php",
     // 'metadata' => ["cancel_action" => "replace_with_redirect_url_when_user_cancels"]
   ];
 

@@ -6,7 +6,10 @@ if(isset($_SESSION['trx_id'])){
   $email = $_SESSION['email'];
   $trx_id = $_SESSION['trx_id'];
   $fullname = $_SESSION['fullname'];
-}
+}else{?>
+  <script>alert('Something went wrong')</script>
+<?php }
+header('location:index.html');
 
 ?>
 

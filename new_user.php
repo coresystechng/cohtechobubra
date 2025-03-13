@@ -5,9 +5,24 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+        if(isset($_POST['continue'])){
+                $email = trim($_POST['con_email']);
+                $sql = $conn->prepare("SELECT * FROM users_tb WHERE email = ?");
+                $sql->bind_param("s", $email);
+                $sql->execute();
+                $result = $sql->get_result();
+                $row = $result->fetch_assoc();
+                $first_name = $row['first_name'];
+                $surname = $row['surname'];
+                $sql = "DELETE FROM users_tb WHERE email = '$email'";
+                $conn->query($sql);
+                
+        }else{
+
         $first_name = trim($_POST['first_name']);
         $surname = trim($_POST['surname']);
         $email = trim($_POST['email']);
+        }
 
         //Save data to database
         $stmt = $conn->prepare("INSERT INTO users_tb (first_name, surname, email) VALUES (?, ?, ?)");
@@ -31,16 +46,13 @@
         $stmt->execute();
         
         // Redirect to Code verification page
-<<<<<<< HEAD
         $fullname = $first_name . " " . $surname;
         $_SESSION['fullname'] = $fullname;
 
         include 'send_email_verify.php';
-=======
         // $fullname = $first_name . " " . $surname;
         // sendmail($fullname,$email,$verification_code);
         header("Location: verification.php?email=$email");
->>>>>>> parent of e8afa4a (installed, tested & deployed php mailer plugin ✅)
 
         $stmt->close();
         
