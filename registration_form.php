@@ -1,5 +1,7 @@
 <?php 
 
+require 'connect.php';
+
 session_start();
 if(isset($_SESSION['trx_id'])){
   $email = $_SESSION['email'];
@@ -9,6 +11,42 @@ if(isset($_SESSION['trx_id'])){
   header('location:index.html');
   session_destroy();
 }
+  //Set Blank variables
+  $first_name=$surname=$other_names=$gender=$date_of_birth=$marital_status=$state_of_origin=$lga=$nationality=$phone_no=$religion=$contact_address=$nok_name=$nok_relationship=$nok_phone_no=$nok_contact_address=$nok_occupation=$attestation_1=$attestation_2="";
+
+  if(isset($_POST['submit'])){
+      $first_name = $_POST['first_name'];
+      $surname = $_POST['surname'];
+      $other_names = $_POST['other_names'];
+      $gender = $_POST['gender'];
+      $date_of_birth = $_POST['date_of_birth'];
+      $marital_status = $_POST['marital_status'];
+      $state_of_origin = $_POST['state_of_origin'];
+      $lga = $_POST['lga'];
+      $nationality = $_POST['nationality'];
+      $phone_no = $_POST['phone_no'];
+      $email = $_POST['email'];
+      $religion = $_POST['religion'];
+      $contact_address = $_POST['contact_address'];
+      $nok_name = $_POST['nok_name'];
+      $nok_relationship = $_POST['nok_relationship'];
+      $nok_phone_no = $_POST['nok_phone_no'];
+      $nok_contact_address = $_POST['nok_contact_address'];
+      $nok_occupation = $_POST['nok_occupation'];
+      $attestation_1 = $_POST['attestation_1'];
+      $attestation_2 = $_POST['attestation_2'];
+
+      $save_query = "INSERT INTO `registration_tb`(`first_name`, `surname`, `other_names`, `gender`, `date_of_birth`, `marital_status`, `state_of_origin`, `lga`, `nationality`, `phone_no`, `email`, `religion`, `contact_address`, `nok_name`, `nok_relationship`, `nok_phone_no`, `nok_contact_address`, `nok_occupation`, `attestation_1`, `attestation_2`) VALUES ('$first_name', '$surname', '$other_names', '$gender', '$date_of_birth', '$marital_status','$state_of_origin', '$lga', '$nationality', '$phone_no', '$email', '$religion','$contact_address','$nok_name', '$nok_relationship','$nok_phone_no', '$nok_contact_address', '$nok_occupation', '$attestation_1','$attestation_2')";
+
+      $send_query = mysqli_query($conn, $save_query);
+
+      if($send_query){
+        // Send email to user
+        include 'send_registration_success.php';
+        header('location:save.php');
+      };
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -75,13 +113,12 @@ if(isset($_SESSION['trx_id'])){
       <h1 class="hide-on-med-and-down">Registration Form</h1>
       <h4 class="hide-on-large-only">Registration Form</h4>
       <p class="flow-text grey-text text-darken-2">Hello <?php echo $fullname; ?> <code>(<?php echo $trx_id; ?>)</code>, <br> Complete the form below to continue the registration process. All fields are required.</p>
-      <p class="flow-text grey-text text-darken-2"><strong>Deadline: Sunday, March 30, 2025. </strong></p>
     </div>
   </header>
   <main>
     <section class="section">
       <div class="container">
-        <form action="save.php" method="post">
+        <form action="registration_form.php" method="post">
 
           <h5>Personal Info</h5>
           <div class="section" id="personal_info">

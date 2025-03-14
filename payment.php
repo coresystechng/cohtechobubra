@@ -1,8 +1,7 @@
 <?php
-
-  if($_SESSION['verification_code'] !== "") {
+  session_start();
+  if($_SESSION['verification_code']) {
     //Fetch Payment Details
-    session_start();
     $email = $_SESSION['email'];
     $fullname = $_SESSION['fullname'];
     // Amount to be paid

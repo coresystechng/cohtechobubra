@@ -1,9 +1,8 @@
 <?php
-
-session_start();
+//Get the user details from the session
 $email = $_SESSION['email'];
-$verification_code = $_SESSION['verification_code'];
-$fullname = strtoupper($_SESSION['fullname']);
+$trx_id = $_SESSION['trx_id'];
+$fullname = $_SESSION['fullname'];
 
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
@@ -34,13 +33,11 @@ try {
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = 'Email Verification';
-    $mail->Body    = "<p> Good day, $fullname.</p></br><p>Please use the verification code below to confirm your email:</p><h1><code>$verification_code<code></h1><p>If you did not make this request, kindly ignore this email.</p><br><hr><p>&copy; 2025 COHTECH Obubra. All rights reserved.</p>";
-    $mail->AltBody = "Your verification code is $verification_code";
+    $mail->Subject = 'Registration Successful';
+    $mail->Body    = "<p>Dear $fullname ($trx_id),</p></br><p>Your registration was successful. Download the PDF attached to the email to save a copy of your registration form.<br><p>Thank you. </p><br><hr><p>&copy; 2025 COHTECH Obubra. All rights reserved.</p>";
+    $mail->AltBody = "Registration Successful";
 
-    $mail->send() ;
-    echo "Message has been sent";
-    header("Location: verification.php?email=$email");
+    $mail->send();
   } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
   }
