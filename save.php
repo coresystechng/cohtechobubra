@@ -1,40 +1,22 @@
 <?php
+session_start();
+if(isset($_SESSION['trx_id'])){
+  $trx_id = $_SESSION['trx_id'];
+  $email = $_SESSION['email'];
+  $fullname = $_SESSION['fullname'];
+  
+  $greeting = "Dear $fullname";
+  $message = "Your data has been saved successfully. Thank you for choosing our esteemed institution. Your admission will be processed in due time and you will be notified of your status via email.";
+  $message2 = "Please click the button below to go back to our website.";
 
-require 'connect.php';
+  } else {
+  header("Location: index.html");
+  };
 
+  // Unset and destroy session variables
+  session_unset();
+  session_destroy();
 
-$first_name=$surname=$other_names=$gender=$date_of_birth=$marital_status=$state_of_origin=$lga=$nationality=$phone_no=$religion=$contact_address=$nok_name=$nok_relationship=$nok_phone_no=$nok_contact_address=$nok_occupation=$attestation_1=$attestation_2="";
-
-if(isset($_POST['submit'])){
-    $first_name = $_POST['first_name'];
-    $surname = $_POST['surname'];
-    $other_names = $_POST['other_names'];
-    $gender = $_POST['gender'];
-    $date_of_birth = $_POST['date_of_birth'];
-    $marital_status = $_POST['marital_status'];
-    $state_of_origin = $_POST['state_of_origin'];
-    $lga = $_POST['lga'];
-    $nationality = $_POST['nationality'];
-    $phone_no = $_POST['phone_no'];
-    $email = $_POST['email'];
-    $religion = $_POST['religion'];
-    $contact_address = $_POST['contact_address'];
-    $nok_name = $_POST['nok_name'];
-    $nok_relationship = $_POST['nok_relationship'];
-    $nok_phone_no = $_POST['nok_phone_no'];
-    $nok_contact_address = $_POST['nok_contact_address'];
-    $nok_occupation = $_POST['nok_occupation'];
-    $attestation_1 = $_POST['attestation_1'];
-    $attestation_2 = $_POST['attestation_2'];
-
-    $save_query = "INSERT INTO `registration_tb`(`first_name`, `surname`, `other_names`, `gender`, `date_of_birth`, `marital_status`, `state_of_origin`, `lga`, `nationality`, `phone_no`, `email`, `religion`, `contact_address`, `nok_name`, `nok_relationship`, `nok_phone_no`, `nok_contact_address`, `nok_occupation`, `attestation_1`, `attestation_2`) VALUES ('$first_name', '$surname', '$other_names', '$gender', '$date_of_birth', '$marital_status','$state_of_origin', '$lga', '$nationality', '$phone_no', '$email', '$religion','$contact_address','$nok_name', '$nok_relationship','$nok_phone_no', '$nok_contact_address', '$nok_occupation', '$attestation_1','$attestation_2')";
-
-    $send_query = mysqli_query($conn, $save_query);
-
-    if($send_query){
-        echo "Data saved successfully";
-    };
-}
 ?>
 
 <!DOCTYPE html>
@@ -89,9 +71,24 @@ if(isset($_POST['submit'])){
   </style>
 </head>
 <body>
-    <br>
-    <button>
-        <a href="/index.html">Back to Home</a>
-    </button>
+    <section class="section">
+      <div class="container section center-align">
+        <div class="container">
+          <div class="card z-depth-3">
+            <div class="card-content container">
+              <img src="assets/img/cohtech-logo.png" alt="COHTECH Obubra Logo" class="responsive-img" width="15%">
+              <h4>Registration Completed!</h4>
+              <p class="theme-color-txt"><b><?php echo $greeting;?>(<?php echo $trx_id ?>),</b></p>
+              <br>
+              <p class=""><?php echo $message;?></p>
+              <br>
+              <p class=""><?php echo $message2;?></p>
+              <br>
+              <a href="https://www.cohtechobubra.edu.ng" class="btn theme-color-bg btn-flat btn-large white-text">Back to Home</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 </body>
 </html>
