@@ -1,7 +1,7 @@
 <?php 
 
-require 'connect.php';
 
+require 'connect.php';
 session_start();
 if(isset($_SESSION['trx_id'])){
   $email = $_SESSION['email'];
@@ -46,7 +46,6 @@ if(isset($_SESSION['trx_id'])){
         header('location:save.php');
       };
     }
-
 ?>
 
 <!DOCTYPE html>
