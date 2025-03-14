@@ -17,6 +17,9 @@
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
+
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -25,8 +28,103 @@
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+
+  /* Swiper Container */
+  .swiper-container {
+    width: 100%;
+    height: 500px; 
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Swiper Slide */
+  .swiper-slide {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  /* Slide Image */
+  .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: brightness(40%);
+  }
+
+  /* Slide Caption */
+  .slide-caption {
+    position: absolute;
+    top: 50%;
+    left: 200px;
+    transform: translateY(-50%);
+    text-align: left;
+    color: #fff;
+    /* background: rgba(0, 0, 0, 0.6); */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 800px;
+  }
+
+  .slide-caption h2 {
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+
+  .slide-caption p {
+    font-size: 1.2rem;
+  }
+
+  /* Pagination Bullets */
+  .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background: #37423b;
+    background-color: white;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+  }
+
+  .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #702963;
+  }
+
+  /* Navigation Buttons */
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: #fff;
+    background: rgba(76, 91, 81, 0.7);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+  }
+
+  .swiper-button-next:hover,
+  .swiper-button-prev:hover {
+    background: #702963;
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 1.5rem;
+  }
+
+
+  </style>
 
 </head>
 
@@ -54,6 +152,7 @@
             <ul>
               <li><a href="courses.html">Courses</a></li>
               <li><a href="entry_requirements.html">Entry Requirements</a></li>
+              <li><a href="https://register.cohtechobubra.edu.ng/" target="_blank">Apply Now</a></li>
             </ul>
           </li>
           <li class="dropdown"><a href="#"><span>Media</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -75,18 +174,58 @@
   <main class="main">
 
     <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background">
+    <div id="hero" class="">
 
-      <img src="assets/img/hero-bg.jpg" alt="" data-aos="fade-in">
+    <!-- Swiper Slider -->
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="assets/img/creab-thepolymath-jDXMQf3LPX8-unsplash.jpg" alt="School Building">
+            <div class="slide-caption">
+              <h2>Shaping the Future of Healthcare</h2>
+              <p>Empowering students with the skills and knowledge to lead in the health sector.</p>
+              <a href="about.html" class="btn learn-more"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+      
+          <div class="swiper-slide">
+            <img src="assets/img/hero-bg.jpg" alt="Library">
+            <div class="slide-caption">
+              <h2>A Legacy of Excellence</h2>
+              <p>Providing top-tier medical education for generations.</p>
+              <a href="about.html" class="btn learn-more"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+      
+          <div class="swiper-slide">
+            <img src="assets/img/creab-thepolymath-jDXMQf3LPX8-unsplash.jpg" alt="Laboratory">
+            <div class="slide-caption">
+              <h2>Hands-On Learning Experience</h2>
+              <p>Equipped with modern laboratories and advanced research facilities.</p>
+              <a href="about.html" class="btn learn-more"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
 
-      <div class="container">
-        <h2 data-aos="fade-up" data-aos-delay="100">Excellence in Health Education,<br>for a Stronger Tomorrow.</h2>
-        <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-          <a href="courses.html" class="btn-get-started">VIEW COURSES</a>
+          <div class="swiper-slide">
+            <img src="assets/img/creab-thepolymath-jDXMQf3LPX8-unsplash.jpg" alt="Laboratory">
+            <div class="slide-caption">
+              <h2>Hands-On Learning Experience</h2>
+              <p>Equipped with modern laboratories and advanced research facilities.</p>
+              <a href="about.html" class="btn learn-more"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
         </div>
+      
+        <!-- Pagination -->
+        <div class="swiper-pagination"></div>
+      
+        <!-- Navigation -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
       </div>
 
-    </section><!-- /Hero Section -->
+
+    </div><!-- /Hero Section -->
 
     <!-- About Section -->
     <section id="about" class="about section">
@@ -373,6 +512,23 @@
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 
+
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      loop: true,
+      effect: 'fade', 
+      speed: 1000, 
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+  
 </body>
 
 </html>

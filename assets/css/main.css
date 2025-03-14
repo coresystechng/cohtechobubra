@@ -1886,3 +1886,25 @@ section,
   color: var(--contrast-color);
   background: color-mix(in srgb, var(--accent-color), transparent 15%);
 }
+
+.learn-more {
+  background-color: #702963; /* Original purple color */
+  color: white;
+  text-align: center;
+  padding: 13px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.learn-more:hover {
+  background-color: #8a4a7f; /* Lighter purple color */
+}
+
+.reach-out{
+  color: #37423b;
+}
+
+.container-small{
+  max-width: 1100px;
+  margin: 0 auto;
+}
