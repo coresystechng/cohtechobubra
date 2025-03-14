@@ -5,7 +5,7 @@
     $email = $_SESSION['email'];
     $fullname = $_SESSION['fullname'];
     // Amount to be paid
-    $amount = 750000;
+    $amount = 771250;
   } else {
     header("Location: index.html");
   }
