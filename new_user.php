@@ -49,10 +49,10 @@
         $fullname = $first_name . " " . $surname;
         $_SESSION['fullname'] = $fullname;
 
-        include 'send_email_verify.php';
         // $fullname = $first_name . " " . $surname;
         // sendmail($fullname,$email,$verification_code);
         header("Location: verification.php?email=$email");
+        include 'send_email_verify.php';
 
         $stmt->close();
         
