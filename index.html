@@ -32,100 +32,6 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
-  <style>
-
-  /* Swiper Container */
-  .swiper-container {
-    width: 100%;
-    height: 500px; 
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Swiper Slide */
-  .swiper-slide {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.5);
-  }
-
-  /* Slide Image */
-  .swiper-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    filter: brightness(40%);
-  }
-
-  /* Slide Caption */
-  .slide-caption {
-    position: absolute;
-    top: 50%;
-    left: 200px;
-    transform: translateY(-50%);
-    text-align: left;
-    color: #fff;
-    /* background: rgba(0, 0, 0, 0.6); */
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 800px;
-  }
-
-  .slide-caption h2 {
-    color: #fff;
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-  }
-
-  .slide-caption p {
-    font-size: 1.2rem;
-  }
-
-  /* Pagination Bullets */
-  .swiper-pagination-bullet {
-    width: 12px;
-    height: 12px;
-    background: #37423b;
-    background-color: white;
-    opacity: 0.5;
-    transition: opacity 0.3s ease;
-  }
-
-  .swiper-pagination-bullet-active {
-    opacity: 1;
-    background: #702963;
-  }
-
-  /* Navigation Buttons */
-  .swiper-button-next,
-  .swiper-button-prev {
-    color: #fff;
-    background: rgba(76, 91, 81, 0.7);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    transition: background 0.3s ease;
-  }
-
-  .swiper-button-next:hover,
-  .swiper-button-prev:hover {
-    background: #702963;
-  }
-
-  .swiper-button-next::after,
-  .swiper-button-prev::after {
-    font-size: 1.5rem;
-  }
-
-
-  </style>
-
 </head>
 
 <body class="index-page">
@@ -176,20 +82,20 @@
     <!-- Hero Section -->
     <div id="hero" class="">
 
-    <!-- Swiper Slider -->
-      <div class="swiper-container">
+    <!-- Swiper Slider Desktop -->
+      <div class="swiper-container d-none d-md-block" data-aos="fade-up" data-aos-delay="200">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <img src="assets/img/creab-thepolymath-jDXMQf3LPX8-unsplash.jpg" alt="School Building">
+            <img src="assets/img/hero-bgi.jpg" alt="Student">
             <div class="slide-caption">
-              <h2>Shaping the Future of Healthcare</h2>
-              <p>Empowering students with the skills and knowledge to lead in the health sector.</p>
+              <h2>Shaping Future Healthcare</h2>
+              <p>Empowering students with the skills to lead in the health sector.</p>
               <a href="about.html" class="btn learn-more"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
       
           <div class="swiper-slide">
-            <img src="assets/img/hero-bg.jpg" alt="Library">
+            <img src="assets/img/hero-bgii.jpg" alt="Alumni">
             <div class="slide-caption">
               <h2>A Legacy of Excellence</h2>
               <p>Providing top-tier medical education for generations.</p>
@@ -198,7 +104,7 @@
           </div>
       
           <div class="swiper-slide">
-            <img src="assets/img/creab-thepolymath-jDXMQf3LPX8-unsplash.jpg" alt="Laboratory">
+            <img src="assets/img/hero-bgiii.jpg" alt="group of friends">
             <div class="slide-caption">
               <h2>Hands-On Learning Experience</h2>
               <p>Equipped with modern laboratories and advanced research facilities.</p>
@@ -207,10 +113,10 @@
           </div>
 
           <div class="swiper-slide">
-            <img src="assets/img/creab-thepolymath-jDXMQf3LPX8-unsplash.jpg" alt="Laboratory">
+            <img src="assets/img/hero-bgiv.jpg" alt="Laboratory">
             <div class="slide-caption">
-              <h2>Hands-On Learning Experience</h2>
-              <p>Equipped with modern laboratories and advanced research facilities.</p>
+              <h2>Innovation in Medicine</h2>
+              <p>Advancing medical knowledge through research and technology.</p>
               <a href="about.html" class="btn learn-more"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
@@ -222,6 +128,50 @@
         <!-- Navigation -->
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
+      </div>
+
+      <!-- Swiper Slider Mobile -->
+      <div class="swiper-container swiper-mobile d-block d-md-none" data-aos="fade-up" data-aos-delay="200">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="assets/img/hero-bgi.jpg" alt="Student">
+            <div class="slide-caption-mobile">
+              <h2>Shaping Future Healthcare</h2>
+              <p>Empowering students with the skills and knowledge to lead in the health sector.</p>
+              <a href="about.html" class="btn learn-more"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+      
+          <div class="swiper-slide">
+            <img src="assets/img/hero-bgii.jpg" alt="Alumni">
+            <div class="slide-caption-mobile">
+              <h2>A Legacy of Excellence</h2>
+              <p>Providing top-tier medical education for generations.</p>
+              <a href="about.html" class="btn learn-more"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+      
+          <div class="swiper-slide">
+            <img src="assets/img/hero-bgiii.jpg" alt="group of friends">
+            <div class="slide-caption-mobile">
+              <h2>Hands-On Learning Experience</h2>
+              <p>Equipped with modern laboratories and advanced research facilities.</p>
+              <a href="about.html" class="btn learn-more"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <img src="assets/img/hero-bgiv.jpg" alt="Laboratory">
+            <div class="slide-caption-mobile">
+              <h2>Innovation in Medicine</h2>
+              <p>Advancing medical knowledge through research and technology.</p>
+              <a href="about.html" class="btn learn-more"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Pagination -->
+        <div class="swiper-pagination"></div>
       </div>
 
 
