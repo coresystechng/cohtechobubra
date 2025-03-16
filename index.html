@@ -35,9 +35,13 @@
 </head>
 
 <body class="index-page">
+  
+  <header id="header" class="header sticky-top">
 
-  <header id="header" class="header d-flex align-items-center sticky-top">
+    f
+
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
+      
 
       <a href="index.html" class="logo d-flex align-items-center me-auto">
         <img src="assets/img/cohtech-logo-full.png" alt="">
@@ -90,7 +94,7 @@
             <div class="slide-caption">
               <h2>Shaping Future Healthcare</h2>
               <p>Empowering students with the skills to lead in the health sector.</p>
-              <a href="about.html" class="btn learn-more"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
+              <a href="about.html" class="btn learn-more-btn"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
       
@@ -99,7 +103,7 @@
             <div class="slide-caption">
               <h2>A Legacy of Excellence</h2>
               <p>Providing top-tier medical education for generations.</p>
-              <a href="about.html" class="btn learn-more"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
+              <a href="about.html" class="btn learn-more-btn"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
       
@@ -108,7 +112,7 @@
             <div class="slide-caption">
               <h2>Hands-On Learning Experience</h2>
               <p>Equipped with modern laboratories and advanced research facilities.</p>
-              <a href="about.html" class="btn learn-more"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
+              <a href="about.html" class="btn learn-more-btn"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
 
@@ -117,7 +121,7 @@
             <div class="slide-caption">
               <h2>Innovation in Medicine</h2>
               <p>Advancing medical knowledge through research and technology.</p>
-              <a href="about.html" class="btn learn-more"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
+              <a href="about.html" class="btn learn-more-btn"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -138,7 +142,7 @@
             <div class="slide-caption-mobile">
               <h2>Shaping Future Healthcare</h2>
               <p>Empowering students with the skills and knowledge to lead in the health sector.</p>
-              <a href="about.html" class="btn learn-more"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
+              <a href="about.html" class="btn learn-more-btn"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
       
@@ -147,7 +151,7 @@
             <div class="slide-caption-mobile">
               <h2>A Legacy of Excellence</h2>
               <p>Providing top-tier medical education for generations.</p>
-              <a href="about.html" class="btn learn-more"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
+              <a href="about.html" class="btn learn-more-btn"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
       
@@ -156,7 +160,7 @@
             <div class="slide-caption-mobile">
               <h2>Hands-On Learning Experience</h2>
               <p>Equipped with modern laboratories and advanced research facilities.</p>
-              <a href="about.html" class="btn learn-more"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
+              <a href="about.html" class="btn learn-more-btn"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
 
@@ -165,7 +169,7 @@
             <div class="slide-caption-mobile">
               <h2>Innovation in Medicine</h2>
               <p>Advancing medical knowledge through research and technology.</p>
-              <a href="about.html" class="btn learn-more"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
+              <a href="about.html" class="btn learn-more-btn"><span class="pe-2">Learn More</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -174,8 +178,8 @@
         <div class="swiper-pagination"></div>
       </div>
 
-
-    </div><!-- /Hero Section -->
+    </div>
+    <!-- /Hero Section -->
 
     <!-- About Section -->
     <section id="about" class="about section">
@@ -465,6 +469,9 @@
 
   <script>
     var swiper = new Swiper('.swiper-container', {
+      autoplay: {
+        delay: 4000,
+      },
       loop: true,
       effect: 'fade', 
       speed: 1000, 
