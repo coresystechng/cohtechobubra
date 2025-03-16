@@ -32,7 +32,12 @@
 
 <body class="contact-page">
 
-  <header id="header" class="header d-flex align-items-center sticky-top">
+  <header id="header" class="header sticky-top">
+
+    <marquee behavior="scroll" direction="left" scrollamount="8" onmouseover="this.stop();" onmouseout="this.start();">
+      <span class="pe-5">📢 Registration is now open!!! <a href="https://register.cohtechobubra.edu.ng/" target="_blank" style="color: rgb(82, 163, 255); text-decoration: underline;">Click here to register.</a></span>
+    </marquee>
+
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
       <a href="index.html" class="logo d-flex align-items-center me-auto">
@@ -104,9 +109,8 @@
 
         <div class="row gy-4">
           
-          
-          <div class="col-lg-6">
-            <h2 class="mb-4 reach-out"><strong>Reach out to Us</strong></h2>
+          <div class="col-lg-6 col-md-6">
+            <h2 class="mb-4 reach-out text-center"><strong>Reach out to Us</strong></h2>
             <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
               <i class="bi bi-geo-alt flex-shrink-0"></i>
               <div>
@@ -119,7 +123,7 @@
               </div>
             </div><!-- End Info Item -->
 
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+            <div class="info-item d-flex"  data-aos="fade-up" data-aos-delay="400">
               <i class="bi bi-telephone flex-shrink-0"></i>
               <div>
                 <h3>Call Us</h3>
@@ -137,8 +141,14 @@
 
           </div>
 
-          <div class="col-lg-6 text-center">
+          <!-- map on desktop -->
+          <div class="col-lg-6 text-center d-none d-lg-block" data-aos="fade-up" data-aos-delay="400">
             <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2672694.6038990445!2d7.8294144238211025!3d5.736762834080728!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x105c8d007b0faff5%3A0x6977e5fa6d9b69e7!2sNational%20Youth%20Development%20Centre%2C%20Obubra!5e0!3m2!1sen!2sng!4v1741982604077!5m2!1sen!2sng" width="500" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+
+          <!-- map on mobile -->
+          <div class="col-md-6 text-center pt-4 d-block d-lg-none" data-aos="fade-up" data-aos-delay="400">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2672694.6038990445!2d7.8294144238211025!3d5.736762834080728!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x105c8d007b0faff5%3A0x6977e5fa6d9b69e7!2sNational%20Youth%20Development%20Centre%2C%20Obubra!5e0!3m2!1sen!2sng!4v1741982604077!5m2!1sen!2sng" width="350" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </div>
