@@ -1,21 +1,10 @@
 <?php
-session_start();
-if(isset($_SESSION['trx_id'])){
-  $trx_id = $_SESSION['trx_id'];
-  $email = $_SESSION['email'];
+  session_start();
   $fullname = $_SESSION['fullname'];
-  
+
   $greeting = "Dear $fullname";
   $message = "Your data has been saved successfully. Thank you for choosing our esteemed institution. Your admission will be processed in due time and you will be notified of your status via email.";
   $message2 = "Please click the button below to go back to our website.";
-
-  } else {
-  header("Location: index.html");
-  };
-
-  // Unset and destroy session variables
-  session_unset();
-  session_destroy();
 
 ?>
 
@@ -78,7 +67,7 @@ if(isset($_SESSION['trx_id'])){
             <div class="card-content container">
               <img src="assets/img/cohtech-logo.png" alt="COHTECH Obubra Logo" class="responsive-img" width="15%">
               <h4>Registration Completed!</h4>
-              <p class="theme-color-txt"><b><?php echo $greeting;?>(<?php echo $trx_id ?>),</b></p>
+              <p class="theme-color-txt"><b><?php echo $greeting;?>,</b></p>
               <br>
               <p class=""><?php echo $message;?></p>
               <br>
@@ -92,3 +81,11 @@ if(isset($_SESSION['trx_id'])){
     </section>
 </body>
 </html>
+
+<?php 
+
+  // Unset and destroy session variables
+  session_unset();
+  session_destroy();
+
+?>
