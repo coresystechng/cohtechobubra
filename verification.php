@@ -36,7 +36,7 @@
       $surname = $result['surname'];
       $fullname = strtoupper($first_name) . " " . strtoupper($surname);
       $_SESSION['verification_code'] = $verification_code;
-      header("Location: payment.php");
+      header("Location: confirm_email.php");
     } else {
       // Redirect to the verification page with an error message
       $error = "Verification code is incorrect";

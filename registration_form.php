@@ -12,7 +12,7 @@ if(isset($_SESSION['trx_id'])){
   session_destroy();
 }
   //Set Blank variables
-  $first_name=$surname=$other_names=$gender=$date_of_birth=$marital_status=$state_of_origin=$lga=$nationality=$phone_no=$religion=$contact_address=$nok_name=$nok_relationship=$nok_phone_no=$nok_contact_address=$nok_occupation=$attestation_1=$attestation_2="";
+  $first_name=$surname=$other_names=$gender=$date_of_birth=$marital_status=$state_of_origin=$lga=$nationality=$phone_no=$email=$religion=$contact_address=$nok_name=$nok_relationship=$nok_phone_no=$nok_contact_address=$nok_occupation=$attestation_1=$attestation_2="";
 
   if(isset($_POST['submit'])){
       $first_name = $_POST['first_name'];
@@ -111,7 +111,7 @@ if(isset($_SESSION['trx_id'])){
     <div class="container">
       <h1 class="hide-on-med-and-down">Registration Form</h1>
       <h4 class="hide-on-large-only">Registration Form</h4>
-      <p class="flow-text grey-text text-darken-2">Hello <?php echo $fullname; ?> <code>(<?php echo $trx_id; ?>)</code>, <br> Complete the form below to continue the registration process. All fields are required.</p>
+      <p class="flow-text grey-text text-darken-2">Complete the form below to continue the registration process. All fields are required.</p>
     </div>
   </header>
   <main>
@@ -212,7 +212,7 @@ if(isset($_SESSION['trx_id'])){
                 <label for="phone_no">Phone Number</label>
               </div>
               <div class="col s12 l5 input-field">
-                <input type="text" name="email" value="<?php echo $email; ?>" id="email" class="validate" required>
+                <input type="text" name="email" id="email" class="validate" required>
                 <label for="email">Email Address</label>
               </div>
               <div class="col s12 l3 input-field">
