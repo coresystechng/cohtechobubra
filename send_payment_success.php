@@ -1,6 +1,6 @@
 <?php
 //Get the user details from the session
-session_start();
+// session_start();
 $email = $_SESSION['email'];
 $trx_id = $_SESSION['trx_id'];
 $fullname = $_SESSION['fullname'];

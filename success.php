@@ -18,14 +18,11 @@ $stmt->bind_param("ss", $trx_id, $email);
 $stmt->execute();
 $stmt->close();
 
-// After the continue button is clicked, the user will be redirected to the registration page
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-  include 'send_payment_success.php';
-  header('Location: registration_form.php');
+  header('Location: login.php');
+  // Send Payment Confirmation to email
+    include 'send_payment_success.php';
 }
-
-
-
 $conn->close();
 
 ?>
@@ -99,9 +96,7 @@ $conn->close();
         <p class="center-align">Click on the button below to continue your registration.</p>
         <br>
         <form action="success.php" method="post">
-          <div class="center-align">
-            <input type="submit" value="Continue Registration" class="btn btn-large btn-flat theme-color-bg white-text">
-          </div>
+          <input type="submit" name="submit" value="continue registration" class="btn btn-large btn-flat theme-color-bg white-text">
         </form>
       </div>
     </section>

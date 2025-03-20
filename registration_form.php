@@ -1,18 +1,21 @@
 <?php 
 
+  require 'connect.php';
+  //start a session
+  session_start();
+  //Redirect users to login page if they try to access landing page
+  if(!$_SESSION["trx_id"]){
+      header('Location: login.php');
+    }
+  
+  $email = $_SESSION["email"];
+  $first_name = $_SESSION["first_name"];
+  $surname = $_SESSION["surname"];
+  $trx_id = $_SESSION["trx_id"];
+  $full_name = $first_name . " " . $surname;
 
-require 'connect.php';
-session_start();
-if(isset($_SESSION['trx_id'])){
-  $email = $_SESSION['email'];
-  $trx_id = $_SESSION['trx_id'];
-  $fullname = $_SESSION['fullname'];
-}else{
-  header('location:index.html');
-  session_destroy();
-}
   //Set Blank variables
-  $first_name=$surname=$other_names=$gender=$date_of_birth=$marital_status=$state_of_origin=$lga=$nationality=$phone_no=$email=$religion=$contact_address=$nok_name=$nok_relationship=$nok_phone_no=$nok_contact_address=$nok_occupation=$attestation_1=$attestation_2="";
+  $other_names=$gender=$date_of_birth=$marital_status=$state_of_origin=$lga=$nationality=$phone_no=$religion=$contact_address=$nok_name=$nok_relationship=$nok_phone_no=$nok_contact_address=$nok_occupation=$attestation_1=$attestation_2="";
 
   if(isset($_POST['submit'])){
       $first_name = $_POST['first_name'];
@@ -97,6 +100,28 @@ if(isset($_SESSION['trx_id'])){
       background-color: #702963 !important;
     }
 
+    /* Change the header background color */
+    .datepicker-date-display {
+    background-color: #702963 !important; /* Change to desired color */
+    }
+
+    /* Change the selected day background color */
+    .datepicker-table td.is-selected {
+    background-color: #702963 !important;
+    color: white !important;
+    }
+    /* Change today button color */
+    .datepicker-table  td.is-today {
+    color: #702963 !important;
+    font-weight: 800 !important;
+    }
+
+    /* Change the cancel/ok button colors */
+    .datepicker-cancel, .datepicker-done {
+      color: #702963 !important;
+    }
+
+
   </style>
 </head>
 <body class="grey lighten-5">
@@ -111,7 +136,7 @@ if(isset($_SESSION['trx_id'])){
     <div class="container">
       <h1 class="hide-on-med-and-down">Registration Form</h1>
       <h4 class="hide-on-large-only">Registration Form</h4>
-      <p class="flow-text grey-text text-darken-2">Complete the form below to continue the registration process. All fields are required.</p>
+      <p class="flow-text grey-text text-darken-2"><b>Dear <?php echo $full_name ?>, </b><br> Complete the form below to continue the registration process. All fields are required.</p>
     </div>
   </header>
   <main>
@@ -123,11 +148,11 @@ if(isset($_SESSION['trx_id'])){
           <div class="section" id="personal_info">
             <div class="row">
               <div class="col s12 l4 input-field">
-                <input type="text" name="first_name" id="first_name" class="validate" required>
+                <input type="text" readonly name="first_name" id="first_name" value="<?php echo $first_name ?>" class="validate" required>
                 <label for="first_name">First Name</label>
               </div>
               <div class="col s12 l3 input-field">
-                <input type="text" name="surname" id="surname" class="validate" required>
+                <input type="text" readonly name="surname" id="surname" value="<?php echo $surname ?>" class="validate" required>
                 <label for="surname">Surname</label>
               </div>
               <div class="col s12 l3 input-field">
@@ -212,7 +237,7 @@ if(isset($_SESSION['trx_id'])){
                 <label for="phone_no">Phone Number</label>
               </div>
               <div class="col s12 l5 input-field">
-                <input type="text" name="email" id="email" class="validate" required>
+                <input type="text" readonly name="email" id="email" value="<?php echo $email ?>" class="validate" required>
                 <label for="email">Email Address</label>
               </div>
               <div class="col s12 l3 input-field">
