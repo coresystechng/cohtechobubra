@@ -77,6 +77,51 @@ h6 {
   font-family: var(--heading-font);
 }
 
+.text-primary{
+  color: #702963 !important;
+
+}
+.btn-primary{
+  color: white !important;
+  background-color: #702963 !important;
+  border: #702963;
+}
+.btn-primary:hover{
+  color: white !important;
+  background-color: #702963 !important;
+}
+input:focus, 
+textarea:focus, 
+select:focus {
+  border-color: #702963 !important;
+  outline: none;
+  box-shadow: 0 0 5px #702963 !important;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #702963;
+  border-color: #702963;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  position: relative;
+  border: 2px solid #702963;
+  border-radius: 3px;
+}
+
+input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 4px;
+  height: 8px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
 /*--------------------------------------------------------------
 # Lomes css edits 
 --------------------------------------------------------------*/
