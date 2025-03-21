@@ -3,74 +3,28 @@
 include '../connect.php';
 session_start();
 
-if (!isset($_SESSION['usertype']) || $_SESSION['usertype'] !== 'admin') {
-    header('Location: login.php');
-    exit();
-}else{
+if ($_SESSION['user_id'] && $_SESSION['usertype'] == 'admin') {
+    
+    if (isset($_POST['logout'])) {
+        session_destroy(); 
+        header('Location: login.php'); 
+    }
 
-
+    $select_query = "SELECT * FROM `registration_tb`";
+    $send_select_query = mysqli_query($conn, $select_query);
+    $properties = mysqli_fetch_all($send_select_query, MYSQLI_ASSOC);
 
     $user_id = $_SESSION['user_id'] ;
 
     $user_query = "SELECT * FROM `users` WHERE `id` = '$user_id'";
     $send_user_query = mysqli_query($conn, $user_query);
     $user = mysqli_fetch_assoc($send_user_query);
-
-    $property = '';
     
-    if (isset($_GET['id'])) {
-        $id = intval($_GET['id']); // Prevent SQL Injection
-    
-        $select_query = "SELECT * FROM registration_tb WHERE registration_id = ?";
-        $stmt = $conn->prepare($select_query);
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $property = $result->fetch_assoc();
-        $stmt->close();
-    }
-    
-    // Logout
-    if (isset($_POST['logout'])) {
-        session_destroy();
-        header('Location: login.php');
-        exit();
-    }
-
+}else {  
+    header('Location: login.php');
 }
 
-
-
-// // accept student
-// if (isset($_POST['accept'])) {
-//     $insert_query = "UPDATE `acceptance_tb` SET `acceptance_status`='Accepted' WHERE registration_id_fk = ?";
-//     $stmt = $conn->prepare($insert_query);
-//     $stmt->bind_param("i", $id);
-//     $stmt->execute();
-//     $stmt->close();
-
-//     $_SESSION['message'] = "Student registration has been accepted!";
-//     $_SESSION['message_type'] = "success";
-//     header("Location: dashboard.php");
-//     exit();
-// }
-
-// // decline student
-// if (isset($_POST['decline'])) {
-//     $insert_query = "UPDATE `acceptance_tb` SET `acceptance_status`='Declined' WHERE registration_id_fk = ?";
-//     $stmt = $conn->prepare($insert_query);
-//     $stmt->bind_param("i", $id);
-//     $stmt->execute();
-//     $stmt->close();
-
-//     $_SESSION['message'] = "Student registration has been declined!";
-//     $_SESSION['message_type'] = "danger";
-//     header("Location: dashboard.php");
-//     exit();
-
-// }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -81,7 +35,6 @@ if (!isset($_SESSION['usertype']) || $_SESSION['usertype'] !== 'admin') {
 <title>Admin Dashboard - COHTECH Obubra</title>
 <meta name="description" content="Official Website of The College of Health Technology, Obubra Cross River State">
 <meta name="keywords" content="college health technology obubra science education nigeria school certificate graduate graduation clinic hospital pharmacy medical laboratory">
-
 
 <!-- Favicons -->
 <link href="../assets/img/cohtech-logo.png" rel="icon">
@@ -118,6 +71,12 @@ if (!isset($_SESSION['usertype']) || $_SESSION['usertype'] !== 'admin') {
         display: block;
         text-decoration: none;
     }
+    .sidebar a:hover {
+        transition: ease 0.5s ;
+        background-color: #702963;
+        color: #fff;
+        border-radius: 10px;
+    }
     .btn-logout{
         background-color: #702963;
         color: #fff;
@@ -125,10 +84,6 @@ if (!isset($_SESSION['usertype']) || $_SESSION['usertype'] !== 'admin') {
         width: 120px;
         display: block;
         text-decoration: none;
-    }
-
-    .btn-container{
-        margin-left: 250px;
     }
 
     .btn-logout:hover {
@@ -144,11 +99,6 @@ if (!isset($_SESSION['usertype']) || $_SESSION['usertype'] !== 'admin') {
         background-color: #702963 !important;
         color: #fff !important;
     }
-    .sidebar a:hover {
-        background-color: #702963;
-        color: #fff;
-        border-radius: 10px;
-    }
     .brand-logo a{
         color: #702963;
         width: 200px;
@@ -162,10 +112,9 @@ if (!isset($_SESSION['usertype']) || $_SESSION['usertype'] !== 'admin') {
     /* Page content */
     .content {
         margin-left: 250px;
-        margin-top: 30px;
-        margin-bottom: 40px;
         padding: 20px;
         transition: margin-left 0.3s ease; /* Smooth transition */
+        margin-top: 30px;
     }
     /* Navbar */
     .navbar {
@@ -204,16 +153,17 @@ if (!isset($_SESSION['usertype']) || $_SESSION['usertype'] !== 'admin') {
         color: #fff;
     }
 
+    /* Hide sidebar on mobile by default */
     
     /* Show sidebar when it has the 'active' class */
     .sidebar.active {
         left: 0;
     }
-
+    
     .profile-dropdown{
         border-radius: 60px !important;
     }
-
+    
     footer{
         position: fixed;
         bottom: 0;
@@ -221,11 +171,14 @@ if (!isset($_SESSION['usertype']) || $_SESSION['usertype'] !== 'admin') {
         background-color: #f8f9fa;
         padding: 10px 0;
     }
-    /* Hide sidebar on mobile by default */
+    /* Message Container */
+    .message-container{
+        margin-left: 250px;
+    }
+
     @media (max-width: 768px) {
         .sidebar {
             left: -250px; /* Move sidebar off-screen */
-            z-index: 1;
             padding-top: 50px;
         }
         .sidebar:hover{
@@ -233,7 +186,6 @@ if (!isset($_SESSION['usertype']) || $_SESSION['usertype'] !== 'admin') {
         }
         .content {
             margin-left: 0; /* Remove margin for content */
-            z-index: 0;
         }
         .navbar {
             left: 0; /* Adjust navbar position */
@@ -241,9 +193,6 @@ if (!isset($_SESSION['usertype']) || $_SESSION['usertype'] !== 'admin') {
         }
         .message-container{
             margin-left: 0px ;
-        }
-        .btn-container{
-            margin-left: 0px;
         }
     }
 </style>
@@ -277,6 +226,7 @@ if (!isset($_SESSION['usertype']) || $_SESSION['usertype'] !== 'admin') {
             </button>
         </form>
     </div>
+    </div>
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-bottom: 1px solid #343a40;">
@@ -309,45 +259,44 @@ if (!isset($_SESSION['usertype']) || $_SESSION['usertype'] !== 'admin') {
         </div>
     </nav>
 
-    <div class="container btn-container mt-3">
-        <a href="registration.php" class="btn btn-outline-custom">Back To Registration</a>
+    <div class="message-container">
+    <!-- Alert Messages -->
+    <?php if (isset($_SESSION['message'])): ?>
+        <div class="alert alert-<?php echo $_SESSION['message_type']; ?> alert-dismissible fade show" role="alert">
+            <?php echo $_SESSION['message']; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php unset($_SESSION['message']); // Clear message after displaying ?>
+    <?php endif; ?>
     </div>
-    
+
     <!-- Content -->
-    <div class="content bg-light text-center mt-3">
-        <h2 class="pb-3">Applicant <?= $property['registration_id']; ?></h2>
-        <?php if ($property): ?>
-            <div class="container mt-3 d-flex justify-content-center">
-                <div class="card text-center" style="width: 25rem;">
-                    <div class="d-flex justify-content-center mt-3">
-                        <img src="https://picsum.photos/100" class="rounded-circle" alt="Student Image" width="100" height="100">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title"  style="font-weight: bold;"><?= htmlspecialchars($property['first_name'] . ' ' . $property['other_names'] ) . ' ' . $property['surname']; ?></h5>
-                        <p class="card-text"><strong>ID:</strong> <br> <?= htmlspecialchars($property['transaction_id']); ?></p>
-                        <p class="card-text"><strong>Course:</strong> <br> <?= htmlspecialchars($property['course_details']); ?></p>
-                        <p class="card-text"><strong>Email:</strong> <br> <?= htmlspecialchars($property['email']); ?></p>
-                        <p class="card-text"><strong>Gender:</strong> <br> <?= htmlspecialchars($property['gender']); ?></p>
-                        <p class="card-text"><strong>Date of birth:</strong> <br> <?= htmlspecialchars($property['date_of_birth']); ?></p>
-                        <p class="card-text"><strong>Marital status:</strong> <br> <?= htmlspecialchars($property['marital_status']); ?></p>
-                        <p class="card-text"><strong>State of Origin:</strong> <br> <?= htmlspecialchars($property['state_of_origin']); ?></p>
-                        <p class="card-text"><strong>LGA:</strong> <br> <?= htmlspecialchars($property['lga']); ?></p>
-                        <p class="card-text"><strong>Phone Number:</strong> <br> <?= htmlspecialchars($property['phone_no']); ?></p>
-                        <p class="card-text"><strong>Religion:</strong> <br> <?= htmlspecialchars($property['religion']); ?></p>
-                        <p class="card-text"><strong>Next of Kin:</strong> <br> <?= htmlspecialchars($property['nok_name']); ?></p>
-                        <p class="card-text"><strong>Next of Kin Phone:</strong> <br> <?= htmlspecialchars($property['nok_phone_no']); ?></p>
-                        <p class="card-text"><strong>Contact Address:</strong> <br> <?= htmlspecialchars($property['contact_address']); ?></p>
-                        <p class="card-text"><strong>Registration Date:</strong> <br> <?= htmlspecialchars($property['date_of_registration']); ?></p>
-                    </div>
-                </div>
-            </div>
-
-        <?php endif; ?>
-
-        <!-- <form action="" method="POST" class="mt-3">
-            <button type="submit" name="accept" class="btn btn-success me-2">Accept</button>
-            <button type="submit" name="decline" class="btn btn-danger ms-2">Decline</button>
-        </form> -->
+    <div class="content bg-light text-center mt-5">
+        <strong><h2 class="pb-3">Students Registration Table</h2></strong>
+        <div class="table-responsive table-width">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Transaction ID</th>
+                        <th scope="col">Appliacnt Name</th>
+                        <th scope="col">Course Details</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($properties as $property): ?>
+                    <tr>
+                        <td scope="row"><?= htmlspecialchars($property['transaction_id']); ?></td>
+                        <td><?= htmlspecialchars($property['first_name'] . ' ' . $property['surname']); ?></td>
+                        <td><?= htmlspecialchars($property['course_details']); ?></td>
+                        <td><?= htmlspecialchars($property['email']); ?></td>
+                        <td><a href="view.php?id=<?= $property['registration_id'] ?>" class="btn btn-primary">View</a></td>
+                    </tr>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <footer class="footer mt-5" style="border-top: 1px solid #343a40;">

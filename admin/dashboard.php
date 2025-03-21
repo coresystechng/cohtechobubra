@@ -10,9 +10,15 @@ if ($_SESSION['user_id'] && $_SESSION['usertype'] == 'admin') {
         header('Location: login.php'); 
     }
 
-    $select_query = "SELECT * FROM `acceptance_tb`";
+    $select_query = "SELECT * FROM `registration_tb`";
     $send_select_query = mysqli_query($conn, $select_query);
     $properties = mysqli_fetch_all($send_select_query, MYSQLI_ASSOC);
+
+    $user_id = $_SESSION['user_id'] ;
+
+    $user_query = "SELECT * FROM `users` WHERE `id` = '$user_id'";
+    $send_user_query = mysqli_query($conn, $user_query);
+    $user = mysqli_fetch_assoc($send_user_query);
     
 }else {  
     header('Location: login.php');
@@ -195,17 +201,17 @@ if ($_SESSION['user_id'] && $_SESSION['usertype'] == 'admin') {
 <body>
 
     <!-- Sidebar -->
-    <div class="sidebar bg-light">
+    <div class="sidebar bg-light" style="border-right: 1px solid #343a40;">
         <h4 class="text-white text-center bg-light brand-logo"><a href="#" class=""><img src="../assets/img/cohtech-logo-blue.png" width="200px" alt="brand-logo"></a></h4>
         <a href="#" class="active mx-4 mt-3 mb-2 d-flex align-items-center">
             <i class="bi bi-house-fill"></i> 
             <span class="ms-4">Dashboard</span>
         </a>
-        <a href="#" class="mx-4 mb-2 d-flex align-items-center">
+        <a href="registration.php" class="mx-4 mb-2 d-flex align-items-center">
             <i class="bi bi-bar-chart"></i> 
             <span class="ms-4">Registration</span>
         </a>
-        <a href="#" class="mx-4 mb-2 d-flex align-items-center">
+        <a href="students.php" class="mx-4 mb-2 d-flex align-items-center">
             <i class="bi bi-folder"></i> 
             <span class="ms-4">Students</span>
         </a>
@@ -223,14 +229,14 @@ if ($_SESSION['user_id'] && $_SESSION['usertype'] == 'admin') {
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-bottom: 1px solid #343a40;">
         <div class="container-fluid">
             <button class="btn btn-primary d-lg-none" id="toggleSidebar">☰</button>
             <a class="navbar-brand ms-2" href="#"></a>
             <div class="ms-auto">
                 <div class="dropdown">
                     <button class="btn btn-outline-custom dropdown-toggle profile-dropdown" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="profile-dropdown">Admin</span>
+                        <span class="profile-dropdown"><?= $user['username']; ?></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                         <li>
@@ -266,42 +272,10 @@ if ($_SESSION['user_id'] && $_SESSION['usertype'] == 'admin') {
 
     <!-- Content -->
     <div class="content bg-light text-center mt-5">
-        <strong><h2 class="pb-3">Students Registration Table</h2></strong>
-        <div class="table-responsive table-width">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Registration ID</th>
-                        <th scope="col">Payment Status</th>
-                        <th scope="col">Acceptance Status</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($properties as $property): ?>
-                    <tr>
-                        <th scope="row"><?= htmlspecialchars($property['registration_id_fk']) ?></th>
-                        <th><?= htmlspecialchars($property['payment_status']) ?></th>
-                        <th>
-                        <?php
-                            if( $property['acceptance_status'] == 'Accepted'){
-                                echo "<span class='text-success'>" . htmlspecialchars($property['acceptance_status']) . "</span>";
-                            }elseif( $property['acceptance_status'] == 'Declined'){
-                                echo "<span class='text-danger'>" . htmlspecialchars($property['acceptance_status']) . "</span>";
-                            }else {
-                                echo htmlspecialchars($property['acceptance_status']);
-                            }
-                        ?>
-                        </th>
-                        <th><a href="view.php?id=<?= $property['registration_id_fk'] ?>" class="btn btn-primary">View</a></th>
-                    </tr>
-                    <?php endforeach ?>
-                </tbody>
-            </table>
-        </div>
+        <h3>Admin Dashboard</h3>
     </div>
 
-    <footer class="footer">
+    <footer class="footer" style="border-top: 1px solid #343a40;">
         <div class="d-sm-flex justify-content-center">
             <span class=" text-center text-sm-left d-block d-sm-inline-block">&copy; <span id="copyright-update"></span> COHTECH Obubra. All rights reserved.</span>
         </div>

@@ -1,8 +1,8 @@
 <?php
 
 $servername = "localhost";  // Change if your database is hosted remotely
-$username = "Lome";  // Use your database username
-$password = "oseijoyalome2";  // Use your database password
+$username = "username";  // Use your database username
+$password = "password";  // Use your database password
 $database = "cohtechobubra_db"; // Use your database name
 
 // Create connection

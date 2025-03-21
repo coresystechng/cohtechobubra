@@ -30,17 +30,11 @@ require 'connect.php';
 
       $send_query = mysqli_query($conn, $save_query);
 
-      if ($send_query) {
-          $registration_id = mysqli_insert_id($conn); // this retrieves the  last inserted ID
-          $insert_into_acceptance_db = "INSERT INTO `acceptance_tb`(`registration_id_fk`, `payment_status`, `acceptance_status`) VALUES ('$registration_id', 'paid', 'Pending')";
-          $insert_query = mysqli_query($conn, $insert_into_acceptance_db);
-      }
-
-      if($insert_query){
-        session_start();
-        $_SESSION['fullname'] = $first_name . ' ' . $surname;
-        echo '<script> alert("Working!") </script>';
-      };
+      // if ($send_query) {
+      //     $registration_id = mysqli_insert_id($conn); // this retrieves the  last inserted ID
+      //     $insert_into_acceptance_db = "INSERT INTO `acceptance_tb`(`registration_id_fk`, `payment_status`, `acceptance_status`) VALUES ('$registration_id', 'paid', 'Pending')";
+      //     $insert_query = mysqli_query($conn, $insert_into_acceptance_db);
+      // }
     }
 ?>
 

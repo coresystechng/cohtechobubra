@@ -7,26 +7,30 @@ $error_username = '';
 $error_password = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name = $_POST['name'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $stmt = $conn->prepare("SELECT * FROM users WHERE name = ? AND usertype = 'admin'");
-    $stmt->bind_param("s", $name);
+    $stmt = $conn->prepare("SELECT * FROM users WHERE `username` = ? AND `usertype` = 'admin'");
+    $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        if (password_verify($password, $user['password'])) {
+        // print_r ($user);
+        if (password_verify( $password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['usertype'] = $user['usertype'];
             
             if ($_SESSION['usertype'] == 'admin') {
                 header('Location: dashboard.php');
+                exit();
             }elseif ($_SESSION['usertype'] == 'student') {
                 header('Location: ./dashboard.php');
+                exit();
             }else{
                 header('Location: ./dashboard.php');
+                exit();
             }
         } else {
         $error_password= '<p class="ms-2 text-danger">Incorrect Password</p>';
@@ -189,14 +193,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="login-container">
         <div class="login-card">
             <div class="card-header bg-white text-center">
-                <img src="../assets/img/cohtech-logo.png" width="80px" alt="COHTECH Logo" class="mb-3">
-                <h4 class="text-primary">COHTECH Obubra Admin</h4>
-                <p class="text-muted">Login to your account</p>
+                <img src="../assets/img/cohtech-logo-blue.png" width="300px" alt="COHTECH Logo" class="my-2">
+                <h5 class="text-muted pb-3">Login to your account</h5>
             </div>
             <div class="card-body">
                 <form action="" method="POST">
                     <div class="position-relative">
-                        <input type="text" class="form-control ps-5" id="name" name="name" placeholder="Name" required>
+                        <input type="text" class="form-control ps-5" id="username" name="username" placeholder="Username" required>
                         <i class="bi bi-person position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
                     </div>
                     <?php echo $error_username; ?>
@@ -217,7 +220,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="mb-3 text-center">
                         <button type="submit" class="btn btn-primary w-100 py-2">Login</button>
                     </div>
-                    <div class="text-center">
+                    <!-- <div class="text-center">
                         <p class="text-muted">Or you can Login with:</p>
                         <button type="button" class="btn btn-outline-custom me-2">
                             <img src="../assets/img/google-icon.png" alt="Google" width="20">
@@ -225,12 +228,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <button type="button" class="btn btn-outline-custom">
                             <img src="../assets/img/github-icon.png" alt="GitHub" width="20">
                         </button>
-                    </div>
+                    </div> -->
                 </form>
             </div>
             <div class="card-footer bg-white text-center mt-3">
-                <b><small>Not an Admin? <a href="https://cohtechobubra.edu.ng/index.html" target="_blank"> Visit our Website</a></small></b><br>
-                <small>&copy; <span id="copyright-update"></span> COHTECH Obubra. All rights reserved.</small>
+                <small> &copy; <span id="copyright-update"></span> COHTECH Obubra. <strong> <a href="https://cohtechobubra.edu.ng/index.html" target="_blank"> Back to Home </a> </strong> </small>
             </div>
         </div>
     </div>

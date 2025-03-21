@@ -126,4 +126,142 @@ input[type="checkbox"]:checked::after {
 # Lomes css edits 
 --------------------------------------------------------------*/
 
-/* login */
+/* Sidebar styles */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: left 0.3s ease; /* Smooth transition */
+}
+.sidebar a {
+    color: #702963;
+    padding: 12px;
+    width: 200px;
+    display: block;
+    text-decoration: none;
+}
+.btn-logout{
+    background-color: #702963;
+    color: #fff;
+    /* padding: 5px; */
+    width: 120px;
+    display: block;
+    text-decoration: none;
+}
+
+.btn-logout:hover {
+    background-color: #5a1f4d;
+    color: white;
+}
+.active {
+    background-color: #702963;
+    color: #fff !important;
+    border-radius: 10px;
+}
+.active:hover {
+    background-color: #702963 !important;
+    color: #fff !important;
+}
+.sidebar a:hover {
+    background-color: #702963;
+    color: #fff;
+    border-radius: 10px;
+}
+.brand-logo a{
+    color: #702963;
+    width: 200px;
+    display: block;
+    text-decoration: none;
+}
+.brand-logo a:hover{
+    background-color: transparent ;
+    border-radius: 0 ;
+}
+/* Page content */
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left 0.3s ease; /* Smooth transition */
+    margin-top: 30px;
+}
+/* Navbar */
+.navbar {
+    position: sticky;
+    top: 0;
+    left: 250px;
+    width: calc(100% - 250px);
+    z-index: 1000;
+    transition: left 0.3s ease, width 0.3s ease; /* Smooth transition */
+}
+.bg-primary{
+    background-color: #702963 !important;
+}
+.btn-primary {
+    background-color: #702963;
+    border: none;
+    border-radius: 10px;
+    /* padding: 10px 20px; */
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #5a1f4d;
+}
+
+.btn-outline-custom {
+    border: 2px solid #702963;
+    color: #702963;
+    border-radius: 10px;
+    padding: 8px 15px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-custom:hover {
+    background-color: #702963;
+    color: #fff;
+}
+
+/* Hide sidebar on mobile by default */
+
+/* Show sidebar when it has the 'active' class */
+.sidebar.active {
+    left: 0;
+}
+
+.profile-dropdown{
+    border-radius: 60px !important;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    padding: 10px 0;
+}
+/* Message Container */
+.message-container{
+    margin-left: 250px;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        left: -250px; /* Move sidebar off-screen */
+        padding-top: 50px;
+    }
+    .sidebar:hover{
+        background-color: #f8f9fa !important;
+    }
+    .content {
+        margin-left: 0; /* Remove margin for content */
+    }
+    .navbar {
+        left: 0; /* Adjust navbar position */
+        width: 100%; /* Full width */
+    }
+    .message-container{
+        margin-left: 0px ;
+    }
+}
