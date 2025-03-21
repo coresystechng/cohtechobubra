@@ -3,6 +3,9 @@
 session_start();
 include('../connect.php');
 
+$error_username = '';
+$error_password = '';
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $password = $_POST['password'];
@@ -26,10 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 header('Location: ./dashboard.php');
             }
         } else {
-            echo "<script>alert('Invalid Password!')</script>";
+        $error_password= '<p class="ms-2 text-danger">Incorrect Password</p>';
         }
     } else {
-        echo "<script>alert('User not found!')</script>";
+        $error_username = '<p class="ms-2 text-danger">Incorrect Username Credentials</p>';
     }
 }
 
@@ -192,14 +195,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="card-body">
                 <form action="" method="POST">
-                    <div class="mb-3 position-relative">
-                        <input typsmall="text" class="form-control ps-4" id="name" name="name" placeholder="Name" required>
-                        <i class="bi bi-person position-absolute top-50 start-0 translate-middle-y ms-2 text-muted"></i>
+                    <div class="position-relative">
+                        <input type="text" class="form-control ps-5" id="name" name="name" placeholder="Name" required>
+                        <i class="bi bi-person position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
                     </div>
-                    <div class="mb-3 position-relative">
-                        <input type="password" class="form-control ps-4" id="password" name="password" placeholder="Password" required>
-                        <i class="bi bi-lock position-absolute top-50 start-0 translate-middle-y ms-2 text-muted"></i>
+                    <?php echo $error_username; ?>
+                    <div class="mb-3"></div>
+                    <div class="position-relative">
+                        <input type="password" class="form-control ps-5" id="password" name="password" placeholder="Password" required>
+                        <i class="bi bi-lock position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
                     </div>
+                    <?php echo $error_password; ?>
+                    <div class="mb-3"></div>
                     <div class="d-flex justify-content-between mb-3">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="rememberMe">

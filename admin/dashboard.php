@@ -3,14 +3,21 @@
 include '../connect.php';
 session_start();
 
-if (!$_SESSION['user_id'] || !$_SESSION['usertype'] == 'admin') {
+if ($_SESSION['user_id'] && $_SESSION['usertype'] == 'admin') {
+    
+    if (isset($_POST['logout'])) {
+        session_destroy(); 
+        header('Location: login.php'); 
+    }
+
+    $select_query = "SELECT * FROM `acceptance_tb`";
+    $send_select_query = mysqli_query($conn, $select_query);
+    $properties = mysqli_fetch_all($send_select_query, MYSQLI_ASSOC);
+    
+}else {  
     header('Location: login.php');
 }
 
-if (isset($_POST['logout'])) {
-    session_destroy(); 
-    header('Location: login.php'); 
-}
 
 ?>
 
@@ -50,8 +57,6 @@ if (isset($_POST['logout'])) {
         position: fixed;
         top: 0;
         left: 0;
-        /* background-color: #343a40; */
-        padding-top: 20px;
         transition: left 0.3s ease; /* Smooth transition */
     }
     .sidebar a {
@@ -84,15 +89,26 @@ if (isset($_POST['logout'])) {
         color: #fff !important;
     }
     .sidebar a:hover {
-        background-color: #702963 !important;
-        color: #fff !important;
+        background-color: #702963;
+        color: #fff;
         border-radius: 10px;
+    }
+    .brand-logo a{
+        color: #702963;
+        width: 200px;
+        display: block;
+        text-decoration: none;
+    }
+    .brand-logo a:hover{
+        background-color: transparent ;
+        border-radius: 0 ;
     }
     /* Page content */
     .content {
         margin-left: 250px;
         padding: 20px;
         transition: margin-left 0.3s ease; /* Smooth transition */
+        margin-top: 30px;
     }
     /* Navbar */
     .navbar {
@@ -132,9 +148,35 @@ if (isset($_POST['logout'])) {
     }
 
     /* Hide sidebar on mobile by default */
+    
+    /* Show sidebar when it has the 'active' class */
+    .sidebar.active {
+        left: 0;
+    }
+    
+    .profile-dropdown{
+        border-radius: 60px !important;
+    }
+    
+    footer{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #f8f9fa;
+        padding: 10px 0;
+    }
+    /* Message Container */
+    .message-container{
+        margin-left: 250px;
+    }
+
     @media (max-width: 768px) {
         .sidebar {
             left: -250px; /* Move sidebar off-screen */
+            padding-top: 50px;
+        }
+        .sidebar:hover{
+            background-color: #f8f9fa !important;
         }
         .content {
             margin-left: 0; /* Remove margin for content */
@@ -143,29 +185,9 @@ if (isset($_POST['logout'])) {
             left: 0; /* Adjust navbar position */
             width: 100%; /* Full width */
         }
-    }
-
-    /* Show sidebar when it has the 'active' class */
-    .sidebar.active {
-        left: 0;
-    }
-
-    .profile-dropdown{
-        border-radius: 60px !important;
-    }
-
-    footer{
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        background-color: #f8f9fa;
-        padding: 10px 0;
-    }
-    .content{
-        margin-top: 30px;
-        /* width: 1400px;  */
-        /* margin-left: auto; */
-        /* margin-right: auto; */
+        .message-container{
+            margin-left: 0px ;
+        }
     }
 </style>
 
@@ -174,18 +196,18 @@ if (isset($_POST['logout'])) {
 
     <!-- Sidebar -->
     <div class="sidebar bg-light">
-        <h4 class="text-white text-center"><img src="../assets/img/cohtech-logo-blue.png" width="200px" alt=""></h4>
+        <h4 class="text-white text-center bg-light brand-logo"><a href="#" class=""><img src="../assets/img/cohtech-logo-blue.png" width="200px" alt="brand-logo"></a></h4>
         <a href="#" class="active mx-4 mt-3 mb-2 d-flex align-items-center">
             <i class="bi bi-house-fill"></i> 
-            <span class="ms-4">Home</span>
+            <span class="ms-4">Dashboard</span>
         </a>
         <a href="#" class="mx-4 mb-2 d-flex align-items-center">
             <i class="bi bi-bar-chart"></i> 
-            <span class="ms-4">Work</span>
+            <span class="ms-4">Registration</span>
         </a>
         <a href="#" class="mx-4 mb-2 d-flex align-items-center">
             <i class="bi bi-folder"></i> 
-            <span class="ms-4">Projects</span>
+            <span class="ms-4">Students</span>
         </a>
         <a href="#" class="mx-4 mb-2 d-flex align-items-center">
             <i class="bi bi-gear"></i> 
@@ -231,6 +253,17 @@ if (isset($_POST['logout'])) {
         </div>
     </nav>
 
+    <div class="message-container">
+    <!-- Alert Messages -->
+    <?php if (isset($_SESSION['message'])): ?>
+        <div class="alert alert-<?php echo $_SESSION['message_type']; ?> alert-dismissible fade show" role="alert">
+            <?php echo $_SESSION['message']; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php unset($_SESSION['message']); // Clear message after displaying ?>
+    <?php endif; ?>
+    </div>
+
     <!-- Content -->
     <div class="content bg-light text-center mt-5">
         <strong><h2 class="pb-3">Students Registration Table</h2></strong>
@@ -238,40 +271,31 @@ if (isset($_POST['logout'])) {
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Student id</th>
+                        <th scope="col">Registration ID</th>
                         <th scope="col">Payment Status</th>
                         <th scope="col">Acceptance Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach ($properties as $property): ?>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Paid</td>
-                        <td>Waiting</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
+                        <th scope="row"><?= htmlspecialchars($property['registration_id_fk']) ?></th>
+                        <th><?= htmlspecialchars($property['payment_status']) ?></th>
+                        <th>
+                        <?php
+                            if( $property['acceptance_status'] == 'Accepted'){
+                                echo "<span class='text-success'>" . htmlspecialchars($property['acceptance_status']) . "</span>";
+                            }elseif( $property['acceptance_status'] == 'Declined'){
+                                echo "<span class='text-danger'>" . htmlspecialchars($property['acceptance_status']) . "</span>";
+                            }else {
+                                echo htmlspecialchars($property['acceptance_status']);
+                            }
+                        ?>
+                        </th>
+                        <th><a href="view.php?id=<?= $property['registration_id_fk'] ?>" class="btn btn-primary">View</a></th>
                     </tr>
-    
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Paid</td>
-                        <td>Waiting</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                    </tr>
-    
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Paid</td>
-                        <td>Waiting</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                    </tr>
-    
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>Paid</td>
-                        <td>Waiting</td>
-                        <td><a href="" class="btn btn-primary">View</a></td>
-                    </tr>
+                    <?php endforeach ?>
                 </tbody>
             </table>
         </div>

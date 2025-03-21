@@ -30,10 +30,16 @@ require 'connect.php';
 
       $send_query = mysqli_query($conn, $save_query);
 
-      if($send_query){
+      if ($send_query) {
+          $registration_id = mysqli_insert_id($conn); // this retrieves the  last inserted ID
+          $insert_into_acceptance_db = "INSERT INTO `acceptance_tb`(`registration_id_fk`, `payment_status`, `acceptance_status`) VALUES ('$registration_id', 'paid', 'Pending')";
+          $insert_query = mysqli_query($conn, $insert_into_acceptance_db);
+      }
+
+      if($insert_query){
         session_start();
         $_SESSION['fullname'] = $first_name . ' ' . $surname;
-        header('location:save.php');
+        echo '<script> alert("Working!") </script>';
       };
     }
 ?>
@@ -46,7 +52,7 @@ require 'connect.php';
   <title>Registration Form - COHTECH Obubra</title>
   <link rel="shortcut icon" href="assets/img/cohtech-logo.png" type="image/x-icon">
   <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap.min.css">
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -113,11 +119,11 @@ require 'connect.php';
           <div class="section" id="personal_info">
             <div class="row">
               <div class="col s12 l4 input-field">
-                <input type="text" name="first_name" id="first_name" class="validate" required>
+                <input type="text" name="first_name" id="first_name" class="validate" >
                 <label for="first_name">First Name</label>
               </div>
               <div class="col s12 l3 input-field">
-                <input type="text" name="surname" id="surname" class="validate" required>
+                <input type="text" name="surname" id="surname" class="validate" >
                 <label for="surname">Surname</label>
               </div>
               <div class="col s12 l3 input-field">
@@ -125,7 +131,7 @@ require 'connect.php';
                 <label for="other_names">Other Names</label>
               </div>
               <div class="col s12 l2 input-field">
-                <select name="gender" id="gender" required>
+                <select name="gender" id="gender" >
                   <option value="">Gender</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
@@ -134,11 +140,11 @@ require 'connect.php';
             </div>
             <div class="row">
               <div class="col s12 l2 input-field">
-                <input type="text" name="date_of_birth" id="date_of_birth" class="datepicker" required>
+                <input type="text" name="date_of_birth" id="date_of_birth" class="datepicker" >
                 <label for="date_of_birth">Date of Birth</label>
               </div>
               <div class="col s12 l2 input-field">
-                <select name="marital_status" id="marital_status" required>
+                <select name="marital_status" id="marital_status" >
                   <option value="">Marital Status</option>
                   <option value="single">Single</option>
                   <option value="Married">Married</option>
@@ -146,7 +152,7 @@ require 'connect.php';
                 </select>
               </div>
               <div class="col s12 l2 input-field">
-                <select name="state_of_origin" id="state_of_origin" required>
+                <select name="state_of_origin" id="state_of_origin" >
                   <option value="" selected="selected">State of Origin</option>
                   <option value="Abia">Abia</option>
                   <option value="Adamawa">Adamawa</option>
@@ -188,25 +194,25 @@ require 'connect.php';
                 </select>
               </div>
               <div class="col s12 l3 input-field">
-                <input type="text" name="lga" id="lga" class="validate" required>
+                <input type="text" name="lga" id="lga" class="validate" >
                 <label for="lga">LGA of Origin</label>
               </div>
               <div class="col s12 l3 input-field">
-                <input type="text" name="nationality" id="nationality" class="validate" required>
+                <input type="text" name="nationality" id="nationality" class="validate" >
                 <label for="nationality">Nationality</label>
               </div>
             </div>
             <div class="row">
               <div class="col s12 l4 input-field">
-                <input type="tel" name="phone_no" id="phone_no" class="validate" required>
+                <input type="tel" name="phone_no" id="phone_no" class="validate" >
                 <label for="phone_no">Phone Number</label>
               </div>
               <div class="col s12 l5 input-field">
-                <input type="text" name="email" value="" id="email" class="validate" required>
+                <input type="text" name="email" value="" id="email" class="validate" >
                 <label for="email">Email Address</label>
               </div>
               <div class="col s12 l3 input-field">
-                <select name="religion" id="religion" required>
+                <select name="religion" id="religion" >
                   <option value="">Religion</option>
                   <option value="christianity">Christianity</option>
                   <option value="islam">Islam</option>
@@ -216,7 +222,7 @@ require 'connect.php';
             </div>
             <div class="row">
               <div class="col s12 input-field">
-                <textarea name="contact_address" id="contact_address" required class="materialize-textarea validate"></textarea>
+                <textarea name="contact_address" id="contact_address"  class="materialize-textarea validate"></textarea>
                 <label for="contact_address">Contact Address</label>
               </div>
             </div>
@@ -226,25 +232,25 @@ require 'connect.php';
           <div class="section" id="next_of_kin">
             <div class="row">
               <div class="col s12 l6 input-field">
-                <input type="text" name="nok_name" id="nok_name" class="validate" required>
+                <input type="text" name="nok_name" id="nok_name" class="validate" >
                 <label for="nok__name">Full Name</label>
               </div>
               <div class="col s12 l3 input-field">
-                <input type="text" name="nok_relationship" id="nok_relationship"placeholder="Father, Mother, Husband etc"  class="validate" required>
+                <input type="text" name="nok_relationship" id="nok_relationship"placeholder="Father, Mother, Husband etc"  class="validate" >
                 <label for="nok_relationship">Relationship</label>
               </div>
               <div class="col s12 l3 input-field">
-                <input type="text" name="nok_phone_no" id="nok_phone_no" class="validate" required>
+                <input type="text" name="nok_phone_no" id="nok_phone_no" class="validate" >
                 <label for="nok_phone_no">Phone Number</label>
               </div>
             </div>
             <div class="row">
               <div class="col s12 l10 input-field">
-                <textarea name="nok_contact_address" id="nok_contact_address" class="materialize-textarea validate" required></textarea>
+                <textarea name="nok_contact_address" id="nok_contact_address" class="materialize-textarea validate" ></textarea>
                 <label for="nok_contact_address">Address</label>
               </div>
               <div class="col s12 l2 input-field">
-                <input type="text" name="nok_occupation" id="nok_occupation" class="validate" required>
+                <input type="text" name="nok_occupation" id="nok_occupation" class="validate" >
                 <label for="nok_occupation">Occupation</label>
               </div>
             </div>
@@ -256,13 +262,13 @@ require 'connect.php';
               <div class="col s12 input-field">
                 <p>
                   <label>
-                    <input type="checkbox" required class="validate" name="attestation_1" value="yes"/>
+                    <input type="checkbox"  class="validate" name="attestation_1" value="yes"/>
                     <span>I hereby attest to the authenticity of the above information supplied above </span>
                   </label>
                 </p>
                 <p>
                   <label>
-                    <input type="checkbox" required class="validate"  name="attestation_2" value="yes"/>
+                    <input type="checkbox"  class="validate"  name="attestation_2" value="yes"/>
                     <span>I agree to comply with the rules and regulations of the college if my registration application is approved. </span>
                   </label>
                 </p>
@@ -292,6 +298,8 @@ require 'connect.php';
   </footer>
   
   
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
   <!-- JQuery CDN -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
   integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -305,8 +313,9 @@ require 'connect.php';
       $('.datepicker').datepicker({yearRange: 50});
       $('select').formSelect({
         
-      });
+      })
     })
   </script>
 </body>
+
 </html>
