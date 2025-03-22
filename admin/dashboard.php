@@ -201,7 +201,7 @@ if ($_SESSION['user_id'] && $_SESSION['usertype'] == 'admin') {
 <body>
 
     <!-- Sidebar -->
-    <div class="sidebar bg-light" style="border-right: 1px solid #343a40;">
+    <div class="sidebar bg-light" style="border-right: 1px solid #ddd;">
         <h4 class="text-white text-center bg-light brand-logo"><a href="#" class=""><img src="../assets/img/cohtech-logo-blue.png" width="200px" alt="brand-logo"></a></h4>
         <a href="#" class="active mx-4 mt-3 mb-2 d-flex align-items-center">
             <i class="bi bi-house-fill"></i> 
@@ -229,7 +229,7 @@ if ($_SESSION['user_id'] && $_SESSION['usertype'] == 'admin') {
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-bottom: 1px solid #343a40;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-bottom: 1px solid #ddd;">
         <div class="container-fluid">
             <button class="btn btn-primary d-lg-none" id="toggleSidebar">☰</button>
             <a class="navbar-brand ms-2" href="#"></a>
@@ -275,7 +275,7 @@ if ($_SESSION['user_id'] && $_SESSION['usertype'] == 'admin') {
         <h3>Admin Dashboard</h3>
     </div>
 
-    <footer class="footer" style="border-top: 1px solid #343a40;">
+    <footer class="footer" style="border-top: 1px solid #ddd;">
         <div class="d-sm-flex justify-content-center">
             <span class=" text-center text-sm-left d-block d-sm-inline-block">&copy; <span id="copyright-update"></span> COHTECH Obubra. All rights reserved.</span>
         </div>
