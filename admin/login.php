@@ -1,39 +1,29 @@
 <?php
 
-session_start();
+
 include('../connect.php');
 
 $error_username = '';
 $error_password = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
 
-    $stmt = $conn->prepare("SELECT * FROM users WHERE `username` = ? AND `usertype` = 'admin'");
+    $stmt = $conn->prepare("SELECT * FROM users WHERE `username` = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        // print_r ($user);
-        if (password_verify( $password, $user['password'])) {
+        if($password == $user['password']) {
+            session_start();
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['usertype'] = $user['usertype'];
-            
-            if ($_SESSION['usertype'] == 'admin') {
-                header('Location: dashboard.php');
-                exit();
-            }elseif ($_SESSION['usertype'] == 'student') {
-                header('Location: ./dashboard.php');
-                exit();
-            }else{
-                header('Location: ./dashboard.php');
-                exit();
-            }
+            header('Location: ./dashboard.php');
         } else {
-        $error_password= '<p class="ms-2 text-danger">Incorrect Password</p>';
+            $error_password= '<p class="ms-2 text-danger">Incorrect Password</p>';
         }
     } else {
         $error_username = '<p class="ms-2 text-danger">Incorrect Username Credentials</p>';

@@ -201,7 +201,7 @@ if ($_SESSION['user_id'] && $_SESSION['usertype'] == 'admin') {
 <body>
 
     <!-- Sidebar -->
-    <div class="sidebar bg-light" style="border-right: 1px solid #343a40;">
+    <div class="sidebar bg-light" style="border-right: 1px solid #ddd;">
         <h4 class="text-white text-center bg-light brand-logo"><a href="#" class=""><img src="../assets/img/cohtech-logo-blue.png" width="200px" alt="brand-logo"></a></h4>
         <a href="dashboard.php" class="mx-4 mt-3 mb-2 d-flex align-items-center">
             <i class="bi bi-house-fill"></i> 
@@ -229,7 +229,7 @@ if ($_SESSION['user_id'] && $_SESSION['usertype'] == 'admin') {
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-bottom: 1px solid #343a40;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-bottom: 1px solid #ddd;">
         <div class="container-fluid">
             <button class="btn btn-primary d-lg-none" id="toggleSidebar">☰</button>
             <a class="navbar-brand ms-2" href="#"></a>
@@ -278,18 +278,18 @@ if ($_SESSION['user_id'] && $_SESSION['usertype'] == 'admin') {
                 <thead>
                     <tr>
                         <th scope="col">Transaction ID</th>
-                        <th scope="col">Appliacnt Name</th>
-                        <th scope="col">Course Details</th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Course Code</th>
                         <th scope="col">Email</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-group-divider">
                     <?php foreach ($properties as $property): ?>
                     <tr>
                         <td scope="row"><?= htmlspecialchars($property['transaction_id']); ?></td>
                         <td><?= htmlspecialchars($property['first_name'] . ' ' . $property['surname']); ?></td>
-                        <td><?= htmlspecialchars($property['course_details']); ?></td>
+                        <td><?= htmlspecialchars($property['course_of_study']); ?></td>
                         <td><?= htmlspecialchars($property['email']); ?></td>
                         <td><a href="view.php?id=<?= $property['registration_id'] ?>" class="btn btn-primary">View</a></td>
                     </tr>
@@ -299,7 +299,7 @@ if ($_SESSION['user_id'] && $_SESSION['usertype'] == 'admin') {
         </div>
     </div>
 
-    <footer class="footer mt-5" style="border-top: 1px solid #343a40;">
+    <footer class="footer mt-5" style="border-top: 1px solid #ddd;">
         <div class="d-sm-flex justify-content-center">
             <span class=" text-center text-sm-left d-block d-sm-inline-block">&copy; <span id="copyright-update"></span> COHTECH Obubra. All rights reserved.</span>
         </div>

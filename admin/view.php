@@ -325,7 +325,7 @@ if (!isset($_SESSION['usertype']) || $_SESSION['usertype'] !== 'admin') {
                     <div class="card-body">
                         <h5 class="card-title"  style="font-weight: bold;"><?= htmlspecialchars($property['first_name'] . ' ' . $property['other_names'] ) . ' ' . $property['surname']; ?></h5>
                         <p class="card-text"><strong>ID:</strong> <br> <?= htmlspecialchars($property['transaction_id']); ?></p>
-                        <p class="card-text"><strong>Course:</strong> <br> <?= htmlspecialchars($property['course_details']); ?></p>
+                        <p class="card-text"><strong>Course:</strong> <br> <?= htmlspecialchars($property['course_of_study']); ?></p>
                         <p class="card-text"><strong>Email:</strong> <br> <?= htmlspecialchars($property['email']); ?></p>
                         <p class="card-text"><strong>Gender:</strong> <br> <?= htmlspecialchars($property['gender']); ?></p>
                         <p class="card-text"><strong>Date of birth:</strong> <br> <?= htmlspecialchars($property['date_of_birth']); ?></p>
