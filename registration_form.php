@@ -15,9 +15,11 @@
   $full_name = $first_name . " " . $surname;
 
   //Set Blank variables
-  $other_names=$gender=$date_of_birth=$marital_status=$state_of_origin=$lga=$nationality=$phone_no=$religion=$contact_address=$nok_name=$nok_relationship=$nok_phone_no=$nok_contact_address=$nok_occupation=$attestation_1=$attestation_2="";
+  $transaction_id=$course_of_study=$other_names=$gender=$date_of_birth=$marital_status=$state_of_origin=$lga=$nationality=$phone_no=$religion=$contact_address=$nok_name=$nok_relationship=$nok_phone_no=$nok_contact_address=$nok_occupation=$attestation_1=$attestation_2="";
 
   if(isset($_POST['submit'])){
+      $transaction_id = $_POST['transaction_id'];
+      $course_of_study = $_POST['course_of_study'];
       $first_name = $_POST['first_name'];
       $surname = $_POST['surname'];
       $other_names = $_POST['other_names'];
@@ -39,7 +41,7 @@
       $attestation_1 = $_POST['attestation_1'];
       $attestation_2 = $_POST['attestation_2'];
 
-      $save_query = "INSERT INTO `registration_tb`(`first_name`, `surname`, `other_names`, `gender`, `date_of_birth`, `marital_status`, `state_of_origin`, `lga`, `nationality`, `phone_no`, `email`, `religion`, `contact_address`, `nok_name`, `nok_relationship`, `nok_phone_no`, `nok_contact_address`, `nok_occupation`, `attestation_1`, `attestation_2`) VALUES ('$first_name', '$surname', '$other_names', '$gender', '$date_of_birth', '$marital_status','$state_of_origin', '$lga', '$nationality', '$phone_no', '$email', '$religion','$contact_address','$nok_name', '$nok_relationship','$nok_phone_no', '$nok_contact_address', '$nok_occupation', '$attestation_1','$attestation_2')";
+      $save_query = "INSERT INTO `registration_tb`(`transaction_id`,`course_of_study`,`first_name`, `surname`, `other_names`, `gender`, `date_of_birth`, `marital_status`, `state_of_origin`, `lga`, `nationality`, `phone_no`, `email`, `religion`, `contact_address`, `nok_name`, `nok_relationship`, `nok_phone_no`, `nok_contact_address`, `nok_occupation`, `attestation_1`, `attestation_2`) VALUES ('$transaction_id','$course_of_study','$first_name', '$surname', '$other_names', '$gender', '$date_of_birth', '$marital_status','$state_of_origin', '$lga', '$nationality', '$phone_no', '$email', '$religion','$contact_address','$nok_name', '$nok_relationship','$nok_phone_no', '$nok_contact_address', '$nok_occupation', '$attestation_1','$attestation_2')";
 
       $send_query = mysqli_query($conn, $save_query);
 
@@ -100,6 +102,14 @@
       background-color: #702963 !important;
     }
 
+    .bold-text {
+      font-weight: bold !important;
+    }
+
+    .underline-txt {
+      text-decoration: underline !important;
+    }
+
     /* Change the header background color */
     .datepicker-date-display {
     background-color: #702963 !important; /* Change to desired color */
@@ -143,16 +153,40 @@
     <section class="section">
       <div class="container">
         <form action="registration_form.php" method="post">
-
+          <h5>Course Details</h5>
+          <div class="section" id="course_details">
+            <div class="row">
+              <div class="col s12 l4 input-field">
+                <input type="text" name="transaction_id" id="transaction_id" value="<?php echo $trx_id ?>" readonly required>
+                <label for="transaction_id">Transaction ID</label>
+              </div>
+              <div class="col s12 l4 input-field">
+                <select name="course_of_study" id="course_of_study" required>
+                  <option value="">Course of Study</option>
+                  <option value="PUTH">Public Health</option>
+                  <option value="CHEW">Community Health</option>
+                  <option value="JCHEW">Junior Community Health</option>
+                  <option value="ENTH">Environmental Health</option>
+                  <option value="MELT">Medical Laboratory Technician</option>
+                  <option value="PHAT">Pharmacy Technician</option>
+                  <option value="XRAY">X-Ray Technician</option>
+                  <option value="HIMT">Health Information Management</option>
+                </select>
+              </div>
+              <div class="col s12 l4 input-field">
+                <p>Kindly visit our <a href="https://cohtechobubra.edu.ng/courses.html" class="theme-color-txt underline-txt bold-text" target="_blank" >Courses page</a> to get more information about the courses we offer.</p>
+              </div>
+            </div>
+          </div>
           <h5>Personal Info</h5>
           <div class="section" id="personal_info">
             <div class="row">
               <div class="col s12 l4 input-field">
-                <input type="text" readonly name="first_name" id="first_name" value="<?php echo $first_name ?>" class="validate" required>
+                <input type="text" readonly name="first_name" id="first_name" value="<?php echo $first_name ?>" required>
                 <label for="first_name">First Name</label>
               </div>
               <div class="col s12 l3 input-field">
-                <input type="text" readonly name="surname" id="surname" value="<?php echo $surname ?>" class="validate" required>
+                <input type="text" readonly name="surname" id="surname" value="<?php echo $surname ?>" required>
                 <label for="surname">Surname</label>
               </div>
               <div class="col s12 l3 input-field">
@@ -237,7 +271,7 @@
                 <label for="phone_no">Phone Number</label>
               </div>
               <div class="col s12 l5 input-field">
-                <input type="text" readonly name="email" id="email" value="<?php echo $email ?>" class="validate" required>
+                <input type="text" readonly name="email" id="email" value="<?php echo $email ?>" required>
                 <label for="email">Email Address</label>
               </div>
               <div class="col s12 l3 input-field">

@@ -19,9 +19,9 @@ $stmt->execute();
 $stmt->close();
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-  header('Location: login.php');
   // Send Payment Confirmation to email
     include 'send_payment_success.php';
+  header('Location: login.php');
 }
 $conn->close();
 
@@ -29,7 +29,7 @@ $conn->close();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Payment Success - Registration | COHTECH Obubra</title>
   <link rel="shortcut icon" href="assets/img/cohtech-logo.png" type="image/x-icon">
@@ -61,7 +61,7 @@ $conn->close();
   </style>
 </head>
 <body>
-<header>
+  <header>
     <div class="parallax-container hide-on-med-and-down">
       <div class="parallax">
         <img src="./assets/img/payment-done.jpg" alt="Designed by Freepik" class="responsive-img">

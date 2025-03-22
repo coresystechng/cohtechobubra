@@ -32,7 +32,7 @@ if(isset($_POST['login'])){
       header('Location: registration_form.php');
       
     } else {
-      $error_msg = "Wrong password!";
+      $error_msg = "Invalid Transaction ID!";
     }
 
   } else {

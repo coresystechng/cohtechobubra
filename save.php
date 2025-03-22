@@ -78,7 +78,7 @@ if(isset($_SESSION['trx_id'])){
             <div class="card-content container">
               <img src="assets/img/cohtech-logo.png" alt="COHTECH Obubra Logo" class="responsive-img" width="15%">
               <h4>Registration Completed!</h4>
-              <p class="theme-color-txt"><b><?php echo $greeting;?>(<?php echo $trx_id ?>),</b></p>
+              <p class="theme-color-txt"><b><?php echo $greeting;?> (<?php echo $trx_id ?>),</b></p>
               <br>
               <p class=""><?php echo $message;?></p>
               <br>

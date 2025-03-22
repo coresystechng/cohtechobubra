@@ -1,6 +1,6 @@
 <?php
 //Get the user details from the session
-// session_start();
+session_start();
 $email = $_SESSION['email'];
 $trx_id = $_SESSION['trx_id'];
 $fullname = $_SESSION['fullname'];
@@ -35,7 +35,7 @@ try {
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = 'Payment Confirmation';
-    $mail->Body    = "<p>Dear $fullname,</p></br><p>Your payment was successful. Below is your Registration ID:</p><h1><code>$trx_id<code></h1><p>Do not delete this email. Kindly keep this code safe for future references.</p><br><hr><p>&copy; 2025 COHTECH Obubra. All rights reserved.</p>";
+    $mail->Body    = "<p>Dear $fullname,</p></br><p>Your payment was successful. Below is your Transaction ID:</p><h1><code>$trx_id<code></h1><p>Do not delete this email. Kindly keep this code safe for future references.</p><br><hr><p>&copy; 2025 COHTECH Obubra. All rights reserved.</p>";
     $mail->AltBody = "Your Registration Reference Number is $trx_id";
 
     $mail->send();
