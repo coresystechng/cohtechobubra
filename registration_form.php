@@ -196,8 +196,8 @@
               <div class="col s12 l2 input-field">
                 <select name="gender" id="gender" required>
                   <option value="">Gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
                 </select>
               </div>
             </div>
@@ -209,9 +209,9 @@
               <div class="col s12 l2 input-field">
                 <select name="marital_status" id="marital_status" required>
                   <option value="">Marital Status</option>
-                  <option value="single">Single</option>
+                  <option value="Single">Single</option>
                   <option value="Married">Married</option>
-                  <option value="divorced">Other</option>
+                  <option value="Other">Other</option>
                 </select>
               </div>
               <div class="col s12 l2 input-field">
@@ -277,9 +277,9 @@
               <div class="col s12 l3 input-field">
                 <select name="religion" id="religion" required>
                   <option value="">Religion</option>
-                  <option value="christianity">Christianity</option>
-                  <option value="islam">Islam</option>
-                  <option value="other">Other</option>
+                  <option value="Christianity">Christianity</option>
+                  <option value="Islam">Islam</option>
+                  <option value="Other">Other</option>
                 </select>
               </div>
             </div>
