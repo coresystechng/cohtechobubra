@@ -163,14 +163,14 @@
               <div class="col s12 l4 input-field">
                 <select name="course_of_study" id="course_of_study" required>
                   <option value="">Course of Study</option>
-                  <option value="PUTH">Public Health</option>
-                  <option value="CHEW">Community Health</option>
-                  <option value="JCHEW">Junior Community Health</option>
-                  <option value="ENTH">Environmental Health</option>
-                  <option value="MELT">Medical Laboratory Technician</option>
-                  <option value="PHAT">Pharmacy Technician</option>
+                  <option value="PHEALTH">BSc. in Public Health</option>
+                  <option value="CHEW">Community Health Extension Worker</option>
+                  <option value="JCHEW">Junior Community Health Extension Worker</option>
+                  <option value="ENVR">Environmental Health Extension Worker</option>
+                  <option value="MEDLAB">Medical Laboratory Technician</option>
+                  <option value="PHARM">Pharmacy Technician</option>
                   <option value="XRAY">X-Ray Technician</option>
-                  <option value="HIMT">Health Information Management</option>
+                  <option value="HIMT">Health Information Management Technician</option>
                 </select>
               </div>
               <div class="col s12 l4 input-field">

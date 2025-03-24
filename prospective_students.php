@@ -74,7 +74,7 @@
 </head>
 <body>
   <header>
-    <nav class="white theme-color-text">
+    <nav class="white theme-color-text z-depth-0">
       <div class="container">
         <a href="https://www.cohtechobubra.edu.ng" class="brand-logo" style="margin-top: 7px;">
           <img src="assets/img/cohtech-logo-blue.png" alt="" class="responsive-img" width="200px">
@@ -99,14 +99,14 @@
         <h1 class="theme-color-txt center-align hide-on-med-and-down">Prospective Students</h1>
         <h4 class="theme-color-txt center-align hide-on-large-only">Prospective Students</h4>
         <br>
-        <table class="striped responsive-table">
+        <table class="striped">
           <thead>
             <tr>
               <th>Transaction ID</th>
-              <th>Full Name</th>
-              <th>Course</th>
-              <th>Email</th>
-              <th>Tel. No</th>
+              <th class="hide-on-med-and-down">Full Name</th>
+              <th class="hide-on-med-and-down">Course</th>
+              <th class="hide-on-med-and-down">Email</th>
+              <th class="hide-on-med-and-down">Tel. No</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -114,10 +114,10 @@
             <?php foreach($students as $student){ ?>
               <tr>
                 <td><?php echo $student['transaction_id']; ?></td>
-                <td><?php echo $student['first_name'] . ' '. $student['surname']; ?></td>
-                <td><?php echo $student['course_of_study']; ?></td>
-                <td><?php echo $student['email']; ?></td>
-                <td><?php echo $student['phone_no']; ?></td>
+                <td class="hide-on-med-and-down"><?php echo $student['first_name'] . ' '. $student['surname']; ?></td>
+                <td class="hide-on-med-and-down"><?php echo $student['course_of_study']; ?></td>
+                <td class="hide-on-med-and-down"><a class="theme-color-txt underline-txt" href="mailto:<?php echo $student['email']; ?>"><?php echo $student['email']; ?></a></td>
+                <td class="hide-on-med-and-down"><?php echo $student['phone_no']; ?></td>
                 <th>
                   <a href="student.php?id=<?php echo $student['transaction_id'];?>" class="btn btn-flat green darken-4 white-text">view <i class="material-icons tiny white-text right">call_made</i></a>
                 </th>
