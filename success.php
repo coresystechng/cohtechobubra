@@ -12,8 +12,8 @@ if(isset($_GET['trxref'])){
   header("Location: index.html");
 }
 
-//Update Users Table with the transaction reference
-$stmt = $conn->prepare("UPDATE users_tb SET payment_ref=? WHERE email=?");
+//Update Users Table with the transaction reference and payment timestamp
+$stmt = $conn->prepare("UPDATE users_tb SET payment_ref=?, timestamp_payment=NOW() WHERE email=?");
 $stmt->bind_param("ss", $trx_id, $email);
 $stmt->execute();
 $stmt->close();
@@ -58,6 +58,21 @@ $conn->close();
         background: green !important;
     }
 
+    /* Parallax height */
+    .parallax-container {
+      height: 400px;
+    }
+
+    body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+  
   </style>
 </head>
 <body>
@@ -71,26 +86,21 @@ $conn->close();
   </header>
   <main>
     <section class="section container">
-      <div class="container section">
-        <h1 class="center-align hide-on-med-and-down">Payment Completed</h1>
-        <h4 class="center-align hide-on-large-only">Payment Completed</h4>
-        <div class="row section">
-          <div class="col s12 l6">
-            <h6 class="right-align hide-on-med-and-down">Your Transaction ID is: </h6>
-            <h6 class="hide-on-large-only">Your Transaction ID is: </h6>
-          </div>
-          <div class="col s8 l2">
-            <input type="text" id="copyText" value="<?php echo $trx_id; ?>" readonly>
-          </div>
-          <div class="col s4 l4">
-            <button class="btn btn-flat theme-color-bg white-text copy-btn" onclick="copyToClipboard()">Copy</button>
-          </div>
+      <h1 class="center-align hide-on-med-and-down">Payment Completed</h1>
+      <h4 class="center-align hide-on-large-only">Payment Completed</h4>
+      <div class="row">
+        <div class="col s12 l6">
+          <h6 class="right-align hide-on-med-and-down">Your Transaction ID is: </h6>
+          <h6 class="hide-on-large-only">Your Transaction ID is: </h6>
+        </div>
+        <div class="col s8 l2">
+          <input type="text" id="copyText" value="<?php echo $trx_id; ?>" readonly>
+        </div>
+        <div class="col s4 l4">
+          <button class="btn btn-flat theme-color-bg white-text copy-btn" onclick="copyToClipboard()">Copy</button>
         </div>
       </div>
-      </div>
     </section>
-    <div class="container divider"></div>
-    <br>
     <section class="center-align">
       <div class="container">
         <p class="center-align">Click on the button below to continue your registration.</p>

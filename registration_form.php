@@ -14,6 +14,14 @@
   $trx_id = $_SESSION["trx_id"];
   $full_name = $first_name . " " . $surname;
 
+  //Get the timestamp of the payment
+  $stmt = $conn->prepare("SELECT timestamp_payment FROM users_tb WHERE email=?");
+  $stmt->bind_param("s", $email);
+  $stmt->execute();
+  $stmt->bind_result($timestamp_payment);
+  $stmt->fetch();
+  $stmt->close();
+  
   //Set Blank variables
   $transaction_id=$course_of_study=$other_names=$gender=$date_of_birth=$marital_status=$state_of_origin=$lga=$nationality=$phone_no=$religion=$contact_address=$nok_name=$nok_relationship=$nok_phone_no=$nok_contact_address=$nok_occupation=$attestation_1=$attestation_2="";
 
@@ -40,8 +48,9 @@
       $nok_occupation = $_POST['nok_occupation'];
       $attestation_1 = $_POST['attestation_1'];
       $attestation_2 = $_POST['attestation_2'];
+      $timestamp_payment = $_POST['timestamp_payment'];
 
-      $save_query = "INSERT INTO `registration_tb`(`transaction_id`,`course_of_study`,`first_name`, `surname`, `other_names`, `gender`, `date_of_birth`, `marital_status`, `state_of_origin`, `lga`, `nationality`, `phone_no`, `email`, `religion`, `contact_address`, `nok_name`, `nok_relationship`, `nok_phone_no`, `nok_contact_address`, `nok_occupation`, `attestation_1`, `attestation_2`) VALUES ('$transaction_id','$course_of_study','$first_name', '$surname', '$other_names', '$gender', '$date_of_birth', '$marital_status','$state_of_origin', '$lga', '$nationality', '$phone_no', '$email', '$religion','$contact_address','$nok_name', '$nok_relationship','$nok_phone_no', '$nok_contact_address', '$nok_occupation', '$attestation_1','$attestation_2')";
+      $save_query = "INSERT INTO `registration_tb`(`transaction_id`,`course_of_study`,`first_name`, `surname`, `other_names`, `gender`, `date_of_birth`, `marital_status`, `state_of_origin`, `lga`, `nationality`, `phone_no`, `email`, `religion`, `contact_address`, `nok_name`, `nok_relationship`, `nok_phone_no`, `nok_contact_address`, `nok_occupation`, `attestation_1`, `attestation_2`, `date_of_payment`) VALUES ('$transaction_id','$course_of_study','$first_name', '$surname', '$other_names', '$gender', '$date_of_birth', '$marital_status','$state_of_origin', '$lga', '$nationality', '$phone_no', '$email', '$religion','$contact_address','$nok_name', '$nok_relationship','$nok_phone_no', '$nok_contact_address', '$nok_occupation', '$attestation_1','$attestation_2', '$timestamp_payment')";
 
       $send_query = mysqli_query($conn, $save_query);
 
@@ -159,6 +168,7 @@
               <div class="col s12 l4 input-field">
                 <input type="text" name="transaction_id" id="transaction_id" value="<?php echo $trx_id ?>" readonly required>
                 <label for="transaction_id">Transaction ID</label>
+                <input type="hidden" name="timestamp_payment" id="timestamp_payment" value="<?php echo $timestamp_payment ?>">
               </div>
               <div class="col s12 l4 input-field">
                 <select name="course_of_study" id="course_of_study" required>
