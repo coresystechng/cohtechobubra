@@ -1,4 +1,5 @@
 <?php
+include 'connect.php';
 session_start();
 if(isset($_SESSION['trx_id'])){
   $trx_id = $_SESSION['trx_id'];
@@ -8,6 +9,10 @@ if(isset($_SESSION['trx_id'])){
   $greeting = "Dear $fullname";
   $message = "Your data has been saved successfully. Thank you for choosing our esteemed institution. Your admission will be processed in due time and you will be notified of your status via email.";
   $message2 = "Please click the button below to go back to our website.";
+
+  // Delete temp data on the users_tb from the database
+  $sql = "DELETE FROM `users_tb` WHERE `payment_ref` = '$trx_id'";
+  $result = mysqli_query($conn, $sql);
 
   } else {
   header("Location: index.html");
