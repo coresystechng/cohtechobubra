@@ -7,8 +7,8 @@ if(isset($_SESSION['trx_id'])){
   $fullname = $_SESSION['fullname'];
   
   $greeting = "Dear $fullname";
-  $message = "Your data has been saved successfully. Thank you for choosing our esteemed institution. Your admission will be processed in due time and you will be notified of your status via email.";
-  $message2 = "Please click the button below to go back to our website.";
+  $message = "Your data has been saved successfully. Your admission will be processed in due time and you will be notified of your status via email.";
+  $message2 = "Please click the link below to save a copy of the registration form or the button below to go back to our website.";
 
   // Delete temp data on the users_tb from the database
   $sql = "DELETE FROM `users_tb` WHERE `payment_ref` = '$trx_id'";
@@ -18,9 +18,13 @@ if(isset($_SESSION['trx_id'])){
   header("Location: index.html");
   };
 
-  // Unset and destroy session variables
-  session_unset();
-  session_destroy();
+  // Check if the "BACK TO HOME" button is clicked
+  if(isset($_POST['submit'])){
+    header("Location: https://www.cohtechobubra.edu.ng");
+    // Unset and destroy session variables
+    session_unset();
+    session_destroy();
+  }
 
 ?>
 
@@ -44,33 +48,16 @@ if(isset($_SESSION['trx_id'])){
       font-family: 'Inter', sans-serif;
     }
 
-    /* Parallax height */
-    .parallax-container {
-      height: 600px;
-    }
-
-    /* label focus color */
-    .input-field input:focus + label, textarea:focus + label {
-      color: #702963 !important;
-    }
-
-    /* label underline focus color */
-    .input-field input:focus, textarea:focus {
-      border-bottom: 1px solid #702963 !important;
-      box-shadow: 0 1px 0 0 #702963 !important;
-    }
-
-    /* Dropdown text color */
-    .dropdown-content li>a,.dropdown-content li > span {
-      color: #702963 !important; 
-    }
-
     .theme-color-txt {
       color: #702963 !important;
     }
 
     .theme-color-bg {
       background-color: #702963 !important;
+    }
+
+    .underline-txt {
+      text-decoration: underline !important;
     }
 
   </style>
@@ -89,7 +76,14 @@ if(isset($_SESSION['trx_id'])){
               <br>
               <p class=""><?php echo $message2;?></p>
               <br>
-              <a href="https://www.cohtechobubra.edu.ng" class="btn theme-color-bg btn-flat btn-large white-text">Back to Home</a>
+              <a target="_blank" href="generate_file.php?trx_id?=<?php echo $trx_id?>" class="theme-color-txt underline-txt">
+                Generate PDF
+                <i class="material-icons tiny theme-color-txt">call_made</i>
+              </a>
+              <br><br>
+              <form action="save.php" method="post">
+                <button type="submit" name="submit" class="btn theme-color-bg btn-flat btn-large white-text">BACK TO HOME</button>
+              </form>
             </div>
           </div>
         </div>
@@ -97,10 +91,3 @@ if(isset($_SESSION['trx_id'])){
     </section>
 </body>
 </html>
-
-<?php
-  // Unset and destroy session variables
-  session_start();
-  session_unset();
-  session_destroy();
-?>

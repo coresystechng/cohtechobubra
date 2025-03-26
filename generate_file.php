@@ -2,9 +2,9 @@
 
 // Include the database connection file
 include 'connect.php';
-
-// Get the Transaction ID
-$transaction_id = "STRVDMW9JQ";
+session_start();
+// Get the Transaction ID from the URL
+$transaction_id = $_SESSION['trx_id'];
 
 // Get user details from the database
 $stmt = $conn->prepare("SELECT * FROM `registration_tb` WHERE `transaction_id` = ?");
@@ -63,7 +63,7 @@ $course_of_study = $user['course_of_study'];
 $current_year = date('Y');
 
 // Include TCPDF library
-include 'vendor/library/tcpdf.php';
+include 'vendor/tcpdf/tcpdf.php';
 
 // Create a new TCPDF object
 $pdf = new TCPDF('P', 'mm', 'A4');
@@ -142,6 +142,9 @@ $pdf->writeHTML($html, true, false, true, false, '');
 
 
 // Output the PDF to the browser
-$pdf->Output("Student Registration Form - $transaction_id", 'I');
+$pdf->Output("Student Registration Form - $transaction_id.pdf", 'I');
 
+// Close the PDF
+session_unset();
+session_destroy();
 ?>

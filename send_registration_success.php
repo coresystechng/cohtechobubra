@@ -34,7 +34,7 @@ try {
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = 'Registration Successful';
-    $mail->Body    = "<p>Dear $fullname ($trx_id),</p></br><p>Your registration was successful. Download the PDF attached to the email to save a copy of your registration form.<br><p>Thank you. </p><br><hr><p>&copy; 2025 COHTECH Obubra. All rights reserved.</p>";
+    $mail->Body    = "<p>Dear $fullname ($trx_id),</p></br><p>Your registration was successful and your data has been saved. Your admission will be processed in due time and you will be notified of your status via email..<br><p>Thank you. </p><br><hr><p>&copy; 2025 COHTECH Obubra. All rights reserved.</p>";
     $mail->AltBody = "Registration Successful";
 
     $mail->send();
