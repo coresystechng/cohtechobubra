@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ?>
         <script>
             alert('Incorrect Details');
-            // window.location.href = 'index.html';
+            window.location.href = 'index.html';
         </script>
         <?php
     }

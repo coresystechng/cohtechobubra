@@ -216,6 +216,7 @@
                       document.getElementById('con_email').value= response.email;
                       emailValid = false;
                     } else{
+                      document.getElementById('submit-area').innerHTML = '<input type="submit" value="start application" id="submit-button" class="btn btn-large btn-flat theme-color-bg white-text">';
                         $("#email-error").text("Email is available").css("color", "green");
                         emailValid = true;
                     }
