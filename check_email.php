@@ -28,9 +28,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           
             $user_ = $user_pending->fetch_assoc();
             $pay =  $user_['payment_ref'];
-            if ($pay === 0) {
+
+      
+            if ($pay == 0) {
                 
-                echo json_encode(["status" => "pay_pending", "email"=> $email , "message" => "Email is already in use. Please use the button below to complete registration."]);
+                echo json_encode(["status" => "pay_pending", "email"=> $email , "message" => "Email is already in use. Please use the button below to make payment."]);
                 exit();
             }else{
                 echo json_encode(["status" => "pending", "email"=> $email ,"message" => "Email is already in use. Please use the button below to complete registration."]);
