@@ -49,6 +49,23 @@
     .underline-txt {
     text-decoration: underline !important;
     }
+    #loading {
+        display: none;
+        width: 10px;
+        height: 10px;
+        border: 3px solid #702963;
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+        -webkit-animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to { -webkit-transform: rotate(360deg); }
+      }
+      @-webkit-keyframes spin {
+        to { -webkit-transform: rotate(360deg); }
+      }
 
   </style>
 </head>
@@ -78,7 +95,7 @@
             <div class="col s12 l6 input-field">
               <input type="text" name="email" id="email" required>
               <label for="email">Email Address</label>
-              <span id="email-error" class="helper-text"></span>
+              <span id="email-error" class="helper-text"><div id="loading"></div></span>
             </div>
             <div class="col s12 l3 input-field">
               <input type="text" name="first_name" id="first_name" required>
@@ -106,7 +123,7 @@
       <div class="container">
         <p class="center">
           <span>&COPY; 2025 COHTECH Obubra.</span>
-          <a href="https://wwww.cohtechobubra.edu.ng" target="_blank" class="white-text underline-txt">
+          <a href="https://www.cohtechobubra.edu.ng" target="_blank" class="white-text underline-txt">
             Back to Home
             <i class="material-icons tiny white-text">call_made</i>
           </a>
@@ -123,11 +140,12 @@
         <div class="input-field">
           <form action="check_ref.php" method="POST">
             <input type="email" name="email_ref"  id="ref-email" readonly required>
-          <input type="text" id="payment_ref" name="payment_ref" required>
+          <!-- <input type="text" id="payment_ref" name="payment_ref" required>
           <label for="payment_ref">Payment Reference</label>
-          <span id="payment-error" class="helper-text"></span>
+          <span id="payment-error" class="helper-text"></span> -->
 
-          <input type="submit" value="Continue Registration" class="btn btn-flat theme-color-bg white-text">
+          <!-- <input type="submit" value="Continue Registration" class="btn btn-flat theme-color-bg white-text"> -->
+           <a href="login.php" class="btn btn-flat theme-color-bg white-text">Continue Registration</a>
         </form>
 
       </div>
@@ -176,13 +194,18 @@
         var email = $(this).val().trim();
 
         if(email !== "") {
+            $("#loading").show(); // Show loading spinner
             $.ajax({
                 url: "check_email.php",
                 type: "POST",
                 data: { email: email },
                 dataType: "json",
                 success: function(response) {
-                    if (response.status === "pending") {
+                     
+                    if (response.status === "error") {
+                      $("#email-error").text("Email is already registered").css("color", "red");
+                      emailValid = false;
+                      } else if(response.status === "pending"){
                         $("#email-error").text(response.message).css("color", "red");
                         emailValid = false;
                         document.getElementById('submit-area').innerHTML = '<a class="btn btn-large btn-flat theme-color-bg white-text modal-trigger" href="#modal1">Continue Registration</a>';
@@ -194,6 +217,7 @@
                       document.getElementById('con_email').value= response.email;
                       emailValid = false;
                     } else{
+                      document.getElementById('submit-area').innerHTML = '<input type="submit" value="start application" id="submit-button" class="btn btn-large btn-flat theme-color-bg white-text">';
                         $("#email-error").text("Email is available").css("color", "green");
                         emailValid = true;
                     }

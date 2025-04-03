@@ -133,7 +133,7 @@
       <div class="container">
         <p class="center">
           <span>&COPY; 2025 COHTECH Obubra.</span>
-          <a href="https://wwww.cohtechobubra.edu.ng" target="_blank" class="white-text underline-txt">
+          <a href="https://www.cohtechobubra.edu.ng" target="_blank" class="white-text underline-txt">
             Back to Home
             <i class="material-icons tiny white-text">call_made</i>
           </a>

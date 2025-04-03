@@ -20,14 +20,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $user_result = $stmt->get_result();
         if ($user_result->num_rows > 0) {
-            $s= $conn->prepare("SELECT * FROM users_tb WHERE email = ? AND payment_ref = 0 ");
-            $s->bind_param("s", $email);
+            $s= $conn->prepare("SELECT * FROM users_tb WHERE email = ? AND payment_ref = ?");
+            $num = 0;
+            $s->bind_param("si", $email, $num);
             $s->execute();
             $user_pending = $s->get_result();
+          
+            $user_ = $user_pending->fetch_assoc();
+            $pay =  $user_['payment_ref'];
 
-
-            if ($user_pending->num_rows > 0) {
-                echo json_encode(["status" => "pay_pending", "email"=> $email , "message" => "Email is already in use. Please use the button below to complete registration."]);
+      
+            if ($pay == 0) {
+                
+                echo json_encode(["status" => "pay_pending", "email"=> $email , "message" => "Email is already in use. Please use the button below to make payment."]);
                 exit();
             }else{
                 echo json_encode(["status" => "pending", "email"=> $email ,"message" => "Email is already in use. Please use the button below to complete registration."]);
