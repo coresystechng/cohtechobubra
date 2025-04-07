@@ -1,11 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - Student Portal - COHTECH Obubra</title>
-</head>
-<body>
-  <h1>Happy Coding</h1>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- link for materialize -->
+		<link
+			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+			rel="stylesheet"
+		/>
+
+		<style>
+			.purple-text {
+				color: #702963;
+			}
+
+			.purple {
+				background-color: #702963;
+			}
+
+			body {
+				margin: 30vh 0 0 0;
+			}
+		</style>
+
+		<title>Login - Student Portal - COHTECH Obubra</title>
+	</head>
+	<body>
+		<div class="">
+			<div class="row">
+				<div class="col l4 m4 s4"></div>
+				<div class="col l4 m4 s4">
+					<form action="./login.php" method="post">
+						<label for="mat_no">Matriculation Number</label>
+						<input type="text" id="mat_no" name="mat_no" required />
+						<label for="pword">Password</label>
+						<input type="password" name="password" id="password" required />
+						<div class="row">
+							<div class="col l4 m4 s4"></div>
+							<div class="col l4 m4 s4">
+								<button
+									type="submit"
+									class="btn purple waves-effect waves-light"
+								>
+									Login
+								</button>
+							</div>
+							<div class="col l4 m4 s4"></div>
+						</div>
+					</form>
+				</div>
+				<div class="col l4 m4 s4"></div>
+			</div>
+		</div>
+	</body>
 </html>
