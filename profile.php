@@ -29,6 +29,13 @@ $connect->close();
 
     
 		<link rel="icon" href="./img/cohtech-logo.png" type="image/x-icon" />
+
+        <style>
+            .underline {
+				text-decoration: underline;
+			}
+
+        </style>
     <title>Profile - Student Portal - COHTECH Obubra</title>
 </head>
 <body>
@@ -51,5 +58,13 @@ $connect->close();
             </div>
         </div>
     </div>
+    <div class="container center-align mb">
+			<span>
+				© 2025 COHTECH Obubra. All Rights Reserved.
+				<a href="./index.html" target="_blank" class="black-text underline"
+					>Back To Home</a
+				>
+			</span>
+		</div>
 </body>
 </html>

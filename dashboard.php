@@ -48,6 +48,11 @@
 				justify-content: space-between; /* Space between logo and profile */
 			}
 
+			.underline {
+				text-decoration: underline;
+			}
+
+
 			footer {
 				height: 10vh !important;
 				display: flex;
