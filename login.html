@@ -4,9 +4,8 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<!-- link for materialize -->
 		<link
-			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css"
 			rel="stylesheet"
 		/>
 
@@ -28,6 +27,9 @@
 				border-bottom: 1px solid #702963 !important;
 				box-shadow: 0 1px 0 0 #702963 !important;
 			}
+			.error-message {
+				color: red;
+			}
 		</style>
 
 		<title>Login - Student Portal - COHTECH Obubra</title>
@@ -45,16 +47,19 @@
 								id="mat_no"
 								name="mat_no"
 								class="validate"
+								autocomplete="off"
+								value="<?php echo isset($_GET['mat_no']) ? $_GET['mat_no'] : ''; ?>"
 								required
 							/>
 						</div>
 						<div class="input-field">
-							<label for="pword">Password</label><br />
+							<label for="password">Password</label><br />
 							<input
 								type="password"
 								name="password"
-								id="pword"
+								id="password"
 								class="validate"
+								autocomplete="new-password"
 								required
 							/>
 						</div>

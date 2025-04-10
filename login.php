@@ -1,22 +1,26 @@
 <?php
 session_start();
+require_once 'connect.php';
 
-// Get form data
 $mat_no = $_POST['mat_no'] ?? '';
 $password = $_POST['password'] ?? '';
 
-// Hardcoded login credentials
-$correct_mat_no = "sean123";
-$correct_password = "1234";
+$stmt = $connect->prepare("SELECT * FROM student_tb WHERE mat_no = ? AND password = ?"); 
+$stmt->bind_param("ss", $mat_no, $password);
+$stmt->execute();
+$result = $stmt->get_result();
 
-// Check if credentials match
-if ($mat_no === $correct_mat_no && $password === $correct_password) {
-    // Login success - start session and redirect
+if ($result->num_rows === 1) {
+    // if credentials is validated
     $_SESSION['mat_no'] = $mat_no;
     header("Location: dashboard.php");
     exit;
 } else {
-    // Login failed - show alert and go back
-    echo "<script>alert('Invalid login credentials'); window.location.href='index.html';</script>";
+    // if not
+    header("Location: index.html?error=invalid&mat_no=" . urlencode($mat_no)); 
+    exit;
 }
+
+$stmt->close();
+$connect->close();
 ?>
