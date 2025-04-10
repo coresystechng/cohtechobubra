@@ -16,10 +16,11 @@ if ($result->num_rows === 1) {
     header("Location: dashboard.php");
     exit;
 } else {
-    // if not
-    header("Location: index.html?error=invalid&mat_no=" . urlencode($mat_no)); 
+    // else it is not validated
+    echo "<script>alert('Invalid credentials'); window.location.href = 'index.html?error=invalid&mat_no=" . urlencode($mat_no) . "';</script>";
     exit;
 }
+
 
 $stmt->close();
 $connect->close();
