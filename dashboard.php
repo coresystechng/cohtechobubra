@@ -1,13 +1,19 @@
-<?php
-// session_start();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-// if (isset($_SESSION['mat_no'])) {
-//     header("Location: index.html");
-//     exit;
-// }
+    <link
+			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css"
+			rel="stylesheet"
+		/>
 
-// echo "<h1>Welcome, " . htmlspecialchars($_SESSION['mat_no']) . "!</h1>";
-// echo "<a href='logout.php'>Logout</a>";
+		<link rel="icon" href="./img/cohtech-logo.png" type="image/x-icon" />
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
 
-echo "successful";
-?>
