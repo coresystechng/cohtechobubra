@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Desired Layout</title>
+		<title>Dashboard - Student Portal - COHTECHOBUBRA</title>
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
 		/>
+
+        
+		<link rel="icon" href="./img/cohtech-logo.png" type="image/x-icon" />
 		<style>
 			.page-header {
 				background-color: #f0f0f0;
@@ -16,9 +19,10 @@
 
 			.sidebar {
 				width: 250px;
-				height: 78vh;
+				height: 80vh;
 				background-color: #e0e0e0;
 				padding: 20px;
+                margin-bottom: -20px;
 			}
 
 			.content {
@@ -78,7 +82,7 @@
 					</div>
 					<br />
 					<div class="container">
-						<a href="" class="purple btn">logout</a>
+						<a href="./logout.php" class="purple btn">logout</a>
 					</div>
 				</ul>
 			</aside>
