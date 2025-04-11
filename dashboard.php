@@ -45,7 +45,7 @@
 			.header-content {
 				display: flex;
 				align-items: center;
-				justify-content: space-between; /* Space between logo and profile */
+				justify-content: space-between;
 			}
 
 			.underline {
