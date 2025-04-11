@@ -3,20 +3,25 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+		<!-- link for material css -->
 		<link
 			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css"
+			rel="stylesheet"
+		/>
+		<!-- link for material icons -->
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
 			rel="stylesheet"
 		/>
 
 		<link rel="icon" href="./img/cohtech-logo.png" type="image/x-icon" />
 		<style>
-			.purple-text {
-				color: #702963;
+			.theme-color-text {
+				color: #702963 !important;
 			}
 
-			.purple {
-				background-color: #702963;
+			.theme-color-bg {
+				background-color: #702963 !important;
 			}
 
 			body {
@@ -78,7 +83,10 @@
 							/>
 						</div>
 						<div class="center-align">
-							<button type="submit" class="btn purple waves-effect waves-light">
+							<button
+								type="submit"
+								class="btn btn-large btn-flat theme-color-bg white-text"
+							>
 								Login
 							</button>
 						</div>
@@ -90,8 +98,13 @@
 		<div class="container center-align mb">
 			<span>
 				© 2025 COHTECH Obubra. All Rights Reserved.
-				<a href="./index.html" target="_blank" class="black-text underline"
-					>Back To Home</a
+				<a
+					href="./index.html"
+					target="_blank"
+					class="theme-color-text underline"
+					>Back To Home<i class="material-icons tiny theme-color-text"
+						>call_made</i
+					></a
 				>
 			</span>
 		</div>
