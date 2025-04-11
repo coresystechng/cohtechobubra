@@ -14,6 +14,11 @@
 			rel="stylesheet"
 		/>
 
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+		/>
+
 		<link rel="icon" href="./img/cohtech-logo.png" type="image/x-icon" />
 		<style>
 			.theme-color-text {
@@ -58,26 +63,32 @@
 			<div class="row">
 				<div class="col l4 m4 s4"></div>
 				<div class="col l4 m4 s4">
-					<form action="login.php" method="post">
+					<form action="login.php" method="post" class="container">
 						<div class="input-field">
-							<label for="mat_no">Matriculation Number</label><br />
+							<label for="mat_no">
+								<i class="fa-solid fa-user"></i>
+								Matriculation Number</label
+							>
 							<input
 								type="text"
 								id="mat_no"
 								name="mat_no"
-								class="validate"
+								class=""
 								autocomplete="off"
 								value="<?php echo isset($_GET['mat_no']) ? $_GET['mat_no'] : ''; ?>"
 								required
 							/>
 						</div>
 						<div class="input-field">
-							<label for="password">Password</label><br />
+							<label for="password">
+								<i class="fa-solid fa-lock"></i>
+								Password</label
+							>
 							<input
 								type="password"
 								name="password"
 								id="password"
-								class="validate"
+								class=""
 								autocomplete="new-password"
 								required
 							/>
@@ -108,5 +119,8 @@
 				>
 			</span>
 		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
 	</body>
 </html>
