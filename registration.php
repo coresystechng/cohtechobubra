@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO student_tb (transaction_id, course_of_study, first_name, surname, other_names, gender, date_of_birth, marital_status, state_of_origin, lga, nationality, phone_no, email, religion, contact_address, nok_name, nok_relationship, nok_phone_no, nok_contact_address, nok_occupation, attestation_1, attestation_2) VALUES ('$transaction_id', '$course_of_study', '$first_name', '$surname', '$other_names', '$gender', '$date_of_birth', '$marital_status', '$state_of_origin', '$lga', '$nationality', '$phone_no', '$email', '$religion', '$contact_address', '$nok_name', '$nok_relationship', '$nok_phone_no', '$nok_contact_address', '$nok_occupation', $attestation_1, $attestation_2)";
 
     if (mysqli_query($connect, $sql)) {
-        header("Location: success.php");
+        header("Location: dashboard.php");
             exit();
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($connect);
@@ -39,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 mysqli_close($connect);
 ?>
+<!-- end of php code -->
 
 
 
@@ -86,6 +87,17 @@ mysqli_close($connect);
         span{
             text-transform: none;
         }
+
+        
+		input[type="text"]:focus,
+		input[type="password"]:focus,
+        input[type="tel"]:focus,
+        input[type="email"]:focus,
+        option:focus
+            {
+				border-bottom: 1px solid #702963 !important;
+				box-shadow: 0 1px 0 0 #702963 !important;
+			}
 
         footer {
             height: 10vh !important;
@@ -136,9 +148,9 @@ mysqli_close($connect);
                             <div class="input-field">
                                 <select name="course" id="course" class="" required>
                                     <option value="" disabled selected>Course Of Study</option>
-                                    <option value="performing arts">performing arts</option>
-                                    <option value="economics">economics</option>
-                                    <option value="chemistry">chemistry</option>
+                                    <option class="theme-color-text" value="performing arts">performing arts</option>
+                                    <option class="theme-color-text" value="economics">economics</option>
+                                    <option class="theme-color-text" value="chemistry">chemistry</option>
                                 </select>
                             </div>
                         </div>
@@ -171,10 +183,14 @@ mysqli_close($connect);
                         <div class="col l3 m6 s12">
                             <div class="input-field">
                                 <select id="gender" name="gender" class="" required>
-                                    <option value="" disabled selected>Gender</option>
-                                    <option value="Male" >Male</option>
-                                    <option value="Female" >Female</option>
-                                    <option value="Prefer not to say" >Prefer not to say</option>
+                                    <option class="
+                                    theme-color-text" value="" disabled selected>Gender</option>
+                                    <option class="
+                                    theme-color-text" value="Male" >Male</option>
+                                    <option class="
+                                    theme-color-text" value="Female" >Female</option>
+                                    <option class="
+                                    theme-color-text" value="Prefer not to say" >Prefer not to say</option>
                                 </select>
                             </div>
                         </div>
@@ -190,54 +206,54 @@ mysqli_close($connect);
                             <div class="input-field">
                                 <select id="maritalStatus" name="marital_status" class="" required>
                                     <option value="" disabled selected>Marital Status</option>
-                                    <option value="Single">Single</option>
-                                    <option value="Married">Married</option>
-                                    <option value="Divorced">Divorced</option>
-                                    <option value="Widowed">Widowed</option>
+                                    <option class="theme-color-text" value="Single">Single</option>
+                                    <option class="theme-color-text" value="Married">Married</option>
+                                    <option class="theme-color-text" value="Divorced">Divorced</option>
+                                    <option class="theme-color-text" value="Widowed">Widowed</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col l2 m6 s12">
                             <div class="input-field">
                                 <select  id="stateOfOrigin" name="state_of_origin" required>
-                                    <option value="" disabled selected> State of Origin</option>
-                                    <option value="Abia">Abia</option>
-                                    <option value="Adamawa">Adamawa</option>
-                                    <option value="Akwa Ibom">Akwa Ibom</option>
-                                    <option value="Anambra">Anambra</option>
-                                    <option value="Bauchi">Bauchi</option>
-                                    <option value="Bayelsa">Bayelsa</option>
-                                    <option value="Benue">Benue</option>
-                                    <option value="Borno">Borno</option>
-                                    <option value="Cross River">Cross River</option>
-                                    <option value="Delta">Delta</option>
-                                    <option value="Ebonyi">Ebonyi</option>
-                                    <option value="Edo">Edo</option>
-                                    <option value="Ekiti">Ekiti</option>
-                                    <option value="Enugu">Enugu</option>
-                                    <option value="FCT - Abuja">FCT - Abuja</option>
-                                    <option value="Gombe">Gombe</option>
-                                    <option value="Imo">Imo</option>
-                                    <option value="Jigawa">Jigawa</option>
-                                    <option value="Kaduna">Kaduna</option>
-                                    <option value="Kano">Kano</option>
-                                    <option value="Katsina">Katsina</option>
-                                    <option value="Kebbi">Kebbi</option>
-                                    <option value="Kogi">Kogi</option>
-                                    <option value="Kwara">Kwara</option>
-                                    <option value="Lagos">Lagos</option>
-                                    <option value="Nasarawa">Nasarawa</option>
-                                    <option value="Niger">Niger</option>
-                                    <option value="Ogun">Ogun</option>
-                                    <option value="Ondo">Ondo</option>
-                                    <option value="Osun">Osun</option>
-                                    <option value="Oyo">Oyo</option>
-                                    <option value="Plateau">Plateau</option>
-                                    <option value="Rivers">Rivers</option>
-                                    <option value="Sokoto">Sokoto</option>
-                                    <option value="Taraba">Taraba</option>
-                                    <option value="Yobe">Yobe</option>
-                                    <option value="Zamfara">Zamfara</option>
+                                    <option class="theme-color-text" value="" disabled selected> State of Origin</option>
+                                    <option class="theme-color-text" value="Abia">Abia</option>
+                                    <option class="theme-color-text" value="Adamawa">Adamawa</option>
+                                    <option class="theme-color-text" value="Akwa Ibom">Akwa Ibom</option>
+                                    <option class="theme-color-text" value="Anambra">Anambra</option>
+                                    <option class="theme-color-text" value="Bauchi">Bauchi</option>
+                                    <option class="theme-color-text" value="Bayelsa">Bayelsa</option>
+                                    <option class="theme-color-text" value="Benue">Benue</option>
+                                    <option class="theme-color-text" value="Borno">Borno</option>
+                                    <option class="theme-color-text" value="Cross River">Cross River</option>
+                                    <option class="theme-color-text" value="Delta">Delta</option>
+                                    <option class="theme-color-text" value="Ebonyi">Ebonyi</option>
+                                    <option class="theme-color-text" value="Edo">Edo</option>
+                                    <option class="theme-color-text" value="Ekiti">Ekiti</option>
+                                    <option class="theme-color-text" value="Enugu">Enugu</option>
+                                    <option class="theme-color-text" value="FCT - Abuja">FCT - Abuja</option>
+                                    <option class="theme-color-text" value="Gombe">Gombe</option>
+                                    <option class="theme-color-text" value="Imo">Imo</option>
+                                    <option class="theme-color-text" value="Jigawa">Jigawa</option>
+                                    <option class="theme-color-text" value="Kaduna">Kaduna</option>
+                                    <option class="theme-color-text" value="Kano">Kano</option>
+                                    <option class="theme-color-text" value="Katsina">Katsina</option>
+                                    <option class="theme-color-text" value="Kebbi">Kebbi</option>
+                                    <option class="theme-color-text" value="Kogi">Kogi</option>
+                                    <option class="theme-color-text" value="Kwara">Kwara</option>
+                                    <option class="theme-color-text" value="Lagos">Lagos</option>
+                                    <option class="theme-color-text" value="Nasarawa">Nasarawa</option>
+                                    <option class="theme-color-text" value="Niger">Niger</option>
+                                    <option class="theme-color-text" value="Ogun">Ogun</option>
+                                    <option class="theme-color-text" value="Ondo">Ondo</option>
+                                    <option class="theme-color-text" value="Osun">Osun</option>
+                                    <option class="theme-color-text" value="Oyo">Oyo</option>
+                                    <option class="theme-color-text" value="Plateau">Plateau</option>
+                                    <option class="theme-color-text" value="Rivers">Rivers</option>
+                                    <option class="theme-color-text" value="Sokoto">Sokoto</option>
+                                    <option class="theme-color-text" value="Taraba">Taraba</option>
+                                    <option class="theme-color-text" value="Yobe">Yobe</option>
+                                    <option class="theme-color-text" value="Zamfara">Zamfara</option>
                                 </select>
                             </div>
                         </div>
@@ -270,12 +286,12 @@ mysqli_close($connect);
                         <div class="col l3 m6 s12">
                             <div class="input-field">
                                 <select id="religion"  name="religion" class="" required>
-                                    <option value="" disabled selected>Religion</option>
-                                    <option value="Christianity" >Christianity</option>
-                                    <option value="Islam" >Islam</option>
-                                    <option value="Traditional African Religion" >Traditional African Religion</option>
-                                    <option value="Other" >Other</option>
-                                    <option value="Prefer not to say" >Prefer not to say</option>
+                                    <option class="theme-color-text" value="" disabled selected>Religion</option>
+                                    <option class="theme-color-text" value="Christianity" >Christianity</option>
+                                    <option class="theme-color-text" value="Islam" >Islam</option>
+                                    <option class="theme-color-text" value="Traditional African Religion" >Traditional African Religion</option>
+                                    <option class="theme-color-text" value="Other" >Other</option>
+                                    <option class="theme-color-text" value="Prefer not to say" >Prefer not to say</option>
                                 </select>
                             </div>
                         </div>
