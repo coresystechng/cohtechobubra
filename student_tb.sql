@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2025 at 10:20 PM
+-- Generation Time: Apr 16, 2025 at 11:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,7 +29,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `student_tb` (
   `registration_id` int(11) NOT NULL,
-  `transaction_id` varchar(10) NOT NULL,
   `course_of_study` varchar(100) NOT NULL,
   `first_name` varchar(38) NOT NULL,
   `surname` varchar(40) NOT NULL,
@@ -49,19 +48,27 @@ CREATE TABLE `student_tb` (
   `nok_phone_no` varchar(19) NOT NULL,
   `nok_contact_address` varchar(100) NOT NULL,
   `nok_occupation` varchar(50) NOT NULL,
-  `attestation_1` varchar(70) NOT NULL,
-  `attestation_2` varchar(70) NOT NULL,
+  `attestation_1` tinyint(1) NOT NULL,
+  `attestation_2` tinyint(1) NOT NULL,
   `date_of_payment` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `mat_no` varchar(100) NOT NULL,
-  `password` varchar(220) NOT NULL
+  `password` varchar(220) NOT NULL,
+  `verify_password` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `student_tb`
 --
 
-INSERT INTO `student_tb` (`registration_id`, `transaction_id`, `course_of_study`, `first_name`, `surname`, `other_names`, `gender`, `date_of_birth`, `marital_status`, `state_of_origin`, `lga`, `nationality`, `phone_no`, `email`, `religion`, `contact_address`, `nok_name`, `nok_relationship`, `nok_phone_no`, `nok_contact_address`, `nok_occupation`, `attestation_1`, `attestation_2`, `date_of_payment`, `mat_no`, `password`) VALUES
-(1, '1', 'Software Engineering\r\n\r\n', 'David', 'Okonkwo', 'Chukwuebuka', 'Male', '2005-07-22', 'Single', 'Anambra', 'Idemili South ', 'Nigeria', '08083308641', 'david123@gmail.com', 'Christian', 'Plot 140D, Byazhin Road, Near Water Board,\r\nByazhin, Kubwa, Bwari Area Council,\r\nAbuja, FCT, Nigeria', 'Emeka Nwankwo', 'Father', '08012345678', 'Address: Plot 140D, Byazhin, Kubwa, Abuja;', 'Civil Engineer', ' David Okonkwo Chukwuebuka, hereby attest that the information provide', 'I, Emeka Nwankwo, confirm that I am the father of David Okonkwo Chukwu', '2025-04-09 20:00:03', 'sean123', '1234-sean');
+INSERT INTO `student_tb` (`registration_id`, `course_of_study`, `first_name`, `surname`, `other_names`, `gender`, `date_of_birth`, `marital_status`, `state_of_origin`, `lga`, `nationality`, `phone_no`, `email`, `religion`, `contact_address`, `nok_name`, `nok_relationship`, `nok_phone_no`, `nok_contact_address`, `nok_occupation`, `attestation_1`, `attestation_2`, `date_of_payment`, `mat_no`, `password`, `verify_password`) VALUES
+(1, 'Software Engineering\r\n\r\n', 'David', 'Okonkwo', 'Chukwuebuka', 'Male', '2005-07-22', 'Single', 'Anambra', 'Idemili South ', 'Nigeria', '08083308641', 'david123@gmail.com', 'Christian', 'Plot 140D, Byazhin Road, Near Water Board,\r\nByazhin, Kubwa, Bwari Area Council,\r\nAbuja, FCT, Nigeria', 'Emeka Nwankwo', 'Father', '08012345678', 'Address: Plot 140D, Byazhin, Kubwa, Abuja;', 'Civil Engineer', 1, 1, '2025-04-14 19:59:38', 'sean123', '1234-sean', ''),
+(2, '', 'sean', 'gbadamosi', 'ohifueme', '', 'Dec 07, 2005', '', 'Edo', 'owan east', 'nigeria', '08083308461', 'seangbadamosi@gmail.com', '', ' plot 141, chikakore before champion church, byazhin, kubwa, abuja', 'Mark Gbadamosi', 'Father', '08037003298', ' plot 141, chikakore before champion church, byazhin, kubwa, abuja', 'Engineer', 1, 1, '2025-04-14 19:50:56', '', '', ''),
+(3, '', 'sean', 'gbadamosi', 'ohifueme', '', 'Dec 07, 2005', '', 'Edo', 'owan east', 'nigeria', '08083308461', 'seangbadamosi@gmail.com', '', ' plot 141, chikakore before champion church, byazhin, kubwa, abuja', 'Mark Gbadamosi', 'Father', '08037003298', ' plot 141, chikakore before champion church, byazhin, kubwa, abuja', 'Engineer', 1, 1, '2025-04-14 20:12:26', '', '', ''),
+(4, 'economics', 'Adesake', 'Obot', 'Samuel', 'Male', 'Aug 07, 2018', 'Single', 'Delta', 'East east', 'Nigeria', '08083303461', 'samwellmos@gmail.com', 'Traditional African Religion', ' plot 141, chikakore before champion church, kubwa, abuja', 'Belinda Obot', 'mother', '08037003256', ' plot 141, chikakore before champion church, byazhin, kubwa, abuja', 'doctor', 1, 1, '2025-04-14 20:17:48', '', '', ''),
+(5, 'chemistry', 'sean', 'qqwdewdefed', 'efefawfewfwef', 'Male', 'Feb 18, 2010', 'Widowed', 'Anambra', 'owan east', 'wdwddwd', '08083308345', 'samwellmos@gmail.com', 'Islam', ' plot 141, chikakore before champion church, kubwa, abuja', 'Belinda Obot', 'momsi', '08037003687', ' plot 141, chikakore before champion church, byazhin, kubwa, abuja', 'software engineer', 1, 1, '2025-04-14 21:59:13', '', '', ''),
+(6, 'performing arts', 'Adesake', 'Obot', 'Samuel', 'Prefer not to say', 'Apr 12, 2006', 'Widowed', 'Benue', 'East east', 'Senegal', '08083308345', 'samwellmos@gmail.com', 'Prefer not to say', ' plot 141, chikakore before champion church, kubwa, abuja', 'Belinda Obot', 'mother', '08037003687', ' plot 141, chikakore before champion church, byazhin, kubwa, abuja', 'lawyer', 1, 1, '2025-04-14 22:01:05', '', '', ''),
+(7, 'economics', 'sean', 'gbadamosi', 'efefefef', 'Male', 'Apr 11, 2013', 'Widowed', 'Delta', 'owan east', 'Senegal', '08083308461', 'samwellmos@gmail.com', 'Islam', ' plot 141, chikakore before champion church, byazhin, kubwa, abuja', 'Mark Gbadamosi', 'mother', '08037003256', ' plot 141, chikakore before champion church, byazhin, kubwa, abuja', 'doctor', 1, 1, '2025-04-14 22:30:17', '', '', ''),
+(8, 'economics', 'sean', 'gbadamosi', 'klougvhgc', 'Male', 'Apr 09, 2025', 'Married', 'Akwa Ibom', 'East east', 'nigeria', '08083308345', 'samwellmos@gmail.com', 'Islam', ' plot 141, chikakore before champion church, byazhin, kubwa, abuja', 'Belinda Obot', 'mother', '08037003256', ' plot 141, chikakore before champion church, byazhin, kubwa, abuja', 'lawyer', 1, 1, '2025-04-14 22:34:41', '', '', '');
 
 --
 -- Indexes for dumped tables
@@ -81,7 +88,7 @@ ALTER TABLE `student_tb`
 -- AUTO_INCREMENT for table `student_tb`
 --
 ALTER TABLE `student_tb`
-  MODIFY `registration_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `registration_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

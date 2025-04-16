@@ -1,9 +1,12 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include './connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Sanitize and retrieve form data
-    $transaction_id = mysqli_real_escape_string($connect, $_POST["transaction_id"]);
     $course_of_study = mysqli_real_escape_string($connect, $_POST["course"]);
     $first_name = mysqli_real_escape_string($connect, $_POST["first_name"]);
     $surname = mysqli_real_escape_string($connect, $_POST["surname"]);
@@ -20,89 +23,103 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $contact_address = mysqli_real_escape_string($connect, $_POST["contact_address"]);
     $nok_name = mysqli_real_escape_string($connect, $_POST["full_name"]);
     $nok_relationship = mysqli_real_escape_string($connect, $_POST["relationship"]);
-    $nok_phone_no = mysqli_real_escape_string($connect, $_POST["nok_phone_no"]); 
+    $nok_phone_no = mysqli_real_escape_string($connect, $_POST["nok_phone_no"]);
     $nok_contact_address = mysqli_real_escape_string($connect, $_POST["address"]);
     $nok_occupation = mysqli_real_escape_string($connect, $_POST["occupation"]);
     $attestation_1 = isset($_POST["attestation1"]) ? 1 : 0;
     $attestation_2 = isset($_POST["attestation2"]) ? 1 : 0;
+    $password = mysqli_real_escape_string($connect, $_POST["password"]);
+    $verify_password = mysqli_real_escape_string($connect, $_POST["verify_password"]);
 
     // SQL query
-    $sql = "INSERT INTO student_tb (transaction_id, course_of_study, first_name, surname, other_names, gender, date_of_birth, marital_status, state_of_origin, lga, nationality, phone_no, email, religion, contact_address, nok_name, nok_relationship, nok_phone_no, nok_contact_address, nok_occupation, attestation_1, attestation_2) VALUES ('$transaction_id', '$course_of_study', '$first_name', '$surname', '$other_names', '$gender', '$date_of_birth', '$marital_status', '$state_of_origin', '$lga', '$nationality', '$phone_no', '$email', '$religion', '$contact_address', '$nok_name', '$nok_relationship', '$nok_phone_no', '$nok_contact_address', '$nok_occupation', $attestation_1, $attestation_2)";
+    $sql = "INSERT INTO student_tb (
+        course_of_study, first_name, surname, other_names, gender, date_of_birth, marital_status, state_of_origin, lga, nationality, phone_no, email, religion, contact_address, nok_name, nok_relationship, nok_phone_no, nok_contact_address, nok_occupation, attestation_1, attestation_2, password, verify_password
+    ) VALUES (
+        '$course_of_study', '$first_name', '$surname', '$other_names', '$gender', '$date_of_birth', '$marital_status', '$state_of_origin', '$lga', '$nationality', '$phone_no', '$email', '$religion', '$contact_address', '$nok_name', '$nok_relationship', '$nok_phone_no', '$nok_contact_address', '$nok_occupation', $attestation_1, $attestation_2, '$password', '$verify_password'
+    )";
 
     if (mysqli_query($connect, $sql)) {
-        header("Location: dashboard.php");
+        // Get the registration ID of the newly inserted record
+        $registration_id = mysqli_insert_id($connect);
+
+        // Generate the mat_no using the full first/last name and a random two-digit number
+        $random_no = rand(10, 99); // Generate a random two-digit number
+        $mat_no = strtolower($first_name . $surname . $random_no);
+
+        // Update the database with the mat_no
+        $updateSql = "UPDATE student_tb SET mat_no = '$mat_no' WHERE registration_id = $registration_id";
+
+        if (mysqli_query($connect, $updateSql)) {
+            header("Location: dashboard.php?mat_no=$mat_no"); // Pass the mat_no as a GET variable
             exit();
+        } else {
+            echo "Error updating mat_no: " . mysqli_error($connect);
+        }
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($connect);
     }
 }
 
 mysqli_close($connect);
-?>
-<!-- end of php code -->
-
+?><!-- end of php code -->
 
 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Compiled and minified CSS -->
-    <link
-		href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css"
-		rel="stylesheet"
-		/>
 
-    <!-- links for material icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css" rel="stylesheet" />
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <!-- for favicon -->
     <link rel="icon" href="./img/cohtech-logo.png" type="image/x-icon" />
 
     <title>Registration - Student Portal - COHTECH Obubra</title>
     <style>
-        .underline{
+        .underline {
             text-decoration: underline;
         }
 
-        label, .capitalize{
+        label,
+        .capitalize {
             text-transform: capitalize !important;
         }
 
         .theme-color-text {
-			color: #702963 !important;
-		}
+            color: #702963 !important;
+        }
 
-		.theme-color-bg {
-			background-color: #702963 !important;
-		}
+        .theme-color-bg {
+            background-color: #702963 !important;
+        }
 
-        h5{
+        h5 {
             margin-top: 40px;
         }
 
-        span{
+        span {
             text-transform: none;
         }
-        
-		input[type="text"]:focus,
-		input[type="password"]:focus,
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
         input[type="tel"]:focus,
         input[type="email"]:focus,
-        option:focus
-        {
-			border-bottom: 1px solid #702963 !important;
-			box-shadow: 0 1px 0 0 #702963 !important;
-		}
+        option:focus {
+            border-bottom: 1px solid #702963 !important;
+            box-shadow: 0 1px 0 0 #702963 !important;
+        }
 
-        .dropdown-content li > a, .dropdown-content li > span {
+        .dropdown-content li>a,
+        .dropdown-content li>span {
             color: #702963;
         }
 
-        [type="checkbox"]:checked + span:not(.lever):before {
+        [type="checkbox"]:checked+span:not(.lever):before {
             border-right: 2px solid #702963;
             border-bottom: 2px solid #702963;
         }
@@ -111,7 +128,10 @@ mysqli_close($connect);
             background-color: #702963;
         }
 
-        .datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done {
+        .datepicker-cancel,
+        .datepicker-clear,
+        .datepicker-today,
+        .datepicker-done {
             color: #702963;
         }
 
@@ -120,22 +140,22 @@ mysqli_close($connect);
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 4vh ;
+            margin-top: 4vh;
             margin-bottom: -2vh !important;
         }
 
-        img{
+        img {
             background-position: top center !important;
         }
 
-        .mt-3{
-            margin: 10vh 0 0 0 ;
+        .mt-3 {
+            margin: 10vh 0 0 0;
         }
     </style>
 
 </head>
+
 <body>
-    
     <header>
         <div class="slider">
             <ul class="slides">
@@ -145,33 +165,42 @@ mysqli_close($connect);
             </ul>
         </div>
     </header>
+
     <main>
         <div class="container">
             <h2>Registration Form</h2>
-            <p>Dear Applicant</p>
-            <p>Complete the form below to continue the registration process. All the input fields are required</p>
+            <p class="flow-text">Dear Applicant, complete the form below to continue the registration process. All the input
+                fields are required</p>
             <form action="./registration.php" method="post">
                 <section>
                     <h5>Course Details</h5>
                     <div class="row">
                         <div class="col l4 m6 s12">
                             <div class="input-field">
-                                <label for="transactionId">transaction id</label>
-                                <input id="transactionId" type="text" name="transaction_id" class="" required>
-                            </div>
-                        </div>
-                        <div class="col l4 m6 s12">
-                            <div class="input-field">
                                 <select name="course" id="course" class="" required>
                                     <option value="" disabled selected>Course Of Study</option>
-                                    <option class="theme-color-text" value="performing arts">performing arts</option>
-                                    <option class="theme-color-text" value="economics">economics</option>
-                                    <option class="theme-color-text" value="chemistry">chemistry</option>
+                                    <option value="Community Health">Community Health</option>
+                                    <option value="Medical Laboratory Technician">Medical Laboratory Technician</option>
+                                    <option value="Pharmacy Technician">Pharmacy Technician</option>
+                                    <option value="Environmental Health Technician">Environmental Health Technician</option>
+                                    <option value="Health Information/Records">Health Information/Records</option>
+                                    <option value="X-Ray Technician">X-Ray Technician</option>
+                                    <option value="Public Health">Public Health</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col l4 m6 s12">
-                            <p>kindly visit our <a href="" class="purple-text underline">Course Page</a> to get more information about the courses we offer</p>
+                            <div class="input-field">
+                                <label for="password">password</label>
+                                <input id="password" autocomplete="new-password" type="password" name="password" class=""
+                                    required>
+                            </div>
+                        </div>
+                        <div class="col l4 m6 s12">
+                            <div class="input-field">
+                                <label for="verifyPassword">verify password</label>
+                                <input id="verifyPassword" type="password" name="verify_password" class="" required>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -199,14 +228,10 @@ mysqli_close($connect);
                         <div class="col l3 m6 s12">
                             <div class="input-field">
                                 <select id="gender" name="gender" class="" required>
-                                    <option class="
-                                    theme-color-text" value="" disabled selected>Gender</option>
-                                    <option class="
-                                    theme-color-text" value="Male" >Male</option>
-                                    <option class="
-                                    theme-color-text" value="Female" >Female</option>
-                                    <option class="
-                                    theme-color-text" value="Prefer not to say" >Prefer not to say</option>
+                                    <option value="" disabled selected>Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Prefer not to say">Prefer not to say</option>
                                 </select>
                             </div>
                         </div>
@@ -222,54 +247,54 @@ mysqli_close($connect);
                             <div class="input-field">
                                 <select id="maritalStatus" name="marital_status" class="" required>
                                     <option value="" disabled selected>Marital Status</option>
-                                    <option class="theme-color-text" value="Single">Single</option>
-                                    <option class="theme-color-text" value="Married">Married</option>
-                                    <option class="theme-color-text" value="Divorced">Divorced</option>
-                                    <option class="theme-color-text" value="Widowed">Widowed</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Divorced">Divorced</option>
+                                    <option value="Widowed">Widowed</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col l2 m6 s12">
                             <div class="input-field">
-                                <select  id="stateOfOrigin" name="state_of_origin" required>
-                                    <option class="theme-color-text" value="" disabled selected> State of Origin</option>
-                                    <option class="theme-color-text" value="Abia">Abia</option>
-                                    <option class="theme-color-text" value="Adamawa">Adamawa</option>
-                                    <option class="theme-color-text" value="Akwa Ibom">Akwa Ibom</option>
-                                    <option class="theme-color-text" value="Anambra">Anambra</option>
-                                    <option class="theme-color-text" value="Bauchi">Bauchi</option>
-                                    <option class="theme-color-text" value="Bayelsa">Bayelsa</option>
-                                    <option class="theme-color-text" value="Benue">Benue</option>
-                                    <option class="theme-color-text" value="Borno">Borno</option>
-                                    <option class="theme-color-text" value="Cross River">Cross River</option>
-                                    <option class="theme-color-text" value="Delta">Delta</option>
-                                    <option class="theme-color-text" value="Ebonyi">Ebonyi</option>
-                                    <option class="theme-color-text" value="Edo">Edo</option>
-                                    <option class="theme-color-text" value="Ekiti">Ekiti</option>
-                                    <option class="theme-color-text" value="Enugu">Enugu</option>
-                                    <option class="theme-color-text" value="FCT - Abuja">FCT - Abuja</option>
-                                    <option class="theme-color-text" value="Gombe">Gombe</option>
-                                    <option class="theme-color-text" value="Imo">Imo</option>
-                                    <option class="theme-color-text" value="Jigawa">Jigawa</option>
-                                    <option class="theme-color-text" value="Kaduna">Kaduna</option>
-                                    <option class="theme-color-text" value="Kano">Kano</option>
-                                    <option class="theme-color-text" value="Katsina">Katsina</option>
-                                    <option class="theme-color-text" value="Kebbi">Kebbi</option>
-                                    <option class="theme-color-text" value="Kogi">Kogi</option>
-                                    <option class="theme-color-text" value="Kwara">Kwara</option>
-                                    <option class="theme-color-text" value="Lagos">Lagos</option>
-                                    <option class="theme-color-text" value="Nasarawa">Nasarawa</option>
-                                    <option class="theme-color-text" value="Niger">Niger</option>
-                                    <option class="theme-color-text" value="Ogun">Ogun</option>
-                                    <option class="theme-color-text" value="Ondo">Ondo</option>
-                                    <option class="theme-color-text" value="Osun">Osun</option>
-                                    <option class="theme-color-text" value="Oyo">Oyo</option>
-                                    <option class="theme-color-text" value="Plateau">Plateau</option>
-                                    <option class="theme-color-text" value="Rivers">Rivers</option>
-                                    <option class="theme-color-text" value="Sokoto">Sokoto</option>
-                                    <option class="theme-color-text" value="Taraba">Taraba</option>
-                                    <option class="theme-color-text" value="Yobe">Yobe</option>
-                                    <option class="theme-color-text" value="Zamfara">Zamfara</option>
+                                <select id="stateOfOrigin" name="state_of_origin" required>
+                                    <option value="" disabled selected> State of Origin</option>
+                                    <option value="Abia">Abia</option>
+                                    <option value="Adamawa">Adamawa</option>
+                                    <option value="Akwa Ibom">Akwa Ibom</option>
+                                    <option value="Anambra">Anambra</option>
+                                    <option value="Bauchi">Bauchi</option>
+                                    <option value="Bayelsa">Bayelsa</option>
+                                    <option value="Benue">Benue</option>
+                                    <option value="Borno">Borno</option>
+                                    <option value="Cross River">Cross River</option>
+                                    <option value="Delta">Delta</option>
+                                    <option value="Ebonyi">Ebonyi</option>
+                                    <option value="Edo">Edo</option>
+                                    <option value="Ekiti">Ekiti</option>
+                                    <option value="Enugu">Enugu</option>
+                                    <option value="FCT - Abuja">FCT - Abuja</option>
+                                    <option value="Gombe">Gombe</option>
+                                    <option value="Imo">Imo</option>
+                                    <option value="Jigawa">Jigawa</option>
+                                    <option value="Kaduna">Kaduna</option>
+                                    <option value="Kano">Kano</option>
+                                    <option value="Katsina">Katsina</option>
+                                    <option value="Kebbi">Kebbi</option>
+                                    <option value="Kogi">Kogi</option>
+                                    <option value="Kwara">Kwara</option>
+                                    <option value="Lagos">Lagos</option>
+                                    <option value="Nasarawa">Nasarawa</option>
+                                    <option value="Niger">Niger</option>
+                                    <option value="Ogun">Ogun</option>
+                                    <option value="Ondo">Ondo</option>
+                                    <option value="Osun">Osun</option>
+                                    <option value="Oyo">Oyo</option>
+                                    <option value="Plateau">Plateau</option>
+                                    <option value="Rivers">Rivers</option>
+                                    <option value="Sokoto">Sokoto</option>
+                                    <option value="Taraba">Taraba</option>
+                                    <option value="Yobe">Yobe</option>
+                                    <option value="Zamfara">Zamfara</option>
                                 </select>
                             </div>
                         </div>
@@ -301,13 +326,13 @@ mysqli_close($connect);
                         </div>
                         <div class="col l3 m6 s12">
                             <div class="input-field">
-                                <select id="religion"  name="religion" class="" required>
-                                    <option class="theme-color-text" value="" disabled selected>Religion</option>
-                                    <option class="theme-color-text" value="Christianity" >Christianity</option>
-                                    <option class="theme-color-text" value="Islam" >Islam</option>
-                                    <option class="theme-color-text" value="Traditional African Religion" >Traditional African Religion</option>
-                                    <option class="theme-color-text" value="Other" >Other</option>
-                                    <option class="theme-color-text" value="Prefer not to say" >Prefer not to say</option>
+                                <select id="religion" name="religion" class="" required>
+                                    <option value="" disabled selected>Religion</option>
+                                    <option value="Christianity">Christianity</option>
+                                    <option value="Islam">Islam</option>
+                                    <option value="Traditional African Religion">Traditional African Religion</option>
+                                    <option value="Other">Other</option>
+                                    <option value="Prefer not to say">Prefer not to say</option>
                                 </select>
                             </div>
                         </div>
@@ -336,8 +361,8 @@ mysqli_close($connect);
                         </div>
                         <div class="col l3 m6 s12">
                             <div class="input-field">
-                                <label for="phoneNumber">phone number</label>
-                                <input id="phoneNumber" name="nok_phone_no" type="text" required>
+                                <label for="nokPhoneNumber">phone number</label>
+                                <input id="nokPhoneNumber" name="nok_phone_no" type="text" required>
                             </div>
                         </div>
                     </div>
@@ -362,40 +387,35 @@ mysqli_close($connect);
                         <div class="col l12 m12 s12">
                             <div class="input-field">
                                 <label>
-                                    <input id="attestation1" name="attestation1" type="checkbox" required/>
+                                    <input id="attestation1" name="attestation1" type="checkbox" required />
                                     <span>I hereby attest to the authenticity of the above information supplied</span>
                                 </label>
                             </div>
                         </div><br>
-                    </div>    
+                    </div>
                     <div class="row">
                         <div class="col l12 m12 s12">
                             <div class="input-field">
                                 <label>
-                                    <input id="attestation2" name="attestation2" type="checkbox" required/>
+                                    <input id="attestation2" name="attestation2" type="checkbox" required />
                                     <span>I agree to comply with the college's regulations upon approval of my registration</span>
                                 </label>
                             </div>
                         </div>
                     </div>
-                </section>   
+                </section>
                 <div class="center-align mt-3">
-                    <button
-				    type="submit"
-				    class="btn btn-large btn-flat theme-color-bg white-text">
-                    submit application
-			        </button>
-                </div> 
+                    <button type="submit" class="btn btn-large btn-flat theme-color-bg white-text">
+                        submit application
+                    </button>
+                </div>
             </form>
-            
         </div>
     </main>
-    <footer class="center-align black" >
+    <footer class="center-align black">
         <span class="white-text">
             © 2025 COHTECH Obubra.
-            <a href="./index.html" target="_blank" class="white-text underline">Back To Home<i class="material-icons tiny"
-			>call_made</i
-			></a>
+            <a href="./index.html" target="_blank" class="white-text underline">Back To Home<i class="material-icons tiny">call_made</i></a>
         </span>
     </footer>
 
@@ -417,6 +437,6 @@ mysqli_close($connect);
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
 </body>
-</html> 
+</html>

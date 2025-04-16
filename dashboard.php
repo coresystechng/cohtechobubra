@@ -3,7 +3,7 @@ session_start();
 include 'connect.php';
 
 if (!isset($_SESSION['mat_no'])) {
-    header("Location: index.html");
+    header("Location: success.php");
     exit;
 }
 
