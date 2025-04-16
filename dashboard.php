@@ -102,7 +102,6 @@ $connect->close();
 
         .vertical-tabs-container {
             display: flex;
-            /* Use flexbox for layout */
         }
 
         .tabs-vertical {
@@ -110,7 +109,6 @@ $connect->close();
             padding: 0;
             margin: 0;
             width: 200px;
-            /* Adjust tab width as needed */
         }
 
         .tabs-vertical .tab {
@@ -121,16 +119,15 @@ $connect->close();
             text-align: left;
             padding: 10px 20px;
             display: block;
-            color: black; /* Default color */
+            color: black; 
         }
 
         .tabs-vertical .tab a.active {
-            color: #702963 !important; /* Active color */
+            color: #702963 !important; 
         }
 
         .content-area {
             flex-grow: 1;
-            /* Allow content to take remaining space */
             padding: 20px;
         }
 

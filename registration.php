@@ -50,7 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $updateSql = "UPDATE student_tb SET mat_no = '$mat_no' WHERE registration_id = $registration_id";
 
         if (mysqli_query($connect, $updateSql)) {
-            header("Location: dashboard.php?mat_no=$mat_no"); // Pass the mat_no as a GET variable
+            // Redirect to success.php with mat_no in the URL
+            header("Location: success.php?mat_no=" . urlencode($mat_no));
             exit();
         } else {
             echo "Error updating mat_no: " . mysqli_error($connect);
@@ -72,10 +73,13 @@ mysqli_close($connect);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- link for external css -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css" rel="stylesheet" />
 
+    <!-- link for material icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <!-- link for favicon -->
     <link rel="icon" href="./img/cohtech-logo.png" type="image/x-icon" />
 
     <title>Registration - Student Portal - COHTECH Obubra</title>
