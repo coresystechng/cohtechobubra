@@ -87,17 +87,33 @@ mysqli_close($connect);
         span{
             text-transform: none;
         }
-
         
 		input[type="text"]:focus,
 		input[type="password"]:focus,
         input[type="tel"]:focus,
         input[type="email"]:focus,
         option:focus
-            {
-				border-bottom: 1px solid #702963 !important;
-				box-shadow: 0 1px 0 0 #702963 !important;
-			}
+        {
+			border-bottom: 1px solid #702963 !important;
+			box-shadow: 0 1px 0 0 #702963 !important;
+		}
+
+        .dropdown-content li > a, .dropdown-content li > span {
+            color: #702963;
+        }
+
+        [type="checkbox"]:checked + span:not(.lever):before {
+            border-right: 2px solid #702963;
+            border-bottom: 2px solid #702963;
+        }
+
+        .datepicker-date-display {
+            background-color: #702963;
+        }
+
+        .datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done {
+            color: #702963;
+        }
 
         footer {
             height: 10vh !important;
