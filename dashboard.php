@@ -8,7 +8,6 @@ if (!isset($_SESSION['mat_no'])) {
 }
 
 $mat_no = $_SESSION['mat_no'];
-
 $sql = "SELECT first_name, surname, mat_no, email, phone_no, contact_address, course_of_study FROM student_tb WHERE mat_no = ?";
 $stmt = $connect->prepare($sql);
 $stmt->bind_param("s", $mat_no);
