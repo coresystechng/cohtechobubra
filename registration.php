@@ -139,6 +139,46 @@ mysqli_close($connect);
             color: #702963;
         }
 
+/* ... your existing CSS ... */
+
+/* Target the year and month dropdowns */
+.datepicker-modal .select-dropdown {
+    /* Adjust width */
+    width: auto; /* Or set a specific width, e.g., 120px */
+
+    /* Adjust max-height */
+    max-height: 200px; /* Adjust as needed */
+
+    /* Adjust overflow */
+    overflow-y: auto; /* Enable vertical scrolling if needed */
+
+    /* Add background color */
+    background-color: white; /* Or any color you prefer */
+
+    /* Add border */
+    border: 1px solid #ccc; /* Or your preferred border style */
+
+    /* Add box shadow */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+    /* Add padding */
+    padding: 5px;
+}
+
+/* Style the list items within the dropdown */
+.datepicker-modal .select-dropdown li {
+    padding: 8px 10px;
+}
+
+/* Style the active list item */
+.datepicker-modal .select-dropdown li.selected {
+    background-color: #f0f0f0; /* Or your preferred active background color */
+}
+
+/* Style the hover state */
+.datepicker-modal .select-dropdown li:hover {
+    background-color: #e0e0e0; /* Or your preferred hover background color */
+}
         footer {
             height: 10vh !important;
             display: flex;
