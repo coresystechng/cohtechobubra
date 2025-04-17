@@ -31,39 +31,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = mysqli_real_escape_string($connect, $_POST["password"]);
     $verify_password = mysqli_real_escape_string($connect, $_POST["verify_password"]);
 
-    // SQL query
-    $sql = "INSERT INTO student_tb (
-        course_of_study, first_name, surname, other_names, gender, date_of_birth, marital_status, state_of_origin, lga, nationality, phone_no, email, religion, contact_address, nok_name, nok_relationship, nok_phone_no, nok_contact_address, nok_occupation, attestation_1, attestation_2, password, verify_password
-    ) VALUES (
-        '$course_of_study', '$first_name', '$surname', '$other_names', '$gender', '$date_of_birth', '$marital_status', '$state_of_origin', '$lga', '$nationality', '$phone_no', '$email', '$religion', '$contact_address', '$nok_name', '$nok_relationship', '$nok_phone_no', '$nok_contact_address', '$nok_occupation', $attestation_1, $attestation_2, '$password', '$verify_password'
-    )";
-
-    if (mysqli_query($connect, $sql)) {
-        // Get the registration ID of the newly inserted record
-        $registration_id = mysqli_insert_id($connect);
-
-        // Generate the mat_no using the full first/last name and a random two-digit number
-        $random_no = rand(10, 99); // Generate a random two-digit number
-        $mat_no = strtolower($first_name . $surname . $random_no);
-
-        // Update the database with the mat_no
-        $updateSql = "UPDATE student_tb SET mat_no = '$mat_no' WHERE registration_id = $registration_id";
-
-        if (mysqli_query($connect, $updateSql)) {
-            // Redirect to success.php with mat_no in the URL
-            header("Location: success.php?mat_no=" . urlencode($mat_no));
-            exit();
-        } else {
-            echo "Error updating mat_no: " . mysqli_error($connect);
-        }
+    if($password !== $verify_password) {
+        echo "<script>alert('Passwords do not match!');</script>";
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($connect);
+        // SQL query
+        $sql = "INSERT INTO student_tb (
+            course_of_study, first_name, surname, other_names, gender, date_of_birth, marital_status, state_of_origin, lga, nationality, phone_no, email, religion, contact_address, nok_name, nok_relationship, nok_phone_no, nok_contact_address, nok_occupation, attestation_1, attestation_2, password, verify_password
+        ) VALUES (
+            '$course_of_study', '$first_name', '$surname', '$other_names', '$gender', '$date_of_birth', '$marital_status', '$state_of_origin', '$lga', '$nationality', '$phone_no', '$email', '$religion', '$contact_address', '$nok_name', '$nok_relationship', '$nok_phone_no', '$nok_contact_address', '$nok_occupation', $attestation_1, $attestation_2, '$password', '$verify_password'
+        )";
+
+        if (mysqli_query($connect, $sql)) {
+            // Get the registration ID of the newly inserted record
+            $registration_id = mysqli_insert_id($connect);
+
+            // Generate the mat_no using the full first/last name and a random two-digit number
+            $random_no = rand(10, 99); // Generate a random two-digit number
+            $mat_no = strtolower($first_name . $surname . $random_no);
+
+            // Update the database with the mat_no
+            $updateSql = "UPDATE student_tb SET mat_no = '$mat_no' WHERE registration_id = $registration_id";
+
+            if (mysqli_query($connect, $updateSql)) {
+                // Redirect to success.php with mat_no in the URL
+                header("Location: success.php?mat_no=" . urlencode($mat_no));
+                exit();
+            } else {
+                echo "Error updating mat_no: " . mysqli_error($connect);
+            }
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($connect);
+        }
     }
+
+    mysqli_close($connect);
 }
-
-mysqli_close($connect);
-?><!-- end of php code -->
-
+?>
 
 
 <!DOCTYPE html>
@@ -159,29 +162,32 @@ mysqli_close($connect);
         .datepicker-table td.is-selected {
             background-color: #702963;
         }
+
+        .parallax-container {
+            height: 600px;
+        }
     </style>
 
 </head>
 
 <body>
     <header>
-        <div class="slider">
-            <ul class="slides">
-                <li>
-                    <img src="./img/study-group-african-people.jpg">
-                </li>
-            </ul>
+        <div class="parallax-container hide-on-med-and-down">
+            <div class="parallax">
+                <img src="./img/study-group-african-people.jpg" class="responsive-img" alt="Banner Image">
+            </div>
         </div>
+        <img src="./img/study-group-african-people.jpg" class="responsive-img hide-on-large-only" alt="Banner Image">
     </header>
 
     <main>
         <div class="container">
-            <h2>Registration Form</h2>
-            <p class="flow-text">Dear Applicant, complete the form below to continue the registration process. All the input
-                fields are required</p>
+            <h2 class="hide-on-med-and-down theme-color-text">Registration Form</h2>
+            <h4 class="hide-on-large-only theme-color-text">Registration Form</h4>
+            <p class="flow-text">Complete the form below to continue the registration process. All fields are required.</p>
             <form action="./registration.php" method="post">
                 <section>
-                    <h5>Course Details</h5>
+                    <h5 class="theme-color-text">Course Details</h5>
                     <div class="row">
                         <div class="col l4 m6 s12">
                             <div class="input-field">
@@ -200,20 +206,20 @@ mysqli_close($connect);
                         <div class="col l4 m6 s12">
                             <div class="input-field">
                                 <label for="password">password</label>
-                                <input id="password" autocomplete="new-password" type="password" name="password" class=""
-                                    required>
+                                <input id="password" autocomplete="new-password" type="password" name="password" class="" required data-length="8" maxlength="8">
                             </div>
                         </div>
                         <div class="col l4 m6 s12">
                             <div class="input-field">
                                 <label for="verifyPassword">verify password</label>
-                                <input id="verifyPassword" type="password" name="verify_password" class="" required>
+                                <input id="verifyPassword" type="password" name="verify_password" class="" required data-length="8" maxlength="8">
+                                <span class="helper-text" id="password_message"></span>
                             </div>
                         </div>
                     </div>
                 </section>
                 <section>
-                    <h5>Personal Info</h5>
+                    <h5 class="theme-color-text">Personal Info</h5>
                     <div class="row">
                         <div class="col l3 m6 s12">
                             <div class="input-field">
@@ -353,7 +359,7 @@ mysqli_close($connect);
                             </div>
                         </div>
                     </div>
-                    <h5>Next of Kin</h5>
+                    <h5 class="theme-color-text">Next of Kin</h5>
                     <div class="row">
                         <div class="col l6 m6 s12">
                             <div class="input-field">
@@ -434,17 +440,30 @@ mysqli_close($connect);
 
             var datepickers = document.querySelectorAll('.datepicker');
             var datepickerInstances = M.Datepicker.init(datepickers);
+        });
 
-            var sliderElems = document.querySelectorAll('.slider');
-            var sliderOptions = {
-                height: 800,
-                indicators: false,
-            };
-            var sliderInstances = M.Slider.init(sliderElems, sliderOptions);
+        // Password Check
+        document.getElementById('verifyPassword').addEventListener('keyup', function() {
+            let password = document.getElementById('password').value;
+            let confirmPassword = this.value;
+            if (password !== confirmPassword) {
+                document.getElementById('password_message').innerText = "Passwords do not match!";
+                document.getElementById('password_message').style.color = "red";
+            } else {
+                document.getElementById('password_message').innerText = "Passwords match!";
+                document.getElementById('password_message').style.color = "green";
+            }
         });
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.parallax').parallax();
+            $('input#password, input#verifyPassword').characterCounter();
+        });
+    </script>
 </body>
+
 </html>
