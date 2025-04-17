@@ -147,7 +147,7 @@ $connect->close();
         <div class="">
             <div class="header-content">
                 <div class="pushing">
-                    <img src="./img/cohtech-logo-full.png" alt="" width="120px" class="responsive-img" />
+                    <img src="/img/study-group-african-people.jpg" alt="" width="120px" class="responsive-img" />
                 </div>
                 <a href="./profile.php " class="dropdown-trigger" data-target="dropdown1">
                     <i class="fa-solid fa-user fa-xl theme-color-text"></i>

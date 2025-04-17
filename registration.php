@@ -155,6 +155,10 @@ mysqli_close($connect);
         .mt-3 {
             margin: 10vh 0 0 0;
         }
+
+        .datepicker-table td.is-selected {
+            background-color: #702963;
+        }
     </style>
 
 </head>
@@ -164,7 +168,7 @@ mysqli_close($connect);
         <div class="slider">
             <ul class="slides">
                 <li>
-                    <img src="./img/random 1.jpg">
+                    <img src="./img/study-group-african-people.jpg">
                 </li>
             </ul>
         </div>
@@ -433,7 +437,7 @@ mysqli_close($connect);
 
             var sliderElems = document.querySelectorAll('.slider');
             var sliderOptions = {
-                height: 700,
+                height: 800,
                 indicators: false,
             };
             var sliderInstances = M.Slider.init(sliderElems, sliderOptions);
