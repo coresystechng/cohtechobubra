@@ -418,6 +418,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                     </div>
                 </section>
+                <br>
                 <div class="center-align mt-3">
                     <button type="submit" class="btn btn-large btn-flat theme-color-bg white-text">
                         submit application
@@ -434,14 +435,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('select');
-            var instances = M.FormSelect.init(elems);
-
-            var datepickers = document.querySelectorAll('.datepicker');
-            var datepickerInstances = M.Datepicker.init(datepickers);
-        });
-
         // Password Check
         document.getElementById('verifyPassword').addEventListener('keyup', function() {
             let password = document.getElementById('password').value;
@@ -461,6 +454,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script>
         $(document).ready(function() {
             $('.parallax').parallax();
+            $('.datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                yearRange: 50,
+                showClearBtn: true,
+            });
             $('input#password, input#verifyPassword').characterCounter();
         });
     </script>
