@@ -31,43 +31,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = mysqli_real_escape_string($connect, $_POST["password"]);
     $verify_password = mysqli_real_escape_string($connect, $_POST["verify_password"]);
 
+    // Image upload logic
+    $imageName = $_FILES['passport']['name'];
+    $imageTmp = $_FILES['passport']['tmp_name'];
+    $imageType = $_FILES['passport']['type'];
+    $imageFolder = "img/" . basename($imageName);
+
     if($password !== $verify_password) {
         echo "<script>alert('Passwords do not match!');</script>";
     } else {
-        // SQL query
-        $sql = "INSERT INTO student_tb (
-            course_of_study, first_name, surname, other_names, gender, date_of_birth, marital_status, state_of_origin, lga, nationality, phone_no, email, religion, contact_address, nok_name, nok_relationship, nok_phone_no, nok_contact_address, nok_occupation, attestation_1, attestation_2, password, verify_password
-        ) VALUES (
-            '$course_of_study', '$first_name', '$surname', '$other_names', '$gender', '$date_of_birth', '$marital_status', '$state_of_origin', '$lga', '$nationality', '$phone_no', '$email', '$religion', '$contact_address', '$nok_name', '$nok_relationship', '$nok_phone_no', '$nok_contact_address', '$nok_occupation', $attestation_1, $attestation_2, '$password', '$verify_password'
-        )";
+        if ($imageType == 'image/jpeg' || $imageType == 'image/jpg') {
+        // Check if image was uploaded successfully
+        if (move_uploaded_file($imageTmp, $imageFolder)) {
+            // SQL query to insert student data along with passport image name
+            $sql = "INSERT INTO student_tb (
+                course_of_study, first_name, surname, other_names, gender, date_of_birth, marital_status, state_of_origin, lga, nationality, phone_no, email, religion, contact_address, nok_name, nok_relationship, nok_phone_no, nok_contact_address, nok_occupation, attestation_1, attestation_2, password, verify_password, passport_image
+            ) VALUES (
+                '$course_of_study', '$first_name', '$surname', '$other_names', '$gender', '$date_of_birth', '$marital_status', '$state_of_origin', '$lga', '$nationality', '$phone_no', '$email', '$religion', '$contact_address', '$nok_name', '$nok_relationship', '$nok_phone_no', '$nok_contact_address', '$nok_occupation', $attestation_1, $attestation_2, '$password', '$verify_password', '$imageName'
+            )";
 
-        if (mysqli_query($connect, $sql)) {
-            // Get the registration ID of the newly inserted record
-            $registration_id = mysqli_insert_id($connect);
+            if (mysqli_query($connect, $sql)) {
+                // Get the registration ID of the newly inserted record
+                $registration_id = mysqli_insert_id($connect);
 
-            // Generate the mat_no using the full first/last name and a random two-digit number
-            $random_no = rand(10, 99); // Generate a random two-digit number
-            $mat_no = strtolower($first_name . $surname . $random_no);
+                // Generate the mat_no using the full first/last name and a random two-digit number
+                $random_no = rand(10, 99); // Generate a random two-digit number
+                $mat_no = strtolower($first_name . $surname . $random_no);
 
-            // Update the database with the mat_no
-            $updateSql = "UPDATE student_tb SET mat_no = '$mat_no' WHERE registration_id = $registration_id";
+                // Update the database with the mat_no
+                $updateSql = "UPDATE student_tb SET mat_no = '$mat_no' WHERE registration_id = $registration_id";
 
-            if (mysqli_query($connect, $updateSql)) {
-                // Redirect to success.php with mat_no in the URL
-                header("Location: success.php?mat_no=" . urlencode($mat_no));
-                exit();
+                if (mysqli_query($connect, $updateSql)) {
+                    // Redirect to success.php with mat_no in the URL
+                    header("Location: success.php?mat_no=" . urlencode($mat_no));
+                    exit();
+                } else {
+                    echo "Error updating mat_no: " . mysqli_error($connect);
+                }
             } else {
-                echo "Error updating mat_no: " . mysqli_error($connect);
+                echo "Error: " . $sql . "<br>" . mysqli_error($connect);
+                }
+        } else {
+            echo "Failed to upload passport image.";
             }
         } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($connect);
+            echo "<script>alert('Please upload only JPG or JPEG files for your passport.');</script>";;
         }
+        }
+        mysqli_close($connect);
     }
-
-    mysqli_close($connect);
-}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -225,11 +238,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h2 class="hide-on-med-and-down theme-color-text">Registration Form</h2>
             <h4 class="hide-on-large-only theme-color-text">Registration Form</h4>
             <p class="flow-text">Complete the form below to continue the registration process. All fields are required.</p>
-            <form action="./registration.php" method="post">
+            <form action="./registration.php" method="post"  enctype="multipart/form-data">
                 <section>
                     <h5 class="theme-color-text">Course Details</h5>
                     <div class="row">
-                        <div class="col l4 m6 s12">
+                        <!-- <div class="col l4 m6 s12">
                             <div class="input-field">
                                 <select name="course" id="course" class="" required>
                                     <option value="" disabled selected>Course Of Study</option>
@@ -242,8 +255,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <option value="Public Health">Public Health</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col l4 m6 s12">
+                            <div class="file-field input-field">
+                                <div class="btn theme-color-bg">
+                                    <label class="white-text">passport</label>
+                                    <input type="file" name="passport" accept="image/jpeg/, image/jpg" required>
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col l4 m6 s12">
                             <div class="input-field">
                                 <label for="password">password</label>
                                 <input id="password" autocomplete="new-password" type="password" name="password" class="" required data-length="8" maxlength="8">
