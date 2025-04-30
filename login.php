@@ -43,38 +43,45 @@ $prefilled_mat_no = isset($_GET['mat_no']) ? $_GET['mat_no'] : '';
     <link rel="icon" href="./img/cohtech-logo.png" type="image/x-icon" />
     <title>Login - Student Portal - COHTECH Obubra</title>
     <style>
+        /* Import Inter Font from Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+        html {
+        font-family: 'Inter', sans-serif;
+        }
+        
         .theme-color-text {
-				color: #702963 !important;
-			}
+            color: #702963 !important;
+        }
 
-			.theme-color-bg {
-				background-color: #702963 !important;
-			}
+        .theme-color-bg {
+            background-color: #702963 !important;
+        }
 
-			input[type="text"]:focus,
-			input[type="password"]:focus {
-				border-bottom: 1px solid #702963 !important;
-				box-shadow: 0 1px 0 0 #702963 !important;
-			}
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-bottom: 1px solid #702963 !important;
+            box-shadow: 0 1px 0 0 #702963 !important;
+        }
 
-			.underline {
-				text-decoration: underline;
-			}
+        .underline {
+            text-decoration: underline;
+        }
 
-			/* icon prefix focus color */
-			.input-field .prefix.active {
-				color: #702963 !important;
-			}
+        /* icon prefix focus color */
+        .input-field .prefix.active {
+            color: #702963 !important;
+        }
 
-			body {
-			display: flex;
-			min-height: 100vh;
-			flex-direction: column;
-			}
+        body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        }
 
-			main {
-				flex: 1 0 auto;
-			}
+        main {
+            flex: 1 0 auto;
+        }
     </style>
 </head>
 

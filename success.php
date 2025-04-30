@@ -19,6 +19,13 @@ $mat_no = isset($_GET['mat_no']) ? $_GET['mat_no'] : null;
     <!-- link for favicon -->
     <link rel="icon" href="./img/cohtech-logo.png" type="image/x-icon" />
     <style>
+        /* Import Inter Font from Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+        html {
+        font-family: 'Inter', sans-serif;
+        }
+        
         .container {
             margin-top: 50px;
         }

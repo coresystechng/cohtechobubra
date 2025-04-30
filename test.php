@@ -9,6 +9,12 @@
   <!-- Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
+    /* Import Inter Font from Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+    html {
+    font-family: 'Inter', sans-serif;
+    }
     /* Shift content to the right when sidenav is fixed */
     @media(min-width: 993px) {
       main {
