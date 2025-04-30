@@ -120,7 +120,7 @@ $prefilled_mat_no = isset($_GET['mat_no']) ? $_GET['mat_no'] : '';
                                     </button>
                                     <br><br><br>
                                     <span>New Student? <a class="theme-color-text underline"
-                                            href="registration.php">Start Your Registration </a></span>
+                                            href="registration.php">Start Your Registration. </a></span>
                                 </div>
                             </form>
                         </div>
@@ -135,7 +135,7 @@ $prefilled_mat_no = isset($_GET['mat_no']) ? $_GET['mat_no'] : '';
         <div class="section container center-align">
             <span>
                 © 2025 COHTECH Obubra. All Rights Reserved. <br class="hide-on-large-only">
-                <a href="./index.html" target="_blank" class="theme-color-text underline">
+                <a href="https://cohtechobubra.edu.ng" target="_blank" class="theme-color-text underline">
                     Back To Home
                     <i class="material-icons tiny theme-color-text">call_made</i>
                 </a>

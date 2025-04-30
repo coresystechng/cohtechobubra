@@ -18,258 +18,248 @@ $stmt->close();
 
 $connect->close();
 ?>
-<!-- end of php code -->
-
-
 
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Dashboard - Student Portal - COHTECH Obubra</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="icon" href="./img/cohtech-logo.png" type="image/x-icon" />
-    <style>
-        /* Import Inter Font from Google Fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Dashboard</title>
+  <!-- Materialize CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    /* Import Inter Font from Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-        html {
-        font-family: 'Inter', sans-serif;
-        }
-        
-        .page-header {
-            background-color: #f0f0f0;
-            height: 10vh;
-            display: flex;
-            align-items: center;
-        }
+    html {
+    font-family: 'Inter', sans-serif;
+    }
+    /* Shift content to the right when sidenav is fixed */
+    @media(min-width: 993px) {
+      main {
+        margin-left: 300px;
+      }
+    }
+    .dashboard-card {
+      margin-top: 20px;
+    }
 
-        .sidebar {
-            width: 18vw !important;
-            height: 80vh;
-            background-color: #e0e0e0;
-            padding: 20px;
-            margin-bottom: -20px;
-        }
+    .underline {
+      text-decoration: underline;
+    }
 
-        .content {
-            padding: 20px;
-        }
+    .theme-color-text {
+      color: #702963 !important;
+    }
 
-        .sidebar-nav {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+    .theme-color-bg {
+      background-color: #702963 !important;
+    }
 
-        .sidebar-nav li {
-            margin-bottom: 10px;
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 60vw;
-        }
-
-        .underline {
-            text-decoration: underline;
-        }
-
-        .theme-color-text {
-            color: #702963 !important;
-        }
-
-        .theme-color-bg {
-            background-color: #702963 !important;
-        }
-
-        footer {
-            height: 10vh !important;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .dropdown-trigger {
-            position: relative;
-        }
-
-        .dropdown-content {
-            position: absolute;
-            top: -3vw;
-        }
-
-        .pushing {
-            margin-left: 45px;
-        }
-
-        .vertical-tabs-container {
-            display: flex;
-        }
-
-        .tabs-vertical {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            width: 200px;
-        }
-
-        .tabs-vertical .tab {
-            width: 100%;
-        }
-
-        .tabs-vertical .tab a {
-            text-align: left;
-            padding: 10px 20px;
-            display: block;
-            color: black; 
-        }
-
-        .tabs-vertical .tab a.active {
-            color: #702963 !important; 
-        }
-
-        .content-area {
-            flex-grow: 1;
-            padding: 20px;
-        }
-
-        .tab-content {
-            display: none;
-            height: 20px !important;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-    </style>
+    .sidenav .active {
+    background-color: #e3f2fd; /* light blue */
+    font-weight: bold;
+    border-left: 4px solid #1976d2;
+    }
+  </style>
 </head>
-
 <body>
-    <header class="page-header">
-        <div class="">
-            <div class="header-content">
-                <div class="pushing">
-                    <img src="/img/study-group-african-people.jpg" alt="" width="120px" class="responsive-img" />
-                </div>
-                <a href="./profile.php " class="dropdown-trigger" data-target="dropdown1">
-                    <i class="fa-solid fa-user fa-xl theme-color-text"></i>
-                    <i class="material-icons theme-color-text">arrow_drop_down</i>
-                </a>
-                <ul id="dropdown1" class="dropdown-content">
-                    <li><a href="./profile.php" class="theme-color-text">profile</a></li>
-                    <li><a href="./logout.php" class="red-text">logout</a></li>
-                </ul>
-            </div>
-        </div>
-    </header>
-    <div class="row">
-        <aside class="col s12 m4 l3 sidebar">
-            <ul class="sidebar-nav tabs-vertical">
-                <div class="container">
-                    <li class="tab">
-                        <a href="#dashboard" class="black-text active">
-                            <i class="fa-solid fa-chart-column"></i>
-                            Dashboard
-                        </a>
-                    </li>
-                    <li class="tab">
-                        <a href="#courses" class="black-text">
-                            <i class="fa-solid fa-book"></i>
-                            Courses
-                        </a>
-                    </li>
-                    <li class="tab">
-                        <a href="#payment" class="black-text">
-                            <i class="fa-solid fa-money-bill"></i>
-                            Payment
-                        </a>
-                    </li>
-                    <li class="tab">
-                        <a href="#result" class="black-text">
-                            <i class="fa-solid fa-circle-check lg"></i>
-                            Result
-                        </a>
-                    </li>
-                    <li class="tab">
-                        <a href="#profile" class="black-text">
-                            <i class="fa-solid fa-user"></i>
-                            profile
-                        </a>
-                    </li>
-                    <div class="vertical-tabs-container">
 
-                    </div>
-                    <br />
-                    <div class="container">
-                        <a href="./logout.php" class="theme-color-bg btn">logout</a>
-                    </div>
-                </div>
-            </ul>
-        </aside>
-
-        <main class="col s12 m8 l9 content">
-            <div class="container">
-                <div class="content-area">
-                    <div id="dashboard" class="tab-content active">Dashboard content</div>
-                    <div id="courses" class="tab-content">Courses content</div>
-                    <div id="payment" class="tab-content">Payment content</div>
-                    <div id="result" class="tab-content">Result content</div>
-                    <div id="profile" class="tab-content">
-                        <div class="">
-                            <div class="row">
-                                <div class="col s12 m8 offset-m2">
-                                    <ul class="collection with-header">
-                                        <li class="collection-header">
-                                            <h4>Student Personal Profile</h4>
-                                        </li>
-                                        <?php if (isset($first_name) && isset($surname) && isset($retrieved_mat_no)): ?>
-                                            <li class="collection-item">Full Name: <?php echo htmlspecialchars($first_name . ' ' . $surname); ?></li>
-                                            <li class="collection-item">Matric Number: <?php echo htmlspecialchars($retrieved_mat_no); ?></li>
-                                            <li class="collection-item">Email: <?php echo htmlspecialchars($email); ?></li>
-                                            <li class="collection-item">Phone: <?php echo htmlspecialchars($phone_no); ?></li>
-                                            <li class="collection-item">Address: <?php echo htmlspecialchars($contact_address); ?></li>
-                                            <li class="collection-item">Course of Study: <?php echo htmlspecialchars($course_of_study); ?></li>
-                                        <?php else: ?>
-                                            <li class="collection-item">Student profile not found.</li>
-                                        <?php endif; ?>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+  <!-- Top Navbar (Mobile Only) -->
+  <nav class="blue hide-on-large-only">
+    <div class="nav-wrapper">
+      <a href="#!" class="brand-logo center">Dashboard</a>
+      <a href="#" data-target="slide-out" class="sidenav-trigger left"><i class="material-icons">menu</i></a>
     </div>
-    <footer class="center-align black">
-        <span class="white-text">
-            © 2025 COHTECH Obubra. All Rights Reserved.
-            <a href="./index.html" target="_blank" class="white-text underline">Back To Home</a>
-        </span>
-    </footer>
+  </nav>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.dropdown-trigger').dropdown();
-            $('.tabs-vertical .tab a').click(function(e) {
-                e.preventDefault();
+  <!-- Fixed Sidenav (Desktop & Mobile) -->
+  <ul id="slide-out" class="sidenav sidenav-fixed">
+    <li><div class="user-view">
+      <div class="background blue lighten-2"></div>
+      <a href="#profile"><img class="circle" src="img/profile_m.png"></a>
+      <a href="#profile"><span class="white-text name"><?php echo $first_name. ' ' . $surname?></span></a>
+      <a href="#profile"><span class="white-text email"><?php echo $email ?></span></a>
+    </div></li>
+    <li><a id="nav-dashboard" href="#dashboard"><i class="material-icons">dashboard</i>Dashboard</a></li>
+    <li><a id="nav-courses" href="#courses"><i class="material-icons">class</i>Courses</a></li>
+    <li><a id="nav-grades" href="#grades"><i class="material-icons">grade</i>Grades</a></li>
+    <li><a id="nav-profile" href="#profile"><i class="material-icons">person</i>Profile</a></li>
+    <li><a href="logout.php" class="red-text"><i class="material-icons red-text">exit_to_app</i>Logout</a></li>
+  </ul>
 
-                $('.tabs-vertical .tab a, .tab-content').removeClass('active');
+  <!-- Main Content -->
+  <main>
+    <!-- Dasboard Content -->
+    <section id="dashboard" class="section container">
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="card blue lighten-4 z-depth-0">
+            <div class="card-content">
+              <span class="card-title">Recent Activities</span>
+              <p>You submitted Assignment 3 for Web Dev.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m6">
+          <div class="card green lighten-4 z-depth-0">
+            <div class="card-content">
+              <span class="card-title">Upcoming Deadlines</span>
+              <p>Project Report due in 3 days.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Courses Content -->
+    <section id="courses" class="section container">
+      <div class="card z-depth-0">
+        <div class="card-content">
+          <span class="card-title">My Courses</span>
+          <ul class="collection">
+            <li class="collection-item avatar">
+              <i class="material-icons circle blue">code</i>
+              <span class="title">Web Development</span>
+              <p>Instructor: Dr. Smith <br> Status: Ongoing</p>
+              <a href="#!" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
+            </li>
+            <li class="collection-item avatar">
+              <i class="material-icons circle green">calculate</i>
+              <span class="title">Mathematics 101</span>
+              <p>Instructor: Prof. Johnson <br> Status: Completed</p>
+              <a href="#!" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
+            </li>
+            <li class="collection-item avatar">
+              <i class="material-icons circle orange">history_edu</i>
+              <span class="title">History of Ideas</span>
+              <p>Instructor: Dr. Kim <br> Status: Ongoing</p>
+              <a href="#!" class="secondary-content"><i class="material-icons">arrow_forward</i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!-- Grades Content -->
+    <section id="grades" class="section container">
+      <div class="card z-depth-0">
+        <div class="card-content">
+          <span class="card-title">Grades Overview</span>
+          <table class="highlight responsive-table">
+            <thead>
+              <tr>
+                <th>Course</th>
+                <th>Assignment</th>
+                <th>Score</th>
+                <th>Feedback</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Web Development</td>
+                <td>Assignment 3</td>
+                <td>92%</td>
+                <td>Great job!</td>
+              </tr>
+              <tr>
+                <td>Mathematics 101</td>
+                <td>Final Exam</td>
+                <td>88%</td>
+                <td>Well done</td>
+              </tr>
+              <tr>
+                <td>History of Ideas</td>
+                <td>Essay 1</td>
+                <td>75%</td>
+                <td>Needs more citations</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <!-- Profile Content -->
+    <section id="profile" class="section container">
+      <div class="card z-depth-0">
+        <div class="card-content">
+          <span class="card-title">My Profile</span>
+          <div class="row">
+            <!-- Profile Image -->
+            <!-- <div class="col s12 m4 center-align">
+              <img src="https://via.placeholder.com/150" alt="Profile Picture" class="circle responsive-img z-depth-1">
+              <br>
+              <a href="#!" class="btn-flat blue-text text-darken-2">Change Photo</a>
+            </div> -->
 
-                $(this).addClass('active');
-                $($(this).attr('href')).addClass('active');
-            });
+            <!-- Profile Details -->
+            <div class="col s12 m12">
+              <ul class="collection">
+                <li class="collection-item">
+                  <strong>Full Name:</strong> <?php echo $first_name. ' ' . $surname?>
+                </li>
+                <li class="collection-item">
+                  <strong>Student ID:</strong> <?php echo $retrieved_mat_no ?>
+                </li>
+                <li class="collection-item">
+                  <strong>Course:</strong> <?php echo $course_of_study ?>
+                </li>
+                <li class="collection-item">
+                  <strong>Email:</strong> <?php echo $email ?>
+                </li>
+                <li class="collection-item">
+                  <strong>Phone Number:</strong> <?php echo $phone_no ?>
+                </li>
+              </ul>
+              <a href="#!" class="btn btn-flat blue darken-4 white-text">
+                <i class="material-icons left">edit</i>Edit Profile
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-            $('.tabs-vertical .tab a.active').click();
+  <!-- Materialize JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    // Init sidenav for mobile
+    document.addEventListener('DOMContentLoaded', function () {
+      M.Sidenav.init(document.querySelectorAll('.sidenav'));
+      
+      M.Sidenav.init(document.querySelectorAll('.sidenav'));
+
+      // Basic tab-like behavior
+      const links = document.querySelectorAll('.sidenav a');
+      const sections = document.querySelectorAll('section');
+
+      links.forEach(link => {
+        link.addEventListener('click', e => {
+          const targetId = link.getAttribute('href').replace('#', '');
+
+          // Hide all sections
+          sections.forEach(sec => sec.style.display = 'none');
+
+          // Show target section if it exists
+          const target = document.getElementById(targetId);
+          if (target) target.style.display = 'block';
+
+          // Remove .active from all links
+          links.forEach(l => l.classList.remove('active'));
+
+        // Add .active to the clicked link
+        link.classList.add('active');
+
         });
-    </script>
-</body>
+      });
 
+      // Show only dashboard on load
+      sections.forEach(sec => sec.style.display = 'none');
+      document.getElementById('dashboard').style.display = 'block';
+      document.querySelector('#nav-dashboard').classList.add('active');
+
+    });
+  </script>
+</body>
 </html>
