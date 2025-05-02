@@ -8,12 +8,12 @@ if (!isset($_SESSION['mat_no'])) {
 }
 
 $mat_no = $_SESSION['mat_no'];
-$sql = "SELECT first_name, surname, mat_no, email, phone_no, contact_address, course_of_study FROM student_tb WHERE mat_no = ?";
+$sql = "SELECT * FROM student_tb WHERE mat_no = ?";
 $stmt = $connect->prepare($sql);
 $stmt->bind_param("s", $mat_no);
 $stmt->execute();
-$stmt->bind_result($first_name, $surname, $retrieved_mat_no, $email, $phone_no, $contact_address, $course_of_study);
-$stmt->fetch();
+$result = $stmt->get_result();
+$student = $result->fetch_assoc();
 $stmt->close();
 
 $connect->close();
@@ -24,10 +24,9 @@ $connect->close();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Student Dashboard</title>
-  <!-- Materialize CSS -->
+  <title><?php echo $student['first_name'] . ' ' . $student['surname']?> - Student Dashboard</title>
+  <link rel="icon" href="./img/cohtech-logo.png" type="image/x-icon" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
-  <!-- Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     /* Import Inter Font from Google Fonts */
@@ -59,16 +58,16 @@ $connect->close();
     }
 
     .sidenav .active {
-    background-color: #e3f2fd; /* light blue */
+    background-color:#eed8ea;
     font-weight: bold;
-    border-left: 4px solid #1976d2;
+    border-left: 4px solid #702963;
     }
   </style>
 </head>
 <body>
 
   <!-- Top Navbar (Mobile Only) -->
-  <nav class="blue hide-on-large-only">
+  <nav class="theme-color-bg hide-on-large-only">
     <div class="nav-wrapper">
       <a href="#!" class="brand-logo center">Dashboard</a>
       <a href="#" data-target="slide-out" class="sidenav-trigger left"><i class="material-icons">menu</i></a>
@@ -78,10 +77,11 @@ $connect->close();
   <!-- Fixed Sidenav (Desktop & Mobile) -->
   <ul id="slide-out" class="sidenav sidenav-fixed">
     <li><div class="user-view">
-      <div class="background blue lighten-2"></div>
-      <a href="#profile"><img class="circle" src="img/profile_m.png"></a>
-      <a href="#profile"><span class="white-text name"><?php echo $first_name. ' ' . $surname?></span></a>
-      <a href="#profile"><span class="white-text email"><?php echo $email ?></span></a>
+      <div class="background theme-color-bg"></div>
+      <img class="circle" src="img/<?php echo $student['passport_image'] ?>">
+      <span class="white-text name"><?php echo $student['first_name']. ' ' . $student['surname']?> - <?php echo $student['mat_no'] ?></span>
+      <span class="white-text email"></span>
+      <span class="white-text email"><?php echo $student['email'] ?></span>
     </div></li>
     <li><a id="nav-dashboard" href="#dashboard"><i class="material-icons">dashboard</i>Dashboard</a></li>
     <li><a id="nav-courses" href="#courses"><i class="material-icons">class</i>Courses</a></li>
@@ -196,19 +196,19 @@ $connect->close();
             <div class="col s12 m12">
               <ul class="collection">
                 <li class="collection-item">
-                  <strong>Full Name:</strong> <?php echo $first_name. ' ' . $surname?>
+                  <strong>Full Name:</strong> <?php echo $student['first_name']. ' ' . $student['surname']?>
                 </li>
                 <li class="collection-item">
-                  <strong>Student ID:</strong> <?php echo $retrieved_mat_no ?>
+                  <strong>Student ID:</strong> <?php echo $student['mat_no'] ?>
                 </li>
                 <li class="collection-item">
-                  <strong>Course:</strong> <?php echo $course_of_study ?>
+                  <strong>Course:</strong> <?php echo $student['course_of_study'] ?>
                 </li>
                 <li class="collection-item">
-                  <strong>Email:</strong> <?php echo $email ?>
+                  <strong>Email:</strong> <?php echo $student['email'] ?>
                 </li>
                 <li class="collection-item">
-                  <strong>Phone Number:</strong> <?php echo $phone_no ?>
+                  <strong>Phone Number:</strong> <?php echo $student['phone_no'] ?>
                 </li>
               </ul>
               <a href="#!" class="btn btn-flat blue darken-4 white-text">

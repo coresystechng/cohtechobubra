@@ -51,15 +51,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             )";
 
             if (mysqli_query($connect, $sql)) {
-                // Get the registration ID of the newly inserted record
-                $registration_id = mysqli_insert_id($connect);
+                // Get the Student ID of the newly inserted record
+                $student_id = mysqli_insert_id($connect);
 
                 // Generate the mat_no using the full first/last name and a random two-digit number
-                $random_no = rand(10, 99); // Generate a random two-digit number
-                $mat_no = strtolower($first_name . $surname . $random_no);
+                $random_no = rand(1000, 9999); // Generate a random four-digit number
+                $mat_no = strtoupper('CHTO' . $random_no);
 
                 // Update the database with the mat_no
-                $updateSql = "UPDATE student_tb SET mat_no = '$mat_no' WHERE registration_id = $registration_id";
+                $updateSql = "UPDATE student_tb SET mat_no = '$mat_no' WHERE student_id = $student_id";
 
                 if (mysqli_query($connect, $updateSql)) {
                     // Redirect to success.php with mat_no in the URL
@@ -225,7 +225,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <option value="" disabled selected>Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
-                                <option value="NA">I prefer not to say</option>
                             </select>
                         </div>
                         <div class="col l2 m6 s12 input-field">
@@ -233,9 +232,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <option value="" disabled selected>Marital Status</option>
                                 <option value="Single">Single</option>
                                 <option value="Married">Married</option>
-                                <option value="Divorced">Divorced</option>
-                                <option value="Widowed">Widowed</option>
-                                <option value="NA">I prefer not to say</option>
+                                <option value="Other">I prefer not to say</option>
                             </select>
                         </div>
                         <div class="col l2 m6 s12 input-field">
@@ -304,7 +301,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <option value="Christianity">Christianity</option>
                                 <option value="Islam">Islam</option>
                                 <option value="Other">Other</option>
-                                <option value="NA">I prefer not to say</option>
                             </select>
                         </div>
                     </div>
