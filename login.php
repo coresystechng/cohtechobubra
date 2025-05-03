@@ -111,7 +111,7 @@ $prefilled_mat_no = isset($_GET['mat_no']) ? $_GET['mat_no'] : '';
                                 <div class="input-field">
                                     <i class="material-icons prefix">lock</i>
                                     <input type="password" name="password" id="password" placeholder="Enter Password"
-                                        autocomplete="new-password" required />
+                                        autocomplete="new-password" required data-length="8" maxlength="8" />
                                 </div>
                                 <br>
                                 <div class="center-align">
