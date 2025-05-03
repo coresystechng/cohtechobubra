@@ -236,7 +236,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </select>
                         </div>
                         <div class="col l2 m6 s12 input-field">
-                            <select id="stateOfOrigin" name="state_of_origin" required>
+                            <select id="stateOfOrigin" onchange="toggleLGA(this)" name="state_of_origin" required>
                                 <option value="" disabled selected> State of Origin</option>
                                 <option value="Abia">Abia</option>
                                 <option value="Adamawa">Adamawa</option>
@@ -278,8 +278,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </select>
                         </div>
                         <div class="col l2 m6 s12 input-field">
-                            <label for="lgaOfOrigin">L.G.A.</label>
-                            <input id="lgaOfOrigin" name="lga_of_origin" type="text" required>
+                  
+                            <select id="lga" class="select-lga" name="lga_of_origin" required>
+                            </select>
                         </div>
                         <div class="col l2 m6 s12 input-field">
                             <label for="nationality">Nationality</label>
@@ -384,7 +385,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         });
     </script>
-
+    <script src="lga_load.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
     <script>
@@ -399,6 +400,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $('select').formSelect();
         });
     </script>
+     
 </body>
 
 </html>
