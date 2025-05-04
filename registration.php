@@ -278,7 +278,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </select>
                         </div>
                         <div class="col l2 m6 s12 input-field">
-                  
                             <select id="lga" class="select-lga" name="lga_of_origin" required>
                             </select>
                         </div>

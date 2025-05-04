@@ -1,13 +1,15 @@
- 
+
+// This script populates the LGA select element based on the selected state in a form
   document.addEventListener('DOMContentLoaded', function () {
- 
+    // Initialize all select elements 
     const elems = document.querySelectorAll('select');
     M.FormSelect.init(elems);
 
- 
+    // Initialize the state and LGA select elements
     const stateSelect = document.getElementById('stateOfOrigin');
     const lgaSelect = document.getElementById('lga');
 
+    // Define the LGA list for each state
     const lgaList = {
         Abia: [
           "Aba North",
@@ -887,12 +889,14 @@
         ]
       }
 
+    // Populate the LGA select element based on the selected state
     stateSelect.addEventListener('change', function () {
       const selectedState = this.value;
 
-       
+      // Clear the LGA select element
       lgaSelect.innerHTML = '<option value="" disabled selected>Select LGA</option>';
 
+      // Populate the LGA select element with the corresponding LGAs
       if (lgaList[selectedState]) {
         lgaList[selectedState].forEach(function (lga) {
           const option = document.createElement('option');
@@ -901,9 +905,8 @@
           lgaSelect.appendChild(option);
         });
 
-       
+        // Re-initialize the LGA select element to apply Materialize styles
         M.FormSelect.init(lgaSelect);
       }
     });
   });
- 
