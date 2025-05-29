@@ -2,23 +2,26 @@
 session_start();
 include 'connect.php';
 
-// Auto logout after 5 minutes (300 seconds) of inactivity
+// Auto logout after 5 minutes of inactivity
 $timeout_duration = 300;
 
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $timeout_duration) {
     session_unset();
     session_destroy();
-    header("Location: login.php"); // Adjust this to your actual login page
+    header("Location: login.php");
     exit;
 }
 
-$_SESSION['last_activity'] = time(); // Update activity timestamp
+// Update activity timestamp
+$_SESSION['last_activity'] = time(); 
 
+// Check if user is logged in
 if (!isset($_SESSION['mat_no'])) {
-    header("Location: success.php"); // Maybe change this to login.php too?
+    header("Location: login.php");
     exit;
 }
 
+// Fetch student details from the database
 $mat_no = $_SESSION['mat_no'];
 $sql = "SELECT * FROM student_tb WHERE mat_no = ?";
 $stmt = $connect->prepare($sql);

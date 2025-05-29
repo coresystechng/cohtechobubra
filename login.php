@@ -7,30 +7,31 @@ $error_msg = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mat_no = $_POST['mat_no'];
     $password = $_POST['password'];
-    // Write the SQL query to check if the user exists
+    
+    //Check if the user exists in the database
     $stmt = $connect->prepare("SELECT * FROM student_tb WHERE mat_no = ? AND password = ?");
     $stmt->bind_param("ss", $mat_no, $password);
     $stmt->execute();
     $result = $stmt->get_result();
-    // Check if the user exists
+  
+    // Check if a user was found
     if ($result->num_rows === 1) {
+        // User found, redirect to the dashboard
         session_start();
-        // if credentials is validated
-        $_SESSION['mat_no'] = $mat_no;
+        $_SESSION['mat_no'] = $mat_no; // Store the matriculation number in session
         header("Location: dashboard.php");
-        exit;
+        // exit();
     } else {
-        // else it is not validated
-        $error_msg = "Invalid Matriculation Number or Password";
+        // User not found, set error message
+        $error_msg = "Invalid Matriculation Number or Password.";
     }
 
-    // Close the statement and connection
+    // Close the statement
     $stmt->close();
+    //close the database connection
     $connect->close();
 }
 
-// Retrieve mat_no from the URL (if any)
-$prefilled_mat_no = isset($_GET['mat_no']) ? $_GET['mat_no'] : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,8 +105,7 @@ $prefilled_mat_no = isset($_GET['mat_no']) ? $_GET['mat_no'] : '';
                                 <div class="input-field">
                                     <i class="material-icons prefix">account_circle</i>
                                     <input type="text" id="mat_no" name="mat_no"
-                                        placeholder="Enter Matriculation Number" autocomplete="off" required
-                                        value="<?php echo htmlspecialchars($prefilled_mat_no); ?>" />
+                                        placeholder="Enter Matriculation Number" autocomplete="off" required />
                                 </div>
 
                                 <div class="input-field">
