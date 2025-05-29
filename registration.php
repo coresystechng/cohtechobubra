@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $imageName = $_FILES['passport']['name'];
     $imageTmp = $_FILES['passport']['tmp_name'];
     $imageType = $_FILES['passport']['type'];
-    $imageFolder = "img/" . basename($imageName);
+    $imageFolder = "uploads/" . basename($imageName);
 
     if($password !== $verify_password) {
         echo "<script>alert('Passwords do not match!');</script>";

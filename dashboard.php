@@ -118,7 +118,7 @@ $connect->close();
     <li>
       <div class="user-view">
         <div class="background theme-color-bg"></div>
-        <img class="circle" src="img/<?php echo $student['passport_image'] ?>" style="border: #eee 2px solid;">
+        <img class="circle" src="uploads/<?php echo $student['passport_image'] ?>" style="border: #eee 2px solid;">
         <span class="white-text name"><?php echo $student['first_name']. ' ' . $student['surname']?></span>
         <span class="white-text email"><?php echo $student['mat_no'] ?></span>
       </div>
@@ -344,7 +344,7 @@ $connect->close();
               <ul class="collection">
                 <li class="collection-item center-align">
                   <img 
-                    src="img/<?php echo $student['passport_image'] ?>"
+                    src="uploads/<?php echo $student['passport_image'] ?>"
                     alt="<?php echo $student['first_name']. ' ' . $student['surname']?>"
                     class="circle"
                     style="width: 150px; height: 150px; border: #702963 2px solid;"
