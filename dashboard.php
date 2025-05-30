@@ -99,6 +99,58 @@ $connect->close();
     .footer-content span {
       color: #aaa;
     }
+
+    /* Dark Mode Styles */
+    body.dark-mode,
+    .dark-mode main,
+    .dark-mode .sidenav,
+    .dark-mode .card,
+    .dark-mode .card-content,
+    .dark-mode .collection,
+    .dark-mode .collection-item,
+    .dark-mode nav,
+    .dark-mode .sidenav-footer,
+    .dark-mode .footer-content {
+      background-color: #181824 !important;
+      color: #e0e0e0 !important;
+    }
+    .dark-mode .theme-color-bg {
+      background-color: #2d1933 !important;
+    }
+    .dark-mode .theme-color-text {
+      color: #e0aaff !important;
+    }
+    .dark-mode .card,
+    .dark-mode .card-content,
+    .dark-mode .collection-item {
+      border-color: #333 !important;
+    }
+    .dark-mode .sidenav .active {
+      background-color: #2d1933 !important;
+      border-left: 4px solid #e0aaff;
+    }
+    .dark-mode .btn,
+    .dark-mode .btn-flat {
+      background-color: #2d1933 !important;
+      color: #e0aaff !important;
+    }
+    .dark-mode .material-icons {
+      color: #e0aaff !important;
+    }
+    .dark-mode table.highlight > tbody > tr {
+      background-color: #232336 !important;
+    }
+    .dark-mode input, .dark-mode textarea, .dark-mode select {
+      background-color: #232336 !important;
+      color: #e0e0e0 !important;
+    }
+    .dark-mode .sidenav-footer,
+    .dark-mode .footer-content span {
+      color: #888 !important;
+    }
+    .dark-mode .card-title {
+      color: #e0aaff !important;
+    }
   </style>
 </head>
 <body>
@@ -110,6 +162,10 @@ $connect->close();
         <img src="img/cohtech-logo-white.png" alt="" class="responsive-img" style="width: 150px; height: auto;">
       </a>
       <a href="#" data-target="slide-out" class="sidenav-trigger left"><i class="material-icons">menu</i></a>
+      <!-- Dark Mode Toggle Button (Mobile) -->
+      <a href="#!" id="dark-mode-toggle-mobile" class="right" style="margin-right: 10px;">
+        <i class="material-icons" id="dark-mode-icon-mobile">dark_mode</i>
+      </a>
     </div>
   </nav>
 
@@ -123,14 +179,40 @@ $connect->close();
         <span class="white-text email"><?php echo $student['mat_no'] ?></span>
       </div>
     </li>
+    <!-- Dark Mode Toggle Button (Desktop) -->
+    <li>
+      <a href="#!" id="dark-mode-toggle" class="center-align theme-color-text" style="color: #702963;">
+      <i class="material-icons" id="dark-mode-icon" style="color: #702963;">dark_mode</i>
+      <!-- <span id="dark-mode-label" style="color: #702963;">Dark Mode</span> -->
+      </a>
+    </li>
+    <style>
+      /* Ensure dark mode toggle text/icon is visible in dark mode */
+      .dark-mode #dark-mode-toggle,
+      .dark-mode #dark-mode-toggle .material-icons,
+      .dark-mode #dark-mode-label {
+      color: #e0aaff !important;
+      }
+    </style>
     <!-- Side Nav Links -->
-    <li><a class="link" id="nav-dashboard" href="#dashboard"><i class="material-icons">dashboard</i>Dashboard</a></li>
-    <li><a class="link" id="nav-courses" href="#courses"><i class="material-icons">class</i>Courses</a></li>
-    <li><a class="link" id="nav-assignments" href="#assignments"><i class="material-icons">library_books</i>Assignments</a></li>
-    <li><a class="link" id="nav-results" href="#results"><i class="material-icons">grade</i>Results</a></li>
-    <li><a class="link" id="nav-payments" href="#payments"><i class="material-icons">monetization_on</i>Payments</a></li>
-    <li><a class="link" id="nav-profile" href="#profile"><i class="material-icons">person</i>Profile</a></li>
-    <li><a class="link" href="logout.php" class="red-text"><i class="material-icons red-text">exit_to_app</i>Logout</a></li>
+    <li><a class="link theme-color-text" id="nav-dashboard" href="#dashboard"><i class="material-icons theme-color-text">dashboard</i><span class="nav-text">Dashboard</span></a></li>
+    <li><a class="link theme-color-text" id="nav-courses" href="#courses"><i class="material-icons theme-color-text">class</i><span class="nav-text">Courses</span></a></li>
+    <li><a class="link theme-color-text" id="nav-assignments" href="#assignments"><i class="material-icons theme-color-text">library_books</i><span class="nav-text">Assignments</span></a></li>
+    <li><a class="link theme-color-text" id="nav-results" href="#results"><i class="material-icons theme-color-text">grade</i><span class="nav-text">Results</span></a></li>
+    <li><a class="link theme-color-text" id="nav-payments" href="#payments"><i class="material-icons theme-color-text">monetization_on</i><span class="nav-text">Payments</span></a></li>
+    <li><a class="link theme-color-text" id="nav-profile" href="#profile"><i class="material-icons theme-color-text">person</i><span class="nav-text">Profile</span></a></li>
+    <li><a class="link theme-color-text" href="logout.php"><i class="material-icons red-text">exit_to_app</i><span class="nav-text">Logout</span></a></li>
+    <style>
+      /* Ensure dark mode applies to sidenav text and icons */
+      .dark-mode .sidenav .link,
+      .dark-mode .sidenav .link .nav-text,
+      .dark-mode .sidenav .material-icons {
+      color: #e0aaff !important;
+      }
+      .dark-mode .sidenav .link .material-icons.red-text {
+      color: #ff5252 !important;
+      }
+    </style>
 
     <li class="sidenav-footer">
     <div class="footer-content">
@@ -382,7 +464,6 @@ $connect->close();
     // Init sidenav for mobile
     document.addEventListener('DOMContentLoaded', function () {
       M.Sidenav.init(document.querySelectorAll('.sidenav'));
-      
       M.Sidenav.init(document.querySelectorAll('.sidenav'));
 
       // Basic tab-like behavior
@@ -403,9 +484,8 @@ $connect->close();
           // Remove .active from all links
           links.forEach(l => l.classList.remove('active'));
 
-        // Add .active to the clicked link
-        link.classList.add('active');
-
+          // Add .active to the clicked link
+          link.classList.add('active');
         });
       });
 
@@ -414,6 +494,37 @@ $connect->close();
       document.getElementById('dashboard').style.display = 'block';
       document.querySelector('#nav-dashboard').classList.add('active');
 
+      // Dark Mode Toggle Logic
+      const body = document.body;
+      const darkModeToggle = document.getElementById('dark-mode-toggle');
+      const darkModeToggleMobile = document.getElementById('dark-mode-toggle-mobile');
+      const darkModeIcon = document.getElementById('dark-mode-icon');
+      const darkModeIconMobile = document.getElementById('dark-mode-icon-mobile');
+      const darkModeLabel = document.getElementById('dark-mode-label');
+
+      // Set dark mode from localStorage
+      if (localStorage.getItem('darkMode') === 'enabled') {
+        body.classList.add('dark-mode');
+        if (darkModeIcon) darkModeIcon.textContent = 'light_mode';
+        if (darkModeIconMobile) darkModeIconMobile.textContent = 'light_mode';
+        if (darkModeLabel) darkModeLabel.textContent = 'Light Mode';
+      }
+
+      function toggleDarkMode() {
+        body.classList.toggle('dark-mode');
+        const enabled = body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', enabled ? 'enabled' : 'disabled');
+        if (darkModeIcon) darkModeIcon.textContent = enabled ? 'light_mode' : 'dark_mode';
+        if (darkModeIconMobile) darkModeIconMobile.textContent = enabled ? 'light_mode' : 'dark_mode';
+        if (darkModeLabel) darkModeLabel.textContent = enabled ? 'Light Mode' : 'Dark Mode';
+      }
+
+      if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', toggleDarkMode);
+      }
+      if (darkModeToggleMobile) {
+        darkModeToggleMobile.addEventListener('click', toggleDarkMode);
+      }
     });
   </script>
 </body>
