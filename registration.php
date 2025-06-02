@@ -175,13 +175,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="col l4 m6 s12 input-field">
                             <select name="course" id="course" required>
                                 <option value="" disabled selected>Course Of Study</option>
-                                <option value="Community Health">Community Health</option>
+                                <option value="Community Health Extension Worker">Community Health</option>
+                                <option value="Junior Community Health Extension Worker">Junior Community Health</option>
                                 <option value="Medical Laboratory Technician">Medical Laboratory Technician</option>
                                 <option value="Pharmacy Technician">Pharmacy Technician</option>
-                                <option value="Environmental Health Technician">Environmental Health Technician</option>
-                                <option value="Health Information/Records">Health Information/Records</option>
+                                <option value="Environmental Health Extension Worker">Environmental Health Technician</option>
+                                <option value="Health Information & Management Technician">Health Information/Records</option>
                                 <option value="X-Ray Technician">X-Ray Technician</option>
-                                <option value="Public Health">Public Health</option>
+                                <option value="Bsc. in Public Health">Public Health</option>
                             </select>
                         </div>
                         <div class="col l4 m6 s12 input-field">
