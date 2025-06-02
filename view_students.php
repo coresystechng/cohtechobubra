@@ -97,7 +97,7 @@ $result = mysqli_query($connect, $sql);
           </a>
           <ul class="right hide-on-med-and-down">
             <li><a href="" class="theme-color-text">Home</a></li>
-            <li><a href="" class="theme-color-text">All Students</a></li>
+            <li><a href="/view_students.php" class="theme-color-text">All Students</a></li>
             <li><a href="" class="theme-color-text">Departments</a></li>
             <li><a href="" class="btn btn-flat theme-color-bg white-text">Login</a></li>
           </ul>
@@ -184,7 +184,7 @@ $result = mysqli_query($connect, $sql);
                     </tr>
                   <?php endwhile; ?>
                 <?php else: ?>
-                  <tr><td colspan="8">No students registered yet.</td></tr>
+                  <tr><td colspan="8" class="center-align">No students registered yet.</td></tr>
                 <?php endif; ?>
                 </tbody>
             </table>
