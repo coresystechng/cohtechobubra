@@ -111,18 +111,28 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach($students as $student){ ?>
+            <?php if (empty($students)): ?>
+              <tr>
+              <td colspan="6" class="center-align">No Students yet</td>
+              </tr>
+            <?php else: ?>
+              <?php foreach($students as $student){ ?>
               <tr>
                 <td><?php echo $student['transaction_id']; ?></td>
                 <td class="hide-on-med-and-down"><?php echo $student['first_name'] . ' '. $student['surname']; ?></td>
                 <td class="hide-on-med-and-down"><?php echo $student['course_of_study']; ?></td>
                 <td class="hide-on-med-and-down"><a class="theme-color-txt underline-txt" href="mailto:<?php echo $student['email']; ?>"><?php echo $student['email']; ?></a></td>
                 <td class="hide-on-med-and-down"><?php echo $student['phone_no']; ?></td>
-                <th>
-                  <a href="student.php?id=<?php echo $student['transaction_id'];?>" class="btn btn-flat green darken-4 white-text">view <i class="material-icons tiny white-text right">call_made</i></a>
-                </th>
+                <td>
+                <a href="student.php?id=<?php echo $student['transaction_id'];?>" class="btn btn-flat green darken-4 white-text">View <i class="material-icons tiny white-text right">call_made</i></a>
+                <form action="delete_student.php" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this student?');">
+                  <input type="hidden" name="transaction_id" value="<?php echo $student['transaction_id']; ?>">
+                  <button type="submit" class="btn btn-flat red darken-2 white-text">Delete <i class="material-icons tiny white-text right">delete</i></button>
+                </form>
+                </td>
               </tr>
-            <?php } ?>
+              <?php } ?>
+            <?php endif; ?>
           </tbody>
         </table>
       </div>
