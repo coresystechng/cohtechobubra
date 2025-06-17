@@ -3,9 +3,9 @@
   require 'connect.php';
   //start a session
   session_start();
-  //Redirect users to login page if they try to access landing page
+  //Redirect users to index page if they try to access landing page
   if(!$_SESSION["trx_id"]){
-      header('Location: login.php');
+      header('Location: index.php');
     }
   
   $email = $_SESSION["email"];
@@ -13,14 +13,6 @@
   $last_name = $_SESSION["last_name"];
   $trx_id = $_SESSION["trx_id"];
   $full_name = $first_name . " " . $last_name;
-
-  //Get the timestamp of the payment
-  $stmt = $conn->prepare("SELECT timestamp_payment FROM users_tb WHERE email=?");
-  $stmt->bind_param("s", $email);
-  $stmt->execute();
-  $stmt->bind_result($timestamp_payment);
-  $stmt->fetch();
-  $stmt->close();
   
   //Set Blank variables
   $transaction_id=$course_of_study=$other_names=$gender=$date_of_birth=$marital_status=$state_of_origin=$lga=$nationality=$phone_no=$religion=$contact_address=$nok_name=$nok_relationship=$nok_phone_no=$nok_contact_address=$nok_occupation=$attestation_1=$attestation_2="";
@@ -48,11 +40,33 @@
       $nok_occupation = $_POST['nok_occupation'];
       $attestation_1 = $_POST['attestation_1'];
       $attestation_2 = $_POST['attestation_2'];
-      $timestamp_payment = $_POST['timestamp_payment'];
 
-      $save_query = "INSERT INTO `registration_tb`(`transaction_id`,`course_of_study`,`first_name`, `last_name`, `other_names`, `gender`, `date_of_birth`, `marital_status`, `state_of_origin`, `lga`, `nationality`, `phone_no`, `email`, `religion`, `contact_address`, `nok_name`, `nok_relationship`, `nok_phone_no`, `nok_contact_address`, `nok_occupation`, `attestation_1`, `attestation_2`, `date_of_payment`) VALUES ('$transaction_id','$course_of_study','$first_name', '$last_name', '$other_names', '$gender', '$date_of_birth', '$marital_status','$state_of_origin', '$lga', '$nationality', '$phone_no', '$email', '$religion','$contact_address','$nok_name', '$nok_relationship','$nok_phone_no', '$nok_contact_address', '$nok_occupation', '$attestation_1','$attestation_2', '$timestamp_payment')";
+      // UPDATE Query
+      $update_query = "UPDATE `registration_tb` SET 
+        `transaction_id`='$transaction_id',
+        `course_of_study`='$course_of_study',
+        `first_name`='$first_name',
+        `last_name`='$last_name',
+        `other_names`='$other_names',
+        `gender`='$gender',
+        `date_of_birth`='$date_of_birth',
+        `marital_status`='$marital_status',
+        `state_of_origin`='$state_of_origin',
+        `lga`='$lga',
+        `nationality`='$nationality',
+        `phone_no`='$phone_no',
+        `religion`='$religion',
+        `contact_address`='$contact_address',
+        `nok_name`='$nok_name',
+        `nok_relationship`='$nok_relationship',
+        `nok_phone_no`='$nok_phone_no',
+        `nok_contact_address`='$nok_contact_address',
+        `nok_occupation`='$nok_occupation',
+        `attestation_1`='$attestation_1',
+        `attestation_2`='$attestation_2'
+        WHERE `email`='$email'";
 
-      $send_query = mysqli_query($conn, $save_query);
+      $send_query = mysqli_query($conn, $update_query);
 
       if($send_query){
         // Send email to user

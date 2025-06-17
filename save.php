@@ -34,7 +34,7 @@ if(isset($_SESSION['trx_id'])){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registration Form - COHTECH Obubra</title>
-  <link rel="shortcut icon" href="assets/img/cohtech-logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="./img/cohtech-logo.png" type="image/x-icon">
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <!--Import Google Icon Font-->
@@ -68,7 +68,7 @@ if(isset($_SESSION['trx_id'])){
         <div class="container">
           <div class="card z-depth-3">
             <div class="card-content container">
-              <img src="assets/img/cohtech-logo.png" alt="COHTECH Obubra Logo" class="responsive-img" width="15%">
+              <img src="./img/cohtech-logo.png" alt="COHTECH Obubra Logo" class="responsive-img" width="15%">
               <h4>Registration Completed!</h4>
               <p class="theme-color-txt"><b><?php echo $greeting;?> (<?php echo $trx_id ?>),</b></p>
               <br>
