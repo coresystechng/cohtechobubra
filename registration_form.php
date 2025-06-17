@@ -155,7 +155,7 @@
     <div class="container">
       <h1 class="hide-on-med-and-down">Registration Form</h1>
       <h4 class="hide-on-large-only">Registration Form</h4>
-      <p class="flow-text grey-text text-darken-2"><b>Dear <?php echo $last_name ?>, </b><br> Complete the form below to continue the registration process. All fields are required.</p>
+      <p class="flow-text grey-text text-darken-2"><b>Dear <?php echo $full_name ?>, </b><br> Complete the form below to continue the registration process. All fields are required.</p>
     </div>
   </header>
   <main>

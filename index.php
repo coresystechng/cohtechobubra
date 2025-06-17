@@ -23,9 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
       $error_msg = "Email is already in use. Please check and try again.";
     } else {
-      // Save Info to the Prosperctive Students Table
-      $save_query = "INSERT INTO `registration_tb` (`email`, `first_name`, `last_name`)VALUES ('$email', '$first_name', '$last_name')";
-      
+      // Save Info to the Prospective Students Table
+      $save_query = "INSERT INTO `registration_tb` (`email`, `first_name`, `last_name`) VALUES ('$email', '$first_name', '$last_name')";
+      $send_query = mysqli_query($conn, $save_query);
+
       session_start();
       $_SESSION['email'] = $email;
       $_SESSION['first_name'] = $first_name;
@@ -123,16 +124,16 @@ $conn->close();
         <form action="./index.php" id="start-form" method="post">
           <div class="row">
             <div class="col s12 l6 input-field">
-              <input type="text" name="email" id="email" required>
+              <input type="text" name="email" id="email" required value="<?php echo $email; ?>">
               <label for="email">Email Address</label>
-              <span class="helper-text"><?php echo $error_msg; ?></span>
+              <span class="helper-text red-text"><?php echo $error_msg; ?></span>
             </div>
             <div class="col s12 l3 input-field">
-              <input type="text" name="first_name" id="first_name" required>
+              <input type="text" name="first_name" id="first_name" required value="<?php echo $first_name; ?>">
               <label for="first_name">First Name</label>
             </div>
             <div class="col s12 l3 input-field">
-              <input type="text" name="last_name" id="last_name" required>
+              <input type="text" name="last_name" id="last_name" required value="<?php echo $last_name; ?>">
               <label for="last_name">last_name</label>
             </div>
           </div>
