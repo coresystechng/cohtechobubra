@@ -4,9 +4,9 @@ session_start();
 if(isset($_SESSION['trx_id'])){
   $trx_id = $_SESSION['trx_id'];
   $email = $_SESSION['email'];
-  $fullname = $_SESSION['fullname'];
+  $full_name = $_SESSION['full_name'];
   
-  $greeting = "Dear $fullname";
+  $greeting = "Dear $full_name";
   $message = "Your data has been saved successfully. Your admission will be processed in due time and you will be notified of your status via email.";
   $message2 = "Please click the link below to save a copy of the registration form or the button below to go back to our website.";
 
@@ -15,7 +15,7 @@ if(isset($_SESSION['trx_id'])){
   $result = mysqli_query($conn, $sql);
 
   } else {
-  header("Location: index.html");
+  header("Location: index.php");
   };
 
   // Check if the "BACK TO HOME" button is clicked

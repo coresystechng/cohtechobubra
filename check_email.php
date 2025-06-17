@@ -1,8 +1,18 @@
 <?php
 require 'connect.php';
 
+// Declare blank variables
+$email = "";
+$first_name = ""; 
+$last_name = "";
+$error_msg = "";
+// Check if the request method is POST
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    $first_name = trim($_POST['first_name']);
+    $last_name = trim($_POST['last_name']);
 
     // Check if email exists
     $stmt = $conn->prepare("SELECT * FROM registration_tb WHERE email = ?");
@@ -12,36 +22,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
 
-        echo json_encode(["status" => "error", "message" => "Email is already registered."]);
+      $error_msg = "Email is already in use. Please check and try again.";
 
     } else {
-        $stmt= $conn->prepare("SELECT * FROM users_tb WHERE email = ?");
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $user_result = $stmt->get_result();
-        if ($user_result->num_rows > 0) {
-            $s= $conn->prepare("SELECT * FROM users_tb WHERE email = ? AND payment_ref = ?");
-            $num = 0;
-            $s->bind_param("si", $email, $num);
-            $s->execute();
-            $user_pending = $s->get_result();
-          
-            $user_ = $user_pending->fetch_assoc();
-            $pay =  $user_['payment_ref'];
+        session_start();
+        $_SESSION['email'] = $email;
+        $_SESSION['first_name'] = $first_name;
+        $_SESSION['last_name'] = $last_name;
+        $_SESSION['full_name'] = $first_name . ' '. $last_name;
 
-      
-            if ($pay == 0) {
-                
-                echo json_encode(["status" => "pay_pending", "email"=> $email , "message" => "Email is already in use. Please use the button below to make payment."]);
-                exit();
-            }else{
-                echo json_encode(["status" => "pending", "email"=> $email ,"message" => "Email is already in use. Please use the button below to complete registration."]);
-                exit();
-            }
-            exit();
-        }else{
-            echo json_encode(["status" => "success", "message" => "Email is available."]);
-        }
+        // Redirect to Payment Page
+        header('Location: payment.php');
+        
     }
 
     $stmt->close();

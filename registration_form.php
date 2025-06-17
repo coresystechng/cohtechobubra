@@ -10,9 +10,9 @@
   
   $email = $_SESSION["email"];
   $first_name = $_SESSION["first_name"];
-  $surname = $_SESSION["surname"];
+  $last_name = $_SESSION["last_name"];
   $trx_id = $_SESSION["trx_id"];
-  $full_name = $first_name . " " . $surname;
+  $full_name = $first_name . " " . $last_name;
 
   //Get the timestamp of the payment
   $stmt = $conn->prepare("SELECT timestamp_payment FROM users_tb WHERE email=?");
@@ -29,7 +29,7 @@
       $transaction_id = $_POST['transaction_id'];
       $course_of_study = $_POST['course_of_study'];
       $first_name = $_POST['first_name'];
-      $surname = $_POST['surname'];
+      $last_name = $_POST['last_name'];
       $other_names = $_POST['other_names'];
       $gender = $_POST['gender'];
       $date_of_birth = $_POST['date_of_birth'];
@@ -50,7 +50,7 @@
       $attestation_2 = $_POST['attestation_2'];
       $timestamp_payment = $_POST['timestamp_payment'];
 
-      $save_query = "INSERT INTO `registration_tb`(`transaction_id`,`course_of_study`,`first_name`, `surname`, `other_names`, `gender`, `date_of_birth`, `marital_status`, `state_of_origin`, `lga`, `nationality`, `phone_no`, `email`, `religion`, `contact_address`, `nok_name`, `nok_relationship`, `nok_phone_no`, `nok_contact_address`, `nok_occupation`, `attestation_1`, `attestation_2`, `date_of_payment`) VALUES ('$transaction_id','$course_of_study','$first_name', '$surname', '$other_names', '$gender', '$date_of_birth', '$marital_status','$state_of_origin', '$lga', '$nationality', '$phone_no', '$email', '$religion','$contact_address','$nok_name', '$nok_relationship','$nok_phone_no', '$nok_contact_address', '$nok_occupation', '$attestation_1','$attestation_2', '$timestamp_payment')";
+      $save_query = "INSERT INTO `registration_tb`(`transaction_id`,`course_of_study`,`first_name`, `last_name`, `other_names`, `gender`, `date_of_birth`, `marital_status`, `state_of_origin`, `lga`, `nationality`, `phone_no`, `email`, `religion`, `contact_address`, `nok_name`, `nok_relationship`, `nok_phone_no`, `nok_contact_address`, `nok_occupation`, `attestation_1`, `attestation_2`, `date_of_payment`) VALUES ('$transaction_id','$course_of_study','$first_name', '$last_name', '$other_names', '$gender', '$date_of_birth', '$marital_status','$state_of_origin', '$lga', '$nationality', '$phone_no', '$email', '$religion','$contact_address','$nok_name', '$nok_relationship','$nok_phone_no', '$nok_contact_address', '$nok_occupation', '$attestation_1','$attestation_2', '$timestamp_payment')";
 
       $send_query = mysqli_query($conn, $save_query);
 
@@ -68,7 +68,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registration Form - COHTECH Obubra</title>
-  <link rel="shortcut icon" href="assets/img/cohtech-logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="./img/cohtech-logo.png" type="image/x-icon">
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <!--Import Google Icon Font-->
@@ -148,14 +148,14 @@
   <header>
     <div class="parallax-container hide-on-med-and-down">
       <div class="parallax">
-        <img src="./assets/img/happy-students.jpg" alt="Designed by Freepik" class="responsive-img">
+        <img src="./img/happy-students.jpg" alt="Designed by Freepik" class="responsive-img">
       </div>
     </div>
-    <img src="./assets/img/happy-students.jpg" alt="Designed by Freepik" class="responsive-img hide-on-large-only">
+    <img src="./img/happy-students.jpg" alt="Designed by Freepik" class="responsive-img hide-on-large-only">
     <div class="container">
       <h1 class="hide-on-med-and-down">Registration Form</h1>
       <h4 class="hide-on-large-only">Registration Form</h4>
-      <p class="flow-text grey-text text-darken-2"><b>Dear <?php echo $full_name ?>, </b><br> Complete the form below to continue the registration process. All fields are required.</p>
+      <p class="flow-text grey-text text-darken-2"><b>Dear <?php echo $last_name ?>, </b><br> Complete the form below to continue the registration process. All fields are required.</p>
     </div>
   </header>
   <main>
@@ -196,8 +196,8 @@
                 <label for="first_name">First Name</label>
               </div>
               <div class="col s12 l3 input-field">
-                <input type="text" readonly name="surname" id="surname" value="<?php echo $surname ?>" required>
-                <label for="surname">Surname</label>
+                <input type="text" readonly name="last_name" id="last_name" value="<?php echo $last_name ?>" required>
+                <label for="last_name">last_name</label>
               </div>
               <div class="col s12 l3 input-field">
                 <input type="text" name="other_names" id="other_names">

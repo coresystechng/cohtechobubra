@@ -5,15 +5,15 @@ require 'connect.php';
 if(isset($_GET['trxref'])){
   session_start();
   $email = $_SESSION['email'];
-  $fullname = $_SESSION['fullname'];
+  $full_name = $_SESSION['full_name'];
   $trx_id = strtoupper($_GET['trxref']);
   $_SESSION['trx_id'] = $trx_id;
 } else {
-  header("Location: index.html");
+  header("Location: index.php");
 }
 
 //Update Users Table with the transaction reference and payment timestamp
-$stmt = $conn->prepare("UPDATE users_tb SET payment_ref=?, timestamp_payment=NOW() WHERE email=?");
+$stmt = $conn->prepare("UPDATE registration_tb SET transaction_id=?, date_of_payment=NOW() WHERE email=?");
 $stmt->bind_param("ss", $trx_id, $email);
 $stmt->execute();
 $stmt->close();
@@ -21,7 +21,7 @@ $stmt->close();
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
   // Send Payment Confirmation to email
     include 'send_payment_success.php';
-  header('Location: login.php');
+  header('Location: registration_form.php');
 }
 $conn->close();
 
@@ -79,10 +79,10 @@ $conn->close();
   <header>
     <div class="parallax-container hide-on-med-and-down">
       <div class="parallax">
-        <img src="./assets/img/payment-done.jpg" alt="Designed by Freepik" class="responsive-img">
+        <img src="./img/payment-done.jpg" alt="Designed by Freepik" class="responsive-img">
       </div>
     </div>
-    <img src="./assets/img/payment-done.jpg" alt="Designed by Freepik" class="responsive-img hide-on-large-only">
+    <img src="./img/payment-done.jpg" alt="Designed by Freepik" class="responsive-img hide-on-large-only">
   </header>
   <main>
     <section class="section container">

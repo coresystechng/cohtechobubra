@@ -191,7 +191,7 @@ class TCPDF_FONTS {
 			fclose($fp);
 			// get font info
 			$fmetric['Flags'] = $flags;
-			preg_match ('#/FullName[\s]*+\(([^\)]*+)#', $font, $matches);
+			preg_match ('#/full_name[\s]*+\(([^\)]*+)#', $font, $matches);
 			$fmetric['name'] = preg_replace('/[^a-zA-Z0-9_\-]/', '', $matches[1]);
 			preg_match('#/FontBBox[\s]*+{([^}]*+)#', $font, $matches);
 			$rawbvl = explode(' ', trim($matches[1]));

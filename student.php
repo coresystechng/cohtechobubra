@@ -50,7 +50,7 @@ if(isset($_GET['id'])){
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?php echo $student['first_name'] . ' ' . $student['surname']; ?> - COHTECH Obubra</title>
+  <title><?php echo $student['first_name'] . ' ' . $student['last_name']; ?> - COHTECH Obubra</title>
   <link rel="shortcut icon" href="assets/img/cohtech-logo.png" type="image/x-icon">
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -110,8 +110,8 @@ if(isset($_GET['id'])){
   <main>
     <section class="section">
     <div class="section container">
-      <h1 class="hide-on-med-and-down"><?php echo $student['first_name'] . ' ' . $student['surname']; ?></h1>
-      <h4 class="hide-on-large-only"><?php echo $student['first_name'] . ' ' . $student['surname']; ?></h4>
+      <h1 class="hide-on-med-and-down"><?php echo $student['first_name'] . ' ' . $student['last_name']; ?></h1>
+      <h4 class="hide-on-large-only"><?php echo $student['first_name'] . ' ' . $student['last_name']; ?></h4>
       <span class="grey-text text-darken-3"><b><?php echo $student['course_of_study'] ?></b></span>
       <br><br>
       <div class="chip" style="background-color:#702963;">
@@ -123,7 +123,7 @@ if(isset($_GET['id'])){
           <div class="col s12 m4">
             <p><b>Date of Registration: </b> <?php echo $student['date_of_registration']; ?></p>
             <p><b>First Name:</b> <?php echo $student['first_name']; ?></p>
-            <p><b>Surname:</b> <?php echo $student['surname']; ?></p>
+            <p><b>last_name:</b> <?php echo $student['last_name']; ?></p>
             <p><b>Other Names:</b> <?php echo $student['other_names']; ?></p>
             <p><b>Gender:</b> <?php echo $student['gender']; ?></p>
             <p><b>Date of Birth:</b> <?php echo $student['date_of_birth']; ?></p>

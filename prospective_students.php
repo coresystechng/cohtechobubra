@@ -119,7 +119,7 @@
               <?php foreach($students as $student){ ?>
               <tr>
                 <td><?php echo $student['transaction_id']; ?></td>
-                <td class="hide-on-med-and-down"><?php echo $student['first_name'] . ' '. $student['surname']; ?></td>
+                <td class="hide-on-med-and-down"><?php echo $student['first_name'] . ' '. $student['last_name']; ?></td>
                 <td class="hide-on-med-and-down"><?php echo $student['course_of_study']; ?></td>
                 <td class="hide-on-med-and-down"><a class="theme-color-txt underline-txt" href="mailto:<?php echo $student['email']; ?>"><?php echo $student['email']; ?></a></td>
                 <td class="hide-on-med-and-down"><?php echo $student['phone_no']; ?></td>

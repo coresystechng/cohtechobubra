@@ -1,13 +1,13 @@
 <?php
   session_start();
-  if($_SESSION['verification_code']) {
+  if($_SESSION['email']) {
     //Fetch Payment Details
     $email = $_SESSION['email'];
-    $fullname = $_SESSION['fullname'];
+    $full_name = $_SESSION['full_name'];
     // Amount to be paid
     $amount = 771250;
   } else {
-    header("Location: index.html");
+    header("Location: index.php");
   }
 
   // Paysack API URL

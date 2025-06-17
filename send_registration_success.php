@@ -2,7 +2,7 @@
 //Get the user details from the session
 $email = $_SESSION['email'];
 $trx_id = $_SESSION['trx_id'];
-$fullname = $_SESSION['fullname'];
+$full_name = $_SESSION['full_name'];
 
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
@@ -29,12 +29,12 @@ try {
 
     //Recipients
     $mail->setFrom('noreply@cohtechobubra.edu.ng', 'COHTECH Obubra');
-    $mail->addAddress($email, $fullname);     //Add a recipient
+    $mail->addAddress($email, $full_name);     //Add a recipient
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = 'Registration Successful';
-    $mail->Body    = "<p>Dear $fullname ($trx_id),</p></br><p>Your registration was successful and your data has been saved. Your admission will be processed in due time and you will be notified of your status via email..<br><p>Thank you. </p><br><hr><p>&copy; 2025 COHTECH Obubra. All rights reserved.</p>";
+    $mail->Body    = "<p>Dear $full_name ($trx_id),</p></br><p>Your registration was successful and your data has been saved. Your admission will be processed in due time and you will be notified of your status via email..<br><p>Thank you. </p><br><hr><p>&copy; 2025 COHTECH Obubra. All rights reserved.</p>";
     $mail->AltBody = "Registration Successful";
 
     $mail->send();
