@@ -1,9 +1,6 @@
 <?php
-  session_start();
-  if($_SESSION['email']) {
-    //Fetch Payment Details
-    $email = $_SESSION['email'];
-    $full_name = $_SESSION['full_name'];
+  if($_GET['email']) {
+    $email = $_GET['email'];
     // Amount to be paid
     $amount = 771250;
   } else {
@@ -17,7 +14,8 @@
   $fields = [
     'email' => $email,
     'amount' => $amount,
-    'callback_url' => "http://localhost/cohtechobubra/success.php", //Redirect URL after payment
+    'callback_url' => "http://localhost/cohtechobubra/success.php?email=$email", //Redirect URL after payment
+    // 'callback_url' => "https://register.cohtechobubra.edu.ng/success.php?email=$email", //Redirect URL after payment
     // 'metadata' => ["cancel_action" => "replace_with_redirect_url_when_user_cancels"]
   ];
 

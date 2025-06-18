@@ -51,7 +51,7 @@ if(isset($_GET['id'])){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo $student['first_name'] . ' ' . $student['last_name']; ?> - COHTECH Obubra</title>
-  <link rel="shortcut icon" href="assets/img/cohtech-logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="./img/cohtech-logo.png" type="image/x-icon">
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <!--Import Google Icon Font-->
@@ -98,7 +98,7 @@ if(isset($_GET['id'])){
     <nav class="white z-depth-0">
       <div class="nav-wrapper container">
         <a href="index.php" class="brand-logo" style="margin-top: 8px;">
-          <img src="assets/img/cohtech-logo-blue.png" alt="COHTECH Logo" width="200">
+          <img src="./img/cohtech-logo-blue.png" alt="COHTECH Logo" width="200">
         </a>
         <ul class="right hide-on-med-and-down">
           <li><a class="right theme-color-txt">Student Registration Form <b>#<?php echo $student['transaction_id'];?></b></a></li>

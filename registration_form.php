@@ -1,18 +1,26 @@
 <?php 
 
   require 'connect.php';
-  //start a session
-  session_start();
-  //Redirect users to index page if they try to access landing page
-  if(!$_SESSION["trx_id"]){
+  //Redirect users to index page if they try to access registration page
+  if(isset($_GET['trx_id'])){
+      $trx_id = $_GET['trx_id'];
+      $email = $_GET['email'];
+
+      $query = "SELECT * FROM registration_tb WHERE email = '$email' LIMIT 1";
+      $result = mysqli_query($conn, $query);
+      if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $first_name = $row['first_name'];
+        $last_name = $row['last_name'];
+        // You can fetch other fields as needed
+      } else {
+        header('Location: index.php');
+        exit();
+      }
+    } else {
       header('Location: index.php');
     }
   
-  $email = $_SESSION["email"];
-  $first_name = $_SESSION["first_name"];
-  $last_name = $_SESSION["last_name"];
-  $trx_id = $_SESSION["trx_id"];
-  $full_name = $first_name . " " . $last_name;
   
   //Set Blank variables
   $transaction_id=$course_of_study=$other_names=$gender=$date_of_birth=$marital_status=$state_of_origin=$lga=$nationality=$phone_no=$religion=$contact_address=$nok_name=$nok_relationship=$nok_phone_no=$nok_contact_address=$nok_occupation=$attestation_1=$attestation_2="";
@@ -64,12 +72,16 @@
         `nok_occupation`='$nok_occupation',
         `attestation_1`='$attestation_1',
         `attestation_2`='$attestation_2'
-        WHERE `email`='$email'";
+        WHERE `transaction_id`='$transaction_id'";
 
       $send_query = mysqli_query($conn, $update_query);
 
       if($send_query){
         // Send email to user
+        session_start();
+        $_SESSION['email'] = $email;
+        $_SESSION['trx_id'] = $transaction_id;
+        $_SESSION['full_name'] = $first_name . ' ' . $last_name;
         include 'send_registration_success.php';
         header('location:save.php');
       };
@@ -169,7 +181,7 @@
     <div class="container">
       <h1 class="hide-on-med-and-down">Registration Form</h1>
       <h4 class="hide-on-large-only">Registration Form</h4>
-      <p class="flow-text grey-text text-darken-2"><b>Dear <?php echo $full_name ?>, </b><br> Complete the form below to continue the registration process. All fields are required.</p>
+      <p class="flow-text grey-text text-darken-2">Complete the form below to continue the registration process. All fields are required.</p>
     </div>
   </header>
   <main>
@@ -182,7 +194,6 @@
               <div class="col s12 l4 input-field">
                 <input type="text" name="transaction_id" id="transaction_id" value="<?php echo $trx_id ?>" readonly required>
                 <label for="transaction_id">Transaction ID</label>
-                <input type="hidden" name="timestamp_payment" id="timestamp_payment" value="<?php echo $timestamp_payment ?>">
               </div>
               <div class="col s12 l4 input-field">
                 <select name="course_of_study" id="course_of_study" required>

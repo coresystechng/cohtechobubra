@@ -27,14 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $save_query = "INSERT INTO `registration_tb` (`email`, `first_name`, `last_name`) VALUES ('$email', '$first_name', '$last_name')";
       $send_query = mysqli_query($conn, $save_query);
 
-      session_start();
-      $_SESSION['email'] = $email;
-      $_SESSION['first_name'] = $first_name;
-      $_SESSION['last_name'] = $last_name;
-      $_SESSION['full_name'] = $first_name . ' '. $last_name;
-
       // Redirect to Payment Page
-      header('Location: payment.php');
+      header("Location: payment.php?email=$email");
       
     }
 
@@ -52,7 +46,7 @@ $conn->close();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Start Registration - COHTECH Obubra</title>
-  <link rel="shortcut icon" href="assets/img/cohtech-logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="./img/cohtech-logo.png" type="image/x-icon">
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <!--Import Google Icon Font-->
@@ -134,7 +128,7 @@ $conn->close();
             </div>
             <div class="col s12 l3 input-field">
               <input type="text" name="last_name" id="last_name" required value="<?php echo $last_name; ?>">
-              <label for="last_name">last_name</label>
+              <label for="last_name">Last Name</label>
             </div>
           </div>
           <div class="row">

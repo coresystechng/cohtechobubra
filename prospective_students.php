@@ -19,7 +19,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prospective Students - COHTECH Obubra</title>
-  <link rel="shortcut icon" href="assets/img/cohtech-logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="./img/cohtech-logo.png" type="image/x-icon">
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <!--Import Google Icon Font-->
@@ -77,7 +77,7 @@
     <nav class="white theme-color-text z-depth-0">
       <div class="container">
         <a href="https://www.cohtechobubra.edu.ng" class="brand-logo" style="margin-top: 7px;">
-          <img src="assets/img/cohtech-logo-blue.png" alt="" class="responsive-img" width="200px">
+          <img src="./img/cohtech-logo-blue.png" alt="" class="responsive-img" width="200px">
         </a>
         <ul class="right hide-on-med-and-down">
           <li><a href="" class="theme-color-txt">Home</a></li>

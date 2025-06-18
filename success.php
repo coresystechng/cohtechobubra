@@ -3,11 +3,8 @@ require 'connect.php';
 
 // Get the transaction reference from the URL
 if(isset($_GET['trxref'])){
-  session_start();
-  $email = $_SESSION['email'];
-  $full_name = $_SESSION['full_name'];
   $trx_id = strtoupper($_GET['trxref']);
-  $_SESSION['trx_id'] = $trx_id;
+  $email = $_GET['email'];
 } else {
   header("Location: index.php");
 }
@@ -19,10 +16,11 @@ $stmt->execute();
 $stmt->close();
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-  // Send Payment Confirmation to email
-    include 'send_payment_success.php';
-  header('Location: registration_form.php');
+  $trx_id = $_POST['trx_id'];
+  $email = $_POST['email'];
+  header("Location: registration_form.php?trx_id=$trx_id&email=$email");
 }
+
 $conn->close();
 
 ?>
@@ -106,6 +104,8 @@ $conn->close();
         <p class="center-align">Click on the button below to continue your registration.</p>
         <br>
         <form action="success.php" method="post">
+          <input type="text" name="trx_id" value="<?php echo $trx_id; ?>">
+          <input type="text" name="email" value="<?php echo $email; ?>">
           <input type="submit" name="submit" value="continue registration" class="btn btn-large btn-flat theme-color-bg white-text">
         </form>
       </div>
