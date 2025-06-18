@@ -104,8 +104,8 @@ $conn->close();
         <p class="center-align">Click on the button below to continue your registration.</p>
         <br>
         <form action="success.php" method="post">
-          <input type="text" name="trx_id" value="<?php echo $trx_id; ?>">
-          <input type="text" name="email" value="<?php echo $email; ?>">
+          <input type="text" hidden name="trx_id" value="<?php echo $trx_id; ?>">
+          <input type="text" hidden name="email" value="<?php echo $email; ?>">
           <input type="submit" name="submit" value="continue registration" class="btn btn-large btn-flat theme-color-bg white-text">
         </form>
       </div>
